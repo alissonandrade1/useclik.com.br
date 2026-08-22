@@ -25,7 +25,7 @@ export default function Footer() {
             </div>
 
             <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '1rem' }}>
-              A plataforma para negócios que vivem de agenda. Centralize agendamentos, clientes, equipe, financeiro e relacionamento.
+              Plataforma de gestão para negócios de serviços por agendamento. Centralize agendamentos, clientes, equipe, financeiro e relacionamento.
             </p>
 
             <div className="font-mono" style={{ fontSize: '0.8125rem', color: 'var(--text-muted)' }}>
@@ -37,25 +37,25 @@ export default function Footer() {
           <div style={{ display: 'flex', gap: '3.5rem', flexWrap: 'wrap' }}>
             <div>
               <div style={{ color: 'var(--text-primary)', fontWeight: 600, fontSize: '0.875rem', marginBottom: '1rem', fontFamily: 'var(--font-mono)' }}>
-                PRODUTO
+                NAVEGAÇÃO
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem', fontSize: '0.875rem' }}>
-                <a href="#pilares" style={{ color: 'inherit', textDecoration: 'none' }}>Os 5 Pilares</a>
-                <a href="#transformacao" style={{ color: 'inherit', textDecoration: 'none' }}>Transformação</a>
-                <a href="#calculadora" style={{ color: 'inherit', textDecoration: 'none' }}>Calculadora No-Show</a>
-                <a href="#segmentos" style={{ color: 'inherit', textDecoration: 'none' }}>Para quem é</a>
+                <a href="#transformacao" style={{ color: 'inherit', textDecoration: 'none' }}>Antes & Depois</a>
+                <a href="#como-funciona" style={{ color: 'inherit', textDecoration: 'none' }}>Como Funciona</a>
+                <a href="#solucoes" style={{ color: 'inherit', textDecoration: 'none' }}>Soluções</a>
+                <a href="#ganhos" style={{ color: 'inherit', textDecoration: 'none' }}>Resultados Concretos</a>
+                <a href="#calculadora" style={{ color: 'inherit', textDecoration: 'none' }}>Calculadora</a>
               </div>
             </div>
 
             <div>
               <div style={{ color: 'var(--text-primary)', fontWeight: 600, fontSize: '0.875rem', marginBottom: '1rem', fontFamily: 'var(--font-mono)' }}>
-                RECURSOS
+                PRODUTO
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem', fontSize: '0.875rem' }}>
-                <a href="#agendamento-online" style={{ color: 'inherit', textDecoration: 'none' }}>Agendamento Online</a>
-                <a href="#gestao-equipe" style={{ color: 'inherit', textDecoration: 'none' }}>Gestão de Equipe</a>
-                <a href="#crm-whatsapp" style={{ color: 'inherit', textDecoration: 'none' }}>CRM & WhatsApp</a>
-                <a href="#relatorios" style={{ color: 'inherit', textDecoration: 'none' }}>Relatórios Financeiros</a>
+                <a href="#planos" style={{ color: 'inherit', textDecoration: 'none' }}>Planos & Preços</a>
+                <a href="#segmentos" style={{ color: 'inherit', textDecoration: 'none' }}>Para quem é</a>
+                <a href="#criar-agenda" style={{ color: 'inherit', textDecoration: 'none' }}>Criar minha agenda</a>
               </div>
             </div>
           </div>

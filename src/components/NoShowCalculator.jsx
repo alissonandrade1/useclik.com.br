@@ -1,39 +1,39 @@
 import React, { useState } from 'react';
-import { Calculator, AlertTriangle, ShieldCheck, ArrowRight } from 'lucide-react';
+import { AlertTriangle, ShieldCheck, ArrowRight } from 'lucide-react';
 
 export default function NoShowCalculator() {
   const [profissionais, setProfissionais] = useState(3);
-  const [faltasPorSemana, setFaltasPorSemana] = useState(5);
-  const [ticketMedio, setTicketMedio] = useState(75);
+  const [faltasPorSemana, setFaltasPorSemana] = useState(4);
+  const [ticketMedio, setTicketMedio] = useState(80);
 
   const faltasMes = Math.round(faltasPorSemana * 4.33);
   const perdaMensal = faltasMes * ticketMedio;
   const perdaAnual = perdaMensal * 12;
-  const economiaEstimadaMensal = Math.round(perdaMensal * 0.75); // 75% recuperado com lembretes automáticos do clik.
+  const economiaEstimadaMensal = Math.round(perdaMensal * 0.75);
 
   return (
     <section id="calculadora" className="section" style={{ backgroundColor: 'var(--bg-surface)' }}>
       <div className="container">
-        <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3.5rem auto' }}>
+        <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 3.5rem auto' }}>
           <div className="badge badge-amber badge-mono" style={{ marginBottom: '1rem' }}>
-            FERRAMENTA INTERATIVA
+            IMPACTO FINANCEIRO REAL
           </div>
           <h2 className="section-heading">
-            Quanto o seu negócio perde com faltas e no-shows?
+            Faturando mais. Perdendo menos.
           </h2>
           <p className="section-desc" style={{ margin: '0 auto' }}>
-            Horários vazios e clientes que faltam sem avisar são o maior vazamento invisível de caixa em negócios de agendamento.
+            Nem todo dinheiro perdido aparece como uma despesa. No-shows, cancelamentos e horários vazios possuem um custo invisível acumulado no mês.
           </p>
         </div>
 
-        <div className="clik-card" style={{ padding: '2.5rem', backgroundColor: 'var(--bg-main)' }}>
+        <div className="clik-card" style={{ padding: 'clamp(1.5rem, 4vw, 2.5rem)', backgroundColor: 'var(--bg-main)' }}>
           <div className="grid-2" style={{ gap: '3rem', alignItems: 'center' }}>
 
             {/* Input Controls */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <div>
                 <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, marginBottom: '0.5rem' }}>
-                  Número de profissionais na equipe: <span className="font-mono" style={{ color: 'var(--text-primary)' }}>{profissionais}</span>
+                  Profissionais na equipe: <span className="font-mono" style={{ color: 'var(--text-primary)' }}>{profissionais}</span>
                 </label>
                 <input 
                   type="range" 
@@ -47,7 +47,7 @@ export default function NoShowCalculator() {
 
               <div>
                 <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, marginBottom: '0.5rem' }}>
-                  Média de faltas/no-shows por semana (toda equipe): <span className="font-mono" style={{ color: 'var(--accent-status-red)' }}>{faltasPorSemana} faltas</span>
+                  Faltas / no-shows por semana (equipe toda): <span className="font-mono" style={{ color: 'var(--accent-status-red)' }}>{faltasPorSemana} faltas/sem</span>
                 </label>
                 <input 
                   type="range" 
@@ -61,7 +61,7 @@ export default function NoShowCalculator() {
 
               <div>
                 <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, marginBottom: '0.5rem' }}>
-                  Valor médio do serviço (Ticket médio): <span className="font-mono">R$ {ticketMedio}</span>
+                  Valor médio do atendimento (Ticket Médio): <span className="font-mono">R$ {ticketMedio}</span>
                 </label>
                 <input 
                   type="range" 
@@ -74,15 +74,26 @@ export default function NoShowCalculator() {
                 />
               </div>
 
+              {/* Direct Multiplication Visual Highlight */}
               <div style={{
-                padding: '1rem',
+                padding: '1.25rem',
                 backgroundColor: 'var(--bg-surface)',
                 borderRadius: 'var(--radius-md)',
-                border: '1px solid var(--border-subtle)',
-                fontSize: '0.8125rem',
-                color: 'var(--text-secondary)'
+                border: '1px solid var(--border-subtle)'
               }}>
-                ℹ️ O clik. envia confirmações automáticas por WhatsApp e permite lista de espera para preencher desistências no mesmo dia.
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginBottom: '0.5rem' }}>
+                  CÁLCULO AUTOMÁTICO
+                </div>
+                <div className="font-mono" style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                  <span>{faltasMes} faltas este mês</span>
+                  <span style={{ color: 'var(--text-muted)' }}>×</span>
+                  <span>R$ {ticketMedio} / atendimento</span>
+                  <span style={{ color: 'var(--text-muted)' }}>=</span>
+                  <span style={{ color: 'var(--accent-status-red)', fontWeight: 800 }}>R$ {perdaMensal.toLocaleString('pt-BR')}</span>
+                </div>
+                <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', marginTop: '0.375rem' }}>
+                  Dinheiro que deixou de entrar direto no caixa do seu negócio.
+                </div>
               </div>
             </div>
 
@@ -95,21 +106,21 @@ export default function NoShowCalculator() {
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem' }}>
                 <AlertTriangle size={20} color="var(--accent-status-red)" />
-                <span className="font-mono" style={{ fontSize: '0.8125rem', color: 'var(--accent-status-red)' }}>ESTIMATIVA DE PREJUÍZO</span>
+                <span className="font-mono" style={{ fontSize: '0.8125rem', color: 'var(--accent-status-red)' }}>PERDA ESTIMADA DE RECEITA</span>
               </div>
 
               <div style={{ marginBottom: '1.5rem' }}>
-                <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Você perde por mês:</div>
+                <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Prejuízo mensal invisível:</div>
                 <div className="font-mono" style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--accent-status-red)' }}>
                   R$ {perdaMensal.toLocaleString('pt-BR')}
                 </div>
                 <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
-                  Aproximadamente <span className="font-mono" style={{ color: '#fff' }}>{faltasMes} horários vazios</span> por mês.
+                  Equivalente a <span className="font-mono" style={{ color: '#fff' }}>{faltasMes} horários vagos</span> sem faturamento.
                 </div>
               </div>
 
-              <div style={{ marginBottom: '2rem', paddingTop: '1.25rem', borderTop: '1px solid var(--border-subtle)' }}>
-                <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Em 1 ano, o prejuízo acumulado é:</div>
+              <div style={{ marginBottom: '1.75rem', paddingTop: '1.25rem', borderTop: '1px solid var(--border-subtle)' }}>
+                <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Em 1 ano, o valor acumulado é:</div>
                 <div className="font-mono" style={{ fontSize: '1.75rem', fontWeight: 700 }}>
                   R$ {perdaAnual.toLocaleString('pt-BR')}
                 </div>
@@ -124,13 +135,13 @@ export default function NoShowCalculator() {
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-status-green)', fontWeight: 600, fontSize: '0.9375rem', marginBottom: '0.25rem' }}>
                   <ShieldCheck size={18} />
-                  <span>Com o clik. você pode resgatar:</span>
+                  <span>Potencial de resgate mensal:</span>
                 </div>
                 <div className="font-mono" style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--accent-status-green)' }}>
                   + R$ {economiaEstimadaMensal.toLocaleString('pt-BR')} / mês
                 </div>
                 <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
-                  Reduzindo no-shows com confirmação WhatsApp e reagendamento inteligente.
+                  Reduzindo desistências tardias com confirmações automáticas e lista de espera.
                 </div>
               </div>
 

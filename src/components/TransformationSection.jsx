@@ -1,44 +1,48 @@
 import React from 'react';
-import { XCircle, CheckCircle2, ArrowRight } from 'lucide-react';
+import { XCircle, CheckCircle2 } from 'lucide-react';
+import Logo from './Logo';
 
 export default function TransformationSection() {
   return (
     <section id="transformacao" className="section" style={{ backgroundColor: 'var(--bg-surface)' }}>
       <div className="container">
-        <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 4rem auto' }}>
-          <div className="section-title-sm">A TRANSFORMAÇÃO OPERACIONAL</div>
-          <h2 className="section-heading">
-            De uma operação espalhada para um negócio sob controle.
+        <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 3.5rem auto' }}>
+          <div className="section-title-sm">TRANSFORMAÇÃO REAL</div>
+          <h2 className="section-heading" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.625rem', flexWrap: 'wrap' }}>
+            <span>Antes</span>
+            <span style={{ color: 'var(--text-muted)' }}>→</span>
+            <span>Depois do</span>
+            <Logo size="medium" />
           </h2>
           <p className="section-desc" style={{ margin: '0 auto' }}>
-            A maioria dos negócios trabalha reagindo ao caos. O clik. centraliza sua rotina para você voltar a ter domínio sobre seu tempo e faturamento.
+            Veja a diferença entre gerenciar sua rotina de forma improvisada ou ter uma operação sob controle.
           </p>
         </div>
 
         <div className="grid-2">
-          {/* ANTES DA CLIK */}
+          {/* ANTES */}
           <div className="clik-card" style={{
             borderColor: 'rgba(239, 68, 68, 0.25)',
             backgroundColor: 'rgba(239, 68, 68, 0.02)',
-            padding: '2rem'
+            padding: 'clamp(1.25rem, 3vw, 2rem)'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
               <XCircle size={24} color="var(--accent-status-red)" />
               <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent-status-red)' }}>
-                Antes do clik. (Operação Espalhada)
+                Antes (Operação Espalhada)
               </h3>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
               {[
-                { title: 'WhatsApp fragmentado', desc: 'Atendimentos interrompidos para responder se "tem horário disponível".' },
-                { title: 'Memória e cadernos', desc: 'Contatos e histórico dos clientes espalhados em papéis e mensagens antigas.' },
-                { title: 'Financeiro cego', desc: 'Falta de clareza sobre quanto foi faturado e quanto foi perdido com faltas.' },
-                { title: 'Equipe desorganizada', desc: 'Dificuldade para saber a ocupação exata e comissões dos profissionais.' },
-                { title: 'Clientes esquecidos', desc: 'Nenhum acompanhamento após o atendimento. Se o cliente não voltar, ninguém percebe.' },
+                { title: 'Procurar horários manualmente', desc: 'Mensagens interrompendo o atendimento a todo momento para checar disponibilidade.' },
+                { title: 'Conversas e contatos espalhados', desc: 'Histórico de clientes perdido entre conversas antigas e anotações soltas.' },
+                { title: 'Clientes esquecidos', desc: 'Nenhum acompanhamento após o serviço. Se o cliente não voltar, ninguém percebe.' },
+                { title: 'Falta de visão sobre o negócio', desc: 'Não saber exatamente quanto faturou ou qual serviço é mais rentável.' },
+                { title: 'Não saber quanto perdeu', desc: 'No-shows e cancelamentos acontecem sem nenhum controle do impacto financeiro.' },
               ].map((item, index) => (
                 <div key={index} style={{
-                  padding: '1rem',
+                  padding: '0.875rem 1rem',
                   backgroundColor: 'var(--bg-main)',
                   borderRadius: 'var(--radius-md)',
                   border: '1px solid rgba(239, 68, 68, 0.15)'
@@ -54,29 +58,30 @@ export default function TransformationSection() {
             </div>
           </div>
 
-          {/* DEPOIS DA CLIK */}
+          {/* DEPOIS */}
           <div className="clik-card" style={{
             borderColor: 'rgba(16, 185, 129, 0.3)',
             backgroundColor: 'rgba(16, 185, 129, 0.02)',
-            padding: '2rem'
+            padding: 'clamp(1.25rem, 3vw, 2rem)'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
               <CheckCircle2 size={24} color="var(--accent-status-green)" />
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent-status-green)' }}>
-                Depois do clik. (Operação Centralizada)
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent-status-green)', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
+                <span>Depois do</span>
+                <Logo size="small" />
               </h3>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
               {[
-                { title: 'Link próprio de agendamento 24h', desc: 'Seus clientes escolhem o serviço, profissional e horário sozinhos.' },
-                { title: 'Base ativa de clientes', desc: 'Histórico completo, frequência, LTV e alertas de clientes sumidos.' },
-                { title: 'Painel financeiro transparente', desc: 'Faturamento em tempo real, ticket médio e cálculo exato de no-shows.' },
-                { title: 'Gestão clara de equipe', desc: 'Escala, disponibilidade e cálculo de atendimentos por profissional.' },
-                { title: 'CRM focado em recorrência', desc: 'Notificações inteligentes para trazer o cliente de volta no tempo certo.' },
+                { title: 'Clientes agendam sozinhos 24/7', desc: 'Link próprio compartilhado no Instagram e WhatsApp onde o cliente escolhe horário e serviço.' },
+                { title: 'Tudo centralizado em um só lugar', desc: 'Agenda, clientes, equipe e resultados reunidos em uma tela clara.' },
+                { title: 'Histórico salvo e acessível', desc: 'Conheça a frequência, preferências e valor total gerado por cada cliente.' },
+                { title: 'Resultados visíveis em tempo real', desc: 'Acompanhe faturamento, ticket médio e produção por profissional.' },
+                { title: 'Oportunidades fáceis de identificar', desc: 'Alertas automáticos para clientes que não voltam há mais de 30 dias.' },
               ].map((item, index) => (
                 <div key={index} style={{
-                  padding: '1rem',
+                  padding: '0.875rem 1rem',
                   backgroundColor: 'var(--bg-main)',
                   borderRadius: 'var(--radius-md)',
                   border: '1px solid rgba(16, 185, 129, 0.2)'

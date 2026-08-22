@@ -1,19 +1,20 @@
 import React from 'react';
 import { ArrowRight, CheckCircle2, Shield } from 'lucide-react';
+import Logo from './Logo';
 
 export default function CTASection() {
   return (
     <section id="criar-agenda" className="section" style={{
       backgroundColor: 'var(--bg-surface)',
       borderBottom: 'none',
-      paddingTop: '6rem',
-      paddingBottom: '6rem'
+      paddingTop: 'clamp(4rem, 8vw, 6rem)',
+      paddingBottom: 'clamp(4rem, 8vw, 6rem)'
     }}>
       <div className="container">
         <div className="clik-card" style={{
           backgroundColor: '#ffffff',
           color: '#0a0a0c',
-          padding: 'clamp(2.5rem, 5vw, 4.5rem)',
+          padding: 'clamp(2rem, 5vw, 4.5rem)',
           borderRadius: 'var(--radius-lg)',
           textAlign: 'center',
           borderColor: '#ffffff',
@@ -32,49 +33,58 @@ export default function CTASection() {
             fontFamily: 'var(--font-mono)',
             marginBottom: '1.5rem'
           }}>
-            SUA AGENDA É SÓ O COMEÇO
+            ORGANIZAÇÃO & CONTROLE
           </div>
 
           <h2 style={{
-            fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
+            fontSize: 'clamp(1.75rem, 4.5vw, 3.25rem)',
             fontWeight: 800,
             letterSpacing: '-0.03em',
-            lineHeight: 1.1,
+            lineHeight: 1.15,
             color: '#0a0a0c',
-            maxWidth: '800px',
+            maxWidth: '820px',
             margin: '0 auto 1.25rem auto'
           }}>
-            Tenha controle sobre cada horário. E sobre tudo o que acontece depois dele.
+            Sua agenda não precisa ser o limite do seu negócio.
           </h2>
 
           <p style={{
-            fontSize: 'clamp(1.0625rem, 1.8vw, 1.25rem)',
+            fontSize: 'clamp(1rem, 1.8vw, 1.25rem)',
             color: '#4a4a52',
-            maxWidth: '600px',
+            maxWidth: '620px',
             margin: '0 auto 2.5rem auto',
             lineHeight: 1.5
           }}>
-            Crie sua conta em menos de 2 minutos. Configure seus serviços, profissionais e compartilhe seu link de agendamento online hoje mesmo.
+            Comece a organizar seus horários, clientes, equipe e resultados em um só lugar. Configure sua conta em menos de 2 minutos.
           </p>
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
             <button className="btn btn-lg" style={{
               backgroundColor: '#0a0a0c',
               color: '#ffffff',
-              padding: '1rem 2.25rem',
-              fontSize: '1.0625rem',
+              padding: '0.875rem 2.25rem',
+              fontSize: '1rem',
               fontWeight: 700
             }}>
-              <span>Criar minha agenda agora</span>
+              <span>Começar gratuitamente</span>
               <ArrowRight size={18} />
             </button>
+            <a href="#como-funciona" className="btn btn-lg" style={{
+              backgroundColor: 'transparent',
+              color: '#0a0a0c',
+              border: '1px solid #d1d1d6',
+              padding: '0.875rem 1.75rem',
+              fontSize: '1rem'
+            }}>
+              <span>Ver como funciona</span>
+            </a>
           </div>
 
           <div style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '2rem',
+            gap: '1.75rem',
             fontSize: '0.875rem',
             color: '#62626e',
             flexWrap: 'wrap'
@@ -85,11 +95,11 @@ export default function CTASection() {
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
               <CheckCircle2 size={16} color="#0a0a0c" />
-              <span>Configuração rápida em 2 minutos</span>
+              <span>Configuração rápida</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
               <Shield size={16} color="#0a0a0c" />
-              <span>Suporte via WhatsApp incluso</span>
+              <span>Suporte 24/7</span>
             </div>
           </div>
         </div>

@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import { Calendar, Users, DollarSign, MessageSquare, ArrowRight, CheckCircle2, AlertTriangle, Clock, TrendingUp, UserCheck, Smartphone } from 'lucide-react';
+import { Calendar, Users, ArrowRight, CheckCircle2, MessageSquare, UserCheck, TrendingUp, Smartphone } from 'lucide-react';
 
 export default function HeroSection() {
   const [activeTab, setActiveTab] = useState('agenda');
 
   return (
-    <section className="section" style={{ paddingTop: '4rem', paddingBottom: '5rem' }}>
+    <section className="section" style={{ paddingTop: 'clamp(3rem, 6vw, 4.5rem)', paddingBottom: 'clamp(3.5rem, 6vw, 5rem)' }}>
       <div className="container">
         {/* Main Hero Header */}
-        <div style={{ textAlign: 'center', maxWidth: '840px', margin: '0 auto 3.5rem auto' }}>
+        <div style={{ textAlign: 'center', maxWidth: '840px', margin: '0 auto 3rem auto' }}>
           <div className="badge badge-mono" style={{ marginBottom: '1.25rem' }}>
             <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--accent-status-green)' }}></span>
-            A PLATAFORMA PARA NEGÓCIOS QUE VIVEM DE AGENDA
+            PLATAFORMA DE GESTÃO PARA NEGÓCIOS DE SERVIÇOS
           </div>
 
           <h1 style={{
-            fontSize: 'clamp(2.5rem, 5.5vw, 4.25rem)',
+            fontSize: 'clamp(2.25rem, 5.5vw, 4.25rem)',
             letterSpacing: '-0.03em',
             lineHeight: 1.08,
             fontWeight: 800,
@@ -25,7 +25,7 @@ export default function HeroSection() {
           </h1>
 
           <p style={{
-            fontSize: 'clamp(1.125rem, 2vw, 1.35rem)',
+            fontSize: 'clamp(1.0625rem, 2vw, 1.35rem)',
             color: 'var(--text-secondary)',
             lineHeight: 1.5,
             maxWidth: '680px',
@@ -36,11 +36,11 @@ export default function HeroSection() {
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
             <a href="#criar-agenda" className="btn btn-primary btn-lg">
-              <span>Criar minha agenda grátis</span>
+              <span>Começar gratuitamente</span>
               <ArrowRight size={18} />
             </a>
-            <a href="#demonstracao" className="btn btn-secondary btn-lg">
-              <span>Ver demonstração interativa</span>
+            <a href="#como-funciona" className="btn btn-secondary btn-lg">
+              <span>Ver como funciona</span>
             </a>
           </div>
 
@@ -49,21 +49,21 @@ export default function HeroSection() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '2rem',
+            gap: '1.75rem',
             marginTop: '2rem',
             fontSize: '0.875rem',
             color: 'var(--text-muted)',
             flexWrap: 'wrap'
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
               <CheckCircle2 size={16} color="var(--accent-status-green)" />
-              <span>Sem necessidade de cartão de crédito</span>
+              <span>Sem cartão de crédito</span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
               <CheckCircle2 size={16} color="var(--accent-status-green)" />
               <span>Página própria de agendamento online</span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
               <CheckCircle2 size={16} color="var(--accent-status-green)" />
               <span>Integração com WhatsApp</span>
             </div>
@@ -81,23 +81,23 @@ export default function HeroSection() {
           <div style={{
             backgroundColor: 'var(--bg-surface)',
             borderBottom: '1px solid var(--border-subtle)',
-            padding: '1rem 1.5rem',
+            padding: '0.875rem 1.25rem',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             flexWrap: 'wrap',
             gap: '1rem'
           }}>
-            {/* Business Title */}
+            {/* Business Status */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <div style={{
-                width: '10px',
-                height: '10px',
+                width: '8px',
+                height: '8px',
                 borderRadius: '50%',
                 backgroundColor: 'var(--accent-status-green)'
               }} />
-              <span style={{ fontWeight: 600, fontSize: '0.9375rem', fontFamily: 'var(--font-mono)' }}>
-                studio clik<span style={{ color: '#3B82F6' }}>.</span> — Operação Hoje
+              <span style={{ fontWeight: 600, fontSize: '0.875rem', fontFamily: 'var(--font-mono)' }}>
+                Painel do Negócio — Visão de Hoje
               </span>
               <span className="badge font-mono" style={{ fontSize: '0.75rem' }}>
                 LIVE DEMO
@@ -107,11 +107,13 @@ export default function HeroSection() {
             {/* Mock Tabs */}
             <div style={{
               display: 'flex',
-              gap: '0.375rem',
+              gap: '0.25rem',
               backgroundColor: 'var(--bg-main)',
               padding: '0.25rem',
               borderRadius: 'var(--radius-md)',
-              border: '1px solid var(--border-subtle)'
+              border: '1px solid var(--border-subtle)',
+              overflowX: 'auto',
+              maxWidth: '100%'
             }}>
               <button 
                 onClick={() => setActiveTab('agenda')}
@@ -149,7 +151,7 @@ export default function HeroSection() {
           </div>
 
           {/* Main Dashboard Content Area */}
-          <div style={{ padding: '1.75rem' }}>
+          <div style={{ padding: 'clamp(1rem, 3vw, 1.75rem)' }}>
 
             {/* TAB 1: AGENDA */}
             {activeTab === 'agenda' && (
@@ -205,7 +207,7 @@ export default function HeroSection() {
                       </div>
 
                       <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-                        <span className="font-mono" style={{ fontWeight: '600', fontSize: '0.9375rem' }}>{item.price}</span>
+                        <span className="font-mono" style={{ fontWeight: 600, fontSize: '0.9375rem' }}>{item.price}</span>
                         <span className={`badge ${item.badgeClass}`}>
                           {item.status}
                         </span>
@@ -216,7 +218,7 @@ export default function HeroSection() {
               </div>
             )}
 
-            {/* TAB 2: CLIENTES & RELACIONAMENTO */}
+            {/* TAB 2: CLIENTES */}
             {activeTab === 'clientes' && (
               <div>
                 <div style={{
@@ -235,12 +237,12 @@ export default function HeroSection() {
                     <MessageSquare color="var(--accent-status-green)" size={20} />
                     <div>
                       <div style={{ fontWeight: 600 }}>8 clientes não voltam há mais de 30 dias</div>
-                      <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>O clik. identificou oportunidades automáticas de retorno via WhatsApp.</div>
+                      <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>Oportunidades identificadas para lembrete automático de retorno.</div>
                     </div>
                   </div>
                   <button className="btn btn-sm btn-primary" style={{ backgroundColor: 'var(--accent-status-green)', color: '#000' }}>
                     <Smartphone size={14} />
-                    <span>Enviar Lembrete Recorrência</span>
+                    <span>Enviar Lembrete WhatsApp</span>
                   </button>
                 </div>
 
@@ -287,10 +289,6 @@ export default function HeroSection() {
                       <span style={{ color: 'var(--text-secondary)' }}>Faturamento Gerado:</span>
                       <span className="font-mono" style={{ fontWeight: 600, color: 'var(--accent-status-green)' }}>R$ 6.720,00</span>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <span style={{ color: 'var(--text-secondary)' }}>Taxa de No-Show:</span>
-                      <span className="font-mono" style={{ color: 'var(--text-muted)' }}>2.3% (baixa)</span>
-                    </div>
                   </div>
                 </div>
 
@@ -310,10 +308,6 @@ export default function HeroSection() {
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                       <span style={{ color: 'var(--text-secondary)' }}>Faturamento Gerado:</span>
                       <span className="font-mono" style={{ fontWeight: 600, color: 'var(--accent-status-green)' }}>R$ 5.760,00</span>
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <span style={{ color: 'var(--text-secondary)' }}>Taxa de No-Show:</span>
-                      <span className="font-mono" style={{ color: 'var(--text-muted)' }}>1.1% (excelente)</span>
                     </div>
                   </div>
                 </div>
@@ -340,42 +334,9 @@ export default function HeroSection() {
                     <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', marginTop: '0.375rem' }}>146 agendamentos concluídos</div>
                   </div>
                 </div>
-
-                <div style={{
-                  padding: '1.25rem',
-                  backgroundColor: 'var(--bg-surface)',
-                  border: '1px solid var(--border-subtle)',
-                  borderRadius: 'var(--radius-md)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '1rem',
-                  flexWrap: 'wrap'
-                }}>
-                  <div>
-                    <div style={{ fontWeight: 600, fontSize: '0.9375rem' }}>💡 Oportunidade de Receita Identificada</div>
-                    <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>Preenchendo apenas 50% das suas faltas via lista de espera automática WhatsApp, você resgata **R$ 320/mês**.</div>
-                  </div>
-                  <button className="btn btn-sm btn-primary">Ativar Lista de Espera</button>
-                </div>
               </div>
             )}
 
-          </div>
-
-          {/* Mockup Footer Caption */}
-          <div style={{
-            backgroundColor: 'var(--bg-main)',
-            borderTop: '1px solid var(--border-subtle)',
-            padding: '0.875rem 1.5rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            fontSize: '0.8125rem',
-            color: 'var(--text-muted)'
-          }}>
-            <span>Veja como o clik. dá visibilidade total da sua operação.</span>
-            <span className="font-mono" style={{ color: 'var(--text-secondary)' }}>useclik.com.br/demo</span>
           </div>
         </div>
       </div>

@@ -1,26 +1,26 @@
 import React from 'react';
-import { Scissors, Sparkles, Eye, Feather, Heart, Paintbrush, Clock, Check } from 'lucide-react';
+import { Scissors, Sparkles, Eye, Feather, Heart, Paintbrush } from 'lucide-react';
 
 const segmentos = [
-  { icon: Scissors, name: 'Barbearias', desc: 'Agendamento rápido de cortes, barboterapia e combos.' },
-  { icon: Sparkles, name: 'Salões de Beleza', desc: 'Gestão de múltiplos cabeleireiros, manicures e procedimentos.' },
-  { icon: Eye, name: 'Studios de Estética & Sobrancelhas', desc: 'Controle rigoroso de horários e retoques recorrentes.' },
-  { icon: Feather, name: 'Lash & Nail Designers', desc: 'Agendamento de manutenções periódicas e aviso de retorno.' },
-  { icon: Heart, name: 'Massagistas & Terapias', desc: 'Agendamentos com tempo de tolerância e confirmação prévia.' },
-  { icon: Paintbrush, name: 'Estúdios de Tatuagem', desc: 'Sessões com duração definida e sinal de confirmação.' },
+  { icon: Scissors, name: 'Barbearias', desc: 'Agendamentos rápidos de cortes, barba e pacotes recorrentes.' },
+  { icon: Sparkles, name: 'Salões de Beleza', desc: 'Organização de múltiplos profissionais, serviços e horários da equipe.' },
+  { icon: Eye, name: 'Studios de Estética & Sobrancelhas', desc: 'Controle preciso de procedimentos, duração e histórico de clientes.' },
+  { icon: Feather, name: 'Lash & Nail Designers', desc: 'Agendamento de manutenções periódicas e lembretes de retorno.' },
+  { icon: Heart, name: 'Massagistas & Terapias', desc: 'Gestão de horários com tempo de tolerância e confirmação prévia.' },
+  { icon: Paintbrush, name: 'Estúdios de Tatuagem', desc: 'Sessões com horários definidos e organização de agenda.' },
 ];
 
 export default function SegmentsSection() {
   return (
     <section id="segmentos" className="section">
       <div className="container">
-        <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3.5rem auto' }}>
-          <div className="section-title-sm">PARA QUEM O CLIK. EXISTE</div>
+        <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 3.5rem auto' }}>
+          <div className="section-title-sm">QUEM PRECISA DE MAIS CONTROLE?</div>
           <h2 className="section-heading">
-            Feito para quem vive de horários e atendimentos.
+            Se o seu dia funciona por horários.
           </h2>
           <p className="section-desc" style={{ margin: '0 auto' }}>
-            Se a sua operação depende de pessoas marcando um horário com sua equipe, a plataforma clik. foi desenhada sob medida para você.
+            Se o seu negócio depende de horários, clientes e atendimentos presenciais, este produto foi pensado para a sua rotina.
           </p>
         </div>
 
@@ -54,27 +54,23 @@ export default function SegmentsSection() {
           })}
         </div>
 
-        {/* Central Idea Banner */}
+        {/* Central Human Manifesto Card */}
         <div style={{
           backgroundColor: 'var(--bg-surface)',
           border: '1px solid var(--border-strong)',
           borderRadius: 'var(--radius-lg)',
-          padding: '2.5rem',
+          padding: 'clamp(1.75rem, 4vw, 2.5rem)',
           textAlign: 'center',
           maxWidth: '800px',
           margin: '0 auto'
         }}>
-          <div className="font-mono" style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
-            IDEIA CENTRAL DA MARCA
-          </div>
           <blockquote style={{
-            fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)',
-            fontWeight: 700,
-            lineHeight: 1.3,
-            color: 'var(--text-primary)',
-            marginBottom: '1rem'
+            fontSize: 'clamp(1.125rem, 2.2vw, 1.5rem)',
+            fontWeight: 600,
+            lineHeight: 1.4,
+            color: 'var(--text-primary)'
           }}>
-            "Não importa o seu segmento. Se você vive de agenda, você precisa ter controle sobre o que acontece antes, durante e depois de cada horário."
+            "Não importa se você trabalha sozinho ou com uma equipe de 15 pessoas. Se sua operação vive de horários marcados, ter controle é o primeiro passo para crescer."
           </blockquote>
         </div>
       </div>
