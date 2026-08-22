@@ -30,7 +30,7 @@ const steps = [
     number: '05',
     icon: Repeat,
     title: 'Fazer voltar',
-    desc: 'Identifique clientes inativos e use lembretes de retorno no momento ideal.'
+    desc: 'Identifique clientes inativos e envie lembretes de retorno no momento ideal.'
   }
 ];
 
@@ -38,8 +38,8 @@ export default function CycleSection() {
   return (
     <section id="como-funciona" className="section">
       <div className="container">
-        <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3.5rem auto' }}>
-          <div className="section-title-sm">PROCESSO CONTÍNUO</div>
+        <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 4rem auto' }}>
+          <div className="section-title-sm">FLUXO CONTÍNUO DE ATENDIMENTO</div>
           <h2 className="section-heading">
             Um ciclo que continua.
           </h2>
@@ -48,57 +48,47 @@ export default function CycleSection() {
           </p>
         </div>
 
-        {/* 5-Step Process Cards Grid */}
-        <div className="grid-5" style={{
+        {/* Fluid Horizontal Timeline Flow (No Heavy Cards) */}
+        <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: '1.25rem'
+          gap: '2rem 1.5rem',
+          position: 'relative'
         }}>
           {steps.map((s, idx) => {
             const Icon = s.icon;
             return (
-              <div key={idx} className="clik-card" style={{
-                padding: '1.5rem',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
+              <div key={idx} style={{
+                paddingTop: '1.25rem',
+                borderTop: '2px solid var(--border-subtle)',
                 position: 'relative'
               }}>
-                <div>
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginBottom: '1rem'
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  marginBottom: '1rem'
+                }}>
+                  <span className="font-mono" style={{
+                    fontSize: '1rem',
+                    fontWeight: 700,
+                    color: 'var(--text-muted)'
                   }}>
-                    <span className="font-mono" style={{
-                      fontSize: '1.125rem',
-                      fontWeight: 800,
-                      color: 'var(--text-muted)'
-                    }}>
-                      {s.number}
-                    </span>
-                    <div style={{
-                      width: '36px',
-                      height: '36px',
-                      borderRadius: 'var(--radius-md)',
-                      backgroundColor: 'var(--bg-surface)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'var(--text-primary)'
-                    }}>
-                      <Icon size={18} />
-                    </div>
+                    {s.number}
+                  </span>
+                  <div style={{
+                    color: 'var(--text-primary)'
+                  }}>
+                    <Icon size={18} />
                   </div>
-
-                  <h3 style={{ fontSize: '1.125rem', fontWeight: 700, marginBottom: '0.5rem' }}>
-                    {s.title}
-                  </h3>
-                  <p style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                    {s.desc}
-                  </p>
                 </div>
+
+                <h3 style={{ fontSize: '1.125rem', fontWeight: 700, marginBottom: '0.5rem' }}>
+                  {s.title}
+                </h3>
+                <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                  {s.desc}
+                </p>
               </div>
             );
           })}

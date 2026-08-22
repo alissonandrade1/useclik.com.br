@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Check, ArrowRight, Star } from 'lucide-react';
+import React from 'react';
+import { Check, Star } from 'lucide-react';
 
 const plans = [
   {
@@ -85,12 +85,10 @@ const comparisonData = [
 ];
 
 export default function PricingSection() {
-  const [selectedMobilePlan, setSelectedMobilePlan] = useState('Pro');
-
   return (
     <section id="planos" className="section" style={{ backgroundColor: 'var(--bg-surface)' }}>
       <div className="container">
-        <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 3.5rem auto' }}>
+        <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 4rem auto' }}>
           <div className="section-title-sm">TRANSPARÊNCIA TOTAL</div>
           <h2 className="section-heading">
             Um plano para cada momento.
@@ -100,18 +98,18 @@ export default function PricingSection() {
           </p>
         </div>
 
-        {/* 4 Pricing Cards */}
-        <div className="grid-4" style={{ marginBottom: '4rem', alignItems: 'stretch' }}>
+        {/* 4 Sleek Open Columns (No Heavy Cards) */}
+        <div className="grid-4" style={{ marginBottom: '4.5rem', alignItems: 'stretch', gap: '1.5rem' }}>
           {plans.map((p, idx) => (
-            <div key={idx} className="clik-card" style={{
+            <div key={idx} style={{
               padding: '1.75rem 1.5rem',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
               position: 'relative',
-              borderColor: p.popular ? '#ffffff' : 'var(--border-subtle)',
+              borderRadius: 'var(--radius-lg)',
+              border: p.popular ? '1px solid #ffffff' : '1px solid var(--border-subtle)',
               backgroundColor: p.popular ? 'var(--bg-card)' : 'var(--bg-main)',
-              boxShadow: p.popular ? '0 10px 30px rgba(255,255,255,0.06)' : 'none'
             }}>
               {p.popular && (
                 <div style={{
@@ -140,7 +138,7 @@ export default function PricingSection() {
                 <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.375rem' }}>
                   {p.name}
                 </h3>
-                <p style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', minHeight: '40px', marginBottom: '1.25rem' }}>
+                <p style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', minHeight: '38px', marginBottom: '1.25rem' }}>
                   {p.desc}
                 </p>
 
@@ -170,17 +168,16 @@ export default function PricingSection() {
           ))}
         </div>
 
-        {/* Feature Comparison Table Title */}
+        {/* Feature Comparison Table */}
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem' }}>
             Comparativo completo de recursos
           </h3>
           <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)' }}>
-            Compare cada detalhe e escolha o melhor plano para o tamanho da sua equipe.
+            Compare cada detalhe e escolha o melhor plano para a sua equipe.
           </p>
         </div>
 
-        {/* Desktop & Mobile Responsive Table Container */}
         <div className="pricing-table-wrapper">
           <table className="pricing-table">
             <thead>

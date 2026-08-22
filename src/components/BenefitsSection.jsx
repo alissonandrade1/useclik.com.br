@@ -32,7 +32,7 @@ export default function BenefitsSection() {
   return (
     <section id="ganhos" className="section">
       <div className="container">
-        <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3.5rem auto' }}>
+        <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 4rem auto' }}>
           <div className="section-title-sm">RESULTADOS CONCRETOS</div>
           <h2 className="section-heading">
             Menos tempo organizando. Mais tempo crescendo.
@@ -42,47 +42,35 @@ export default function BenefitsSection() {
           </p>
         </div>
 
-        <div className="grid-4">
+        {/* Fluid 4-Column Open Layout (No Cards) */}
+        <div className="grid-4" style={{ gap: '2rem 1.5rem' }}>
           {benefits.map((b, idx) => {
             const Icon = b.icon;
             return (
-              <div key={idx} className="clik-card" style={{
-                padding: '1.75rem',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between'
+              <div key={idx} style={{
+                paddingTop: '1.25rem',
+                borderTop: '1px solid var(--border-strong)'
               }}>
-                <div>
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginBottom: '1.25rem'
-                  }}>
-                    <span className="font-mono" style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', fontWeight: 600 }}>
-                      CARD {b.number}
-                    </span>
-                    <div style={{
-                      width: '38px',
-                      height: '38px',
-                      borderRadius: 'var(--radius-md)',
-                      backgroundColor: 'var(--bg-surface)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'var(--text-primary)'
-                    }}>
-                      <Icon size={20} />
-                    </div>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  marginBottom: '1rem'
+                }}>
+                  <span className="font-mono" style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                    {b.number}
+                  </span>
+                  <div style={{ color: 'var(--text-primary)' }}>
+                    <Icon size={18} />
                   </div>
-
-                  <h3 style={{ fontSize: '1.125rem', fontWeight: 700, marginBottom: '0.5rem' }}>
-                    {b.title}
-                  </h3>
-                  <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                    {b.desc}
-                  </p>
                 </div>
+
+                <h3 style={{ fontSize: '1.125rem', fontWeight: 700, marginBottom: '0.5rem' }}>
+                  {b.title}
+                </h3>
+                <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                  {b.desc}
+                </p>
               </div>
             );
           })}

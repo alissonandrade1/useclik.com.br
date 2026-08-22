@@ -6,91 +6,116 @@ export default function TransformationSection() {
   return (
     <section id="transformacao" className="section" style={{ backgroundColor: 'var(--bg-surface)' }}>
       <div className="container">
+        {/* Section Header: Clean & Direct "Antes & Depois" */}
         <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 3.5rem auto' }}>
           <div className="section-title-sm">TRANSFORMAÇÃO REAL</div>
-          <h2 className="section-heading" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.625rem', flexWrap: 'wrap' }}>
-            <span>Antes</span>
-            <span style={{ color: 'var(--text-muted)' }}>→</span>
-            <span>Depois do</span>
-            <Logo size="medium" />
+          <h2 className="section-heading">
+            Antes & Depois
           </h2>
           <p className="section-desc" style={{ margin: '0 auto' }}>
             Veja a diferença entre gerenciar sua rotina de forma improvisada ou ter uma operação sob controle.
           </p>
         </div>
 
-        <div className="grid-2">
+        {/* Fluid Side-by-Side Comparison */}
+        <div className="grid-2" style={{ gap: '2rem', alignItems: 'stretch' }}>
           {/* ANTES */}
-          <div className="clik-card" style={{
-            borderColor: 'rgba(239, 68, 68, 0.25)',
-            backgroundColor: 'rgba(239, 68, 68, 0.02)',
-            padding: 'clamp(1.25rem, 3vw, 2rem)'
+          <div style={{
+            backgroundColor: 'var(--bg-main)',
+            border: '1px solid var(--border-subtle)',
+            borderRadius: 'var(--radius-lg)',
+            padding: 'clamp(1.5rem, 3.5vw, 2.5rem)',
+            display: 'flex',
+            flexDirection: 'column'
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
-              <XCircle size={24} color="var(--accent-status-red)" />
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent-status-red)' }}>
-                Antes (Operação Espalhada)
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.75rem',
+              marginBottom: '2rem',
+              paddingBottom: '1.25rem',
+              borderBottom: '1px solid var(--border-subtle)'
+            }}>
+              <XCircle size={22} color="var(--accent-status-red)" />
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                Antes <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)', fontWeight: 400 }}>(Operação Espalhada)</span>
               </h3>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               {[
-                { title: 'Procurar horários manualmente', desc: 'Mensagens interrompendo o atendimento a todo momento para checar disponibilidade.' },
-                { title: 'Conversas e contatos espalhados', desc: 'Histórico de clientes perdido entre conversas antigas e anotações soltas.' },
+                { title: 'Procurar horários manualmente', desc: 'Atendimento interrompido a todo momento para responder disponibilidade no WhatsApp.' },
+                { title: 'Conversas e contatos espalhados', desc: 'Histórico dos clientes perdido entre papéis, conversas antigas e bloco de notas.' },
                 { title: 'Clientes esquecidos', desc: 'Nenhum acompanhamento após o serviço. Se o cliente não voltar, ninguém percebe.' },
-                { title: 'Falta de visão sobre o negócio', desc: 'Não saber exatamente quanto faturou ou qual serviço é mais rentável.' },
-                { title: 'Não saber quanto perdeu', desc: 'No-shows e cancelamentos acontecem sem nenhum controle do impacto financeiro.' },
+                { title: 'Falta de visão sobre o negócio', desc: 'Não saber exatamente quanto faturou no mês ou qual serviço traz mais retorno.' },
+                { title: 'Não saber quanto perdeu com faltas', desc: 'No-shows e cancelamentos acontecem sem nenhum controle do impacto no caixa.' },
               ].map((item, index) => (
                 <div key={index} style={{
-                  padding: '0.875rem 1rem',
-                  backgroundColor: 'var(--bg-main)',
-                  borderRadius: 'var(--radius-md)',
-                  border: '1px solid rgba(239, 68, 68, 0.15)'
+                  display: 'flex',
+                  gap: '0.875rem',
+                  alignItems: 'flex-start'
                 }}>
-                  <div style={{ fontWeight: 600, fontSize: '0.9375rem', marginBottom: '0.25rem', color: 'var(--text-primary)' }}>
-                    ❌ {item.title}
-                  </div>
-                  <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
-                    {item.desc}
+                  <span style={{ color: 'var(--accent-status-red)', fontWeight: 700, fontSize: '0.875rem', marginTop: '2px' }}>✕</span>
+                  <div>
+                    <div style={{ fontWeight: 600, fontSize: '0.9375rem', color: 'var(--text-primary)', marginBottom: '0.125rem' }}>
+                      {item.title}
+                    </div>
+                    <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                      {item.desc}
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* DEPOIS */}
-          <div className="clik-card" style={{
-            borderColor: 'rgba(16, 185, 129, 0.3)',
-            backgroundColor: 'rgba(16, 185, 129, 0.02)',
-            padding: 'clamp(1.25rem, 3vw, 2rem)'
+          {/* DEPOIS DO CLIK. (PUN INSIDE THE CARD HEADER) */}
+          <div style={{
+            backgroundColor: 'var(--bg-main)',
+            border: '1px solid var(--border-strong)',
+            borderRadius: 'var(--radius-lg)',
+            padding: 'clamp(1.5rem, 3.5vw, 2.5rem)',
+            display: 'flex',
+            flexDirection: 'column',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.4)'
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
-              <CheckCircle2 size={24} color="var(--accent-status-green)" />
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent-status-green)', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.75rem',
+              marginBottom: '2rem',
+              paddingBottom: '1.25rem',
+              borderBottom: '1px solid var(--border-subtle)'
+            }}>
+              <CheckCircle2 size={22} color="var(--accent-status-green)" />
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-primary)', display: 'inline-flex', alignItems: 'center', gap: '0.375rem' }}>
                 <span>Depois do</span>
                 <Logo size="small" />
+                <span style={{ fontSize: '0.875rem', color: 'var(--accent-status-green)', fontWeight: 500, marginLeft: '0.25rem' }}>(Centralizada)</span>
               </h3>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               {[
-                { title: 'Clientes agendam sozinhos 24/7', desc: 'Link próprio compartilhado no Instagram e WhatsApp onde o cliente escolhe horário e serviço.' },
-                { title: 'Tudo centralizado em um só lugar', desc: 'Agenda, clientes, equipe e resultados reunidos em uma tela clara.' },
-                { title: 'Histórico salvo e acessível', desc: 'Conheça a frequência, preferências e valor total gerado por cada cliente.' },
-                { title: 'Resultados visíveis em tempo real', desc: 'Acompanhe faturamento, ticket médio e produção por profissional.' },
-                { title: 'Oportunidades fáceis de identificar', desc: 'Alertas automáticos para clientes que não voltam há mais de 30 dias.' },
+                { title: 'Clientes agendam sozinhos 24/7', desc: 'Link próprio compartilhado no Instagram e WhatsApp onde o cliente escolhe serviço e horário.' },
+                { title: 'Tudo centralizado em um só lugar', desc: 'Agenda, clientes, equipe e resultados reunidos em uma tela clara e inteligente.' },
+                { title: 'Histórico salvo e acessível', desc: 'Conheça a frequência, preferências e valor total gerado (LTV) por cada cliente.' },
+                { title: 'Resultados visíveis em tempo real', desc: 'Acompanhe faturamento, ticket médio e produção por profissional sem planilhas.' },
+                { title: 'Oportunidades de retorno', desc: 'Alertas inteligentes para clientes que não agendam há mais de 30 dias.' },
               ].map((item, index) => (
                 <div key={index} style={{
-                  padding: '0.875rem 1rem',
-                  backgroundColor: 'var(--bg-main)',
-                  borderRadius: 'var(--radius-md)',
-                  border: '1px solid rgba(16, 185, 129, 0.2)'
+                  display: 'flex',
+                  gap: '0.875rem',
+                  alignItems: 'flex-start'
                 }}>
-                  <div style={{ fontWeight: 600, fontSize: '0.9375rem', marginBottom: '0.25rem', color: 'var(--text-primary)' }}>
-                    ✅ {item.title}
-                  </div>
-                  <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
-                    {item.desc}
+                  <span style={{ color: 'var(--accent-status-green)', fontWeight: 700, fontSize: '0.875rem', marginTop: '2px' }}>✓</span>
+                  <div>
+                    <div style={{ fontWeight: 600, fontSize: '0.9375rem', color: 'var(--text-primary)', marginBottom: '0.125rem' }}>
+                      {item.title}
+                    </div>
+                    <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                      {item.desc}
+                    </div>
                   </div>
                 </div>
               ))}

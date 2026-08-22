@@ -14,7 +14,7 @@ export default function SegmentsSection() {
   return (
     <section id="segmentos" className="section">
       <div className="container">
-        <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 3.5rem auto' }}>
+        <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 4rem auto' }}>
           <div className="section-title-sm">QUEM PRECISA DE MAIS CONTROLE?</div>
           <h2 className="section-heading">
             Se o seu dia funciona por horários.
@@ -24,29 +24,29 @@ export default function SegmentsSection() {
           </p>
         </div>
 
-        <div className="grid-3" style={{ marginBottom: '3rem' }}>
+        {/* Fluid 3-Column Open Grid (No Heavy Cards) */}
+        <div className="grid-3" style={{ marginBottom: '3.5rem', gap: '2rem' }}>
           {segmentos.map((s, idx) => {
             const Icon = s.icon;
             return (
-              <div key={idx} className="clik-card" style={{ padding: '1.75rem' }}>
+              <div key={idx} style={{
+                paddingBottom: '1.25rem',
+                borderBottom: '1px solid var(--border-subtle)'
+              }}>
                 <div style={{
-                  width: '44px',
-                  height: '44px',
-                  borderRadius: 'var(--radius-md)',
-                  backgroundColor: 'var(--bg-surface)',
-                  border: '1px solid var(--border-subtle)',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '1.25rem',
-                  color: 'var(--text-primary)'
+                  gap: '0.75rem',
+                  marginBottom: '0.625rem'
                 }}>
-                  <Icon size={22} />
+                  <div style={{ color: 'var(--text-primary)' }}>
+                    <Icon size={20} />
+                  </div>
+                  <h3 style={{ fontSize: '1.125rem', fontWeight: 600 }}>
+                    {s.name}
+                  </h3>
                 </div>
-                <h3 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '0.5rem' }}>
-                  {s.name}
-                </h3>
-                <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5, paddingLeft: '1.75rem' }}>
                   {s.desc}
                 </p>
               </div>
@@ -54,14 +54,13 @@ export default function SegmentsSection() {
           })}
         </div>
 
-        {/* Central Human Manifesto Card */}
+        {/* Central Human Manifesto (Clean Open Quote Block) */}
         <div style={{
-          backgroundColor: 'var(--bg-surface)',
-          border: '1px solid var(--border-strong)',
-          borderRadius: 'var(--radius-lg)',
-          padding: 'clamp(1.75rem, 4vw, 2.5rem)',
+          borderTop: '1px solid var(--border-strong)',
+          borderBottom: '1px solid var(--border-strong)',
+          padding: 'clamp(2rem, 4vw, 3rem) 0',
           textAlign: 'center',
-          maxWidth: '800px',
+          maxWidth: '850px',
           margin: '0 auto'
         }}>
           <blockquote style={{

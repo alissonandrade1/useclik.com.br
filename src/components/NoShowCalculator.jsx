@@ -22,17 +22,23 @@ export default function NoShowCalculator() {
             Faturando mais. Perdendo menos.
           </h2>
           <p className="section-desc" style={{ margin: '0 auto' }}>
-            Nem todo dinheiro perdido aparece como uma despesa. No-shows, cancelamentos e horários vazios possuem um custo invisível acumulado no mês.
+            Nem todo dinheiro perdido aparece como uma despesa. No-shows, cancelamentos e horários vagos possuem um custo invisível acumulado no mês.
           </p>
         </div>
 
-        <div className="clik-card" style={{ padding: 'clamp(1.5rem, 4vw, 2.5rem)', backgroundColor: 'var(--bg-main)' }}>
+        {/* Fluid Layout (Single Clean Section Container) */}
+        <div style={{
+          backgroundColor: 'var(--bg-main)',
+          border: '1px solid var(--border-subtle)',
+          borderRadius: 'var(--radius-lg)',
+          padding: 'clamp(1.5rem, 4vw, 3rem)'
+        }}>
           <div className="grid-2" style={{ gap: '3rem', alignItems: 'center' }}>
 
             {/* Input Controls */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, marginBottom: '0.5rem' }}>
+                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, marginBottom: '0.625rem' }}>
                   Profissionais na equipe: <span className="font-mono" style={{ color: 'var(--text-primary)' }}>{profissionais}</span>
                 </label>
                 <input 
@@ -46,8 +52,8 @@ export default function NoShowCalculator() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, marginBottom: '0.5rem' }}>
-                  Faltas / no-shows por semana (equipe toda): <span className="font-mono" style={{ color: 'var(--accent-status-red)' }}>{faltasPorSemana} faltas/sem</span>
+                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, marginBottom: '0.625rem' }}>
+                  Faltas / no-shows por semana (toda equipe): <span className="font-mono" style={{ color: 'var(--accent-status-red)' }}>{faltasPorSemana} faltas/sem</span>
                 </label>
                 <input 
                   type="range" 
@@ -60,7 +66,7 @@ export default function NoShowCalculator() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, marginBottom: '0.5rem' }}>
+                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, marginBottom: '0.625rem' }}>
                   Valor médio do atendimento (Ticket Médio): <span className="font-mono">R$ {ticketMedio}</span>
                 </label>
                 <input 
@@ -76,52 +82,45 @@ export default function NoShowCalculator() {
 
               {/* Direct Multiplication Visual Highlight */}
               <div style={{
-                padding: '1.25rem',
-                backgroundColor: 'var(--bg-surface)',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid var(--border-subtle)'
+                paddingTop: '1.25rem',
+                borderTop: '1px solid var(--border-subtle)'
               }}>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginBottom: '0.5rem' }}>
-                  CÁLCULO AUTOMÁTICO
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginBottom: '0.375rem' }}>
+                  CÁLCULO DIRETO
                 </div>
-                <div className="font-mono" style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                <div className="font-mono" style={{ fontSize: '1.0625rem', fontWeight: 600, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                   <span>{faltasMes} faltas este mês</span>
                   <span style={{ color: 'var(--text-muted)' }}>×</span>
                   <span>R$ {ticketMedio} / atendimento</span>
                   <span style={{ color: 'var(--text-muted)' }}>=</span>
                   <span style={{ color: 'var(--accent-status-red)', fontWeight: 800 }}>R$ {perdaMensal.toLocaleString('pt-BR')}</span>
                 </div>
-                <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', marginTop: '0.375rem' }}>
-                  Dinheiro que deixou de entrar direto no caixa do seu negócio.
-                </div>
               </div>
             </div>
 
             {/* Results Display */}
             <div style={{
-              backgroundColor: 'var(--bg-surface)',
-              border: '1px solid var(--border-strong)',
-              borderRadius: 'var(--radius-lg)',
-              padding: '2rem'
+              borderLeft: '1px solid var(--border-subtle)',
+              paddingLeft: 'clamp(1rem, 3vw, 2.5rem)'
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem' }}>
-                <AlertTriangle size={20} color="var(--accent-status-red)" />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem' }}>
+                <AlertTriangle size={18} color="var(--accent-status-red)" />
                 <span className="font-mono" style={{ fontSize: '0.8125rem', color: 'var(--accent-status-red)' }}>PERDA ESTIMADA DE RECEITA</span>
               </div>
 
               <div style={{ marginBottom: '1.5rem' }}>
                 <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Prejuízo mensal invisível:</div>
-                <div className="font-mono" style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--accent-status-red)' }}>
+                <div className="font-mono" style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--accent-status-red)', lineHeight: 1.1, marginTop: '0.25rem' }}>
                   R$ {perdaMensal.toLocaleString('pt-BR')}
                 </div>
-                <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
+                <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', marginTop: '0.375rem' }}>
                   Equivalente a <span className="font-mono" style={{ color: '#fff' }}>{faltasMes} horários vagos</span> sem faturamento.
                 </div>
               </div>
 
               <div style={{ marginBottom: '1.75rem', paddingTop: '1.25rem', borderTop: '1px solid var(--border-subtle)' }}>
                 <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Em 1 ano, o valor acumulado é:</div>
-                <div className="font-mono" style={{ fontSize: '1.75rem', fontWeight: 700 }}>
+                <div className="font-mono" style={{ fontSize: '1.5rem', fontWeight: 700 }}>
                   R$ {perdaAnual.toLocaleString('pt-BR')}
                 </div>
               </div>
@@ -139,9 +138,6 @@ export default function NoShowCalculator() {
                 </div>
                 <div className="font-mono" style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--accent-status-green)' }}>
                   + R$ {economiaEstimadaMensal.toLocaleString('pt-BR')} / mês
-                </div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
-                  Reduzindo desistências tardias com confirmações automáticas e lista de espera.
                 </div>
               </div>
 

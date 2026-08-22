@@ -28,7 +28,7 @@ export default function SolutionsSection() {
   return (
     <section id="solucoes" className="section" style={{ backgroundColor: 'var(--bg-surface)' }}>
       <div className="container">
-        <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3.5rem auto' }}>
+        <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 4rem auto' }}>
           <div className="section-title-sm">FEITO PARA A SUA ROTINA</div>
           <h2 className="section-heading">
             Menos improviso. Mais controle.
@@ -38,29 +38,31 @@ export default function SolutionsSection() {
           </p>
         </div>
 
-        <div className="grid-2">
+        {/* Fluid Open Grid Layout */}
+        <div className="grid-2" style={{ gap: '2.5rem 3rem' }}>
           {solutions.map((item, idx) => {
             const Icon = item.icon;
             return (
-              <div key={idx} className="clik-card" style={{ padding: '2rem' }}>
+              <div key={idx} style={{
+                paddingBottom: '1.5rem',
+                borderBottom: '1px solid var(--border-subtle)'
+              }}>
                 <div style={{
-                  width: '44px',
-                  height: '44px',
-                  borderRadius: 'var(--radius-md)',
-                  backgroundColor: 'var(--bg-main)',
-                  border: '1px solid var(--border-subtle)',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '1.25rem',
-                  color: 'var(--text-primary)'
+                  gap: '0.75rem',
+                  marginBottom: '0.875rem'
                 }}>
-                  <Icon size={22} />
+                  <div style={{
+                    color: 'var(--text-primary)'
+                  }}>
+                    <Icon size={22} />
+                  </div>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700 }}>
+                    {item.title}
+                  </h3>
                 </div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.625rem' }}>
-                  {item.title}
-                </h3>
-                <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+                <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', lineHeight: 1.6, paddingLeft: '2rem' }}>
                   {item.desc}
                 </p>
               </div>
