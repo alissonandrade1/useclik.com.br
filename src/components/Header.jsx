@@ -1,5 +1,6 @@
 import React from 'react';
 import { Calendar, ArrowRight, Menu, X } from 'lucide-react';
+import Logo from './Logo';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
@@ -20,36 +21,8 @@ export default function Header() {
         height: '4.5rem'
       }}>
         {/* Brand Logo */}
-        <a href="/home" style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.625rem',
-          textDecoration: 'none',
-          color: 'var(--text-primary)'
-        }}>
-          <div style={{
-            width: '34px',
-            height: '34px',
-            borderRadius: '8px',
-            background: 'var(--text-primary)',
-            color: 'var(--bg-main)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontWeight: 800,
-            fontSize: '1rem',
-            fontFamily: 'var(--font-mono)'
-          }}>
-            C
-          </div>
-          <span style={{
-            fontSize: '1.25rem',
-            fontWeight: 700,
-            letterSpacing: '-0.03em',
-            fontFamily: 'var(--font-sans)'
-          }}>
-            CLiK<span style={{ color: 'var(--text-muted)' }}>.com.br</span>
-          </span>
+        <a href="/home" style={{ textDecoration: 'none' }}>
+          <Logo size="medium" showDomain={true} />
         </a>
 
         {/* Nav Desktop Links */}

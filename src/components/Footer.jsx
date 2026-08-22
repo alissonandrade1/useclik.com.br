@@ -1,4 +1,5 @@
 import React from 'react';
+import Logo from './Logo';
 
 export default function Footer() {
   return (
@@ -19,29 +20,8 @@ export default function Footer() {
         }}>
           {/* Brand Info */}
           <div style={{ maxWidth: '320px' }}>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.625rem',
-              color: 'var(--text-primary)',
-              marginBottom: '1rem'
-            }}>
-              <div style={{
-                width: '30px',
-                height: '30px',
-                borderRadius: '6px',
-                background: 'var(--text-primary)',
-                color: 'var(--bg-main)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontWeight: 800,
-                fontSize: '0.9375rem',
-                fontFamily: 'var(--font-mono)'
-              }}>
-                C
-              </div>
-              <span style={{ fontSize: '1.25rem', fontWeight: 700 }}>CLiK</span>
+            <div style={{ marginBottom: '1rem' }}>
+              <Logo size="medium" showDomain={false} />
             </div>
 
             <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '1rem' }}>

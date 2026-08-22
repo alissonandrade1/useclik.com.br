@@ -97,7 +97,7 @@ export default function HeroSection() {
                 backgroundColor: 'var(--accent-status-green)'
               }} />
               <span style={{ fontWeight: 600, fontSize: '0.9375rem', fontFamily: 'var(--font-mono)' }}>
-                Studio CLiK — Operação Hoje
+                Studio cLiK<span style={{ color: '#3B82F6' }}>.</span> — Operação Hoje
               </span>
               <span className="badge font-mono" style={{ fontSize: '0.75rem' }}>
                 LIVE DEMO
