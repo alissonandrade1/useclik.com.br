@@ -21,7 +21,7 @@ export default function Footer() {
           {/* Brand Info */}
           <div style={{ maxWidth: '320px' }}>
             <div style={{ marginBottom: '1rem' }}>
-              <Logo size="medium" showDomain={false} />
+              <Logo size="medium" />
             </div>
 
             <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '1rem' }}>

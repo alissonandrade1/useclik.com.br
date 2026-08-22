@@ -22,7 +22,7 @@ export default function Header() {
       }}>
         {/* Brand Logo */}
         <a href="/home" style={{ textDecoration: 'none' }}>
-          <Logo size="medium" showDomain={true} />
+          <Logo size="medium" />
         </a>
 
         {/* Nav Desktop Links */}

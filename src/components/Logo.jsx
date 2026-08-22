@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default function Logo({ size = 'medium', showDomain = true, className = '' }) {
+export default function Logo({ size = 'medium', className = '' }) {
   const fontSize = size === 'small' ? '1.25rem' : size === 'large' ? '2.25rem' : '1.5rem';
 
   return (
-    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem', textDecoration: 'none' }} className={className}>
+    <div style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }} className={className}>
       <span 
         style={{
           fontSize: fontSize,
@@ -17,20 +17,8 @@ export default function Logo({ size = 'medium', showDomain = true, className = '
           alignItems: 'baseline'
         }}
       >
-        cLiK<span style={{ color: '#3B82F6', fontWeight: 900 }}>.</span>
+        clik<span style={{ color: '#3B82F6', fontWeight: 900 }}>.</span>
       </span>
-
-      {showDomain && (
-        <span style={{
-          fontSize: '0.875rem',
-          color: 'var(--text-muted)',
-          fontFamily: 'var(--font-mono)',
-          fontWeight: 500,
-          marginLeft: '0.125rem'
-        }}>
-          com.br
-        </span>
-      )}
     </div>
   );
 }
