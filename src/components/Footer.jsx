@@ -74,7 +74,7 @@ export default function Footer() {
           color: 'var(--text-muted)'
         }}>
           <div>
-            © {new Date().getFullYear()} CLiK. Todos os direitos reservados.
+            © {new Date().getFullYear()} clik. Todos os direitos reservados.
           </div>
           <div>
             "Sua agenda é só o começo."

@@ -15,12 +15,12 @@ export default function SegmentsSection() {
     <section id="segmentos" className="section">
       <div className="container">
         <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3.5rem auto' }}>
-          <div className="section-title-sm">PARA QUEM A CLIK EXISTE</div>
+          <div className="section-title-sm">PARA QUEM O CLIK. EXISTE</div>
           <h2 className="section-heading">
             Feito para quem vive de horários e atendimentos.
           </h2>
           <p className="section-desc" style={{ margin: '0 auto' }}>
-            Se a sua operação depende de pessoas marcando um horário com sua equipe, a CLiK foi desenhada sob medida para você.
+            Se a sua operação depende de pessoas marcando um horário com sua equipe, a plataforma clik. foi desenhada sob medida para você.
           </p>
         </div>
 

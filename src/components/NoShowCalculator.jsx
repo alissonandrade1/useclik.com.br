@@ -9,7 +9,7 @@ export default function NoShowCalculator() {
   const faltasMes = Math.round(faltasPorSemana * 4.33);
   const perdaMensal = faltasMes * ticketMedio;
   const perdaAnual = perdaMensal * 12;
-  const economiaEstimadaMensal = Math.round(perdaMensal * 0.75); // 75% recuperado com lembretes automaticos CLiK
+  const economiaEstimadaMensal = Math.round(perdaMensal * 0.75); // 75% recuperado com lembretes automáticos do clik.
 
   return (
     <section id="calculadora" className="section" style={{ backgroundColor: 'var(--bg-surface)' }}>
@@ -82,7 +82,7 @@ export default function NoShowCalculator() {
                 fontSize: '0.8125rem',
                 color: 'var(--text-secondary)'
               }}>
-                ℹ️ A CLiK envia confirmações automáticas por WhatsApp e permite lista de espera para preencher desistências no mesmo dia.
+                ℹ️ O clik. envia confirmações automáticas por WhatsApp e permite lista de espera para preencher desistências no mesmo dia.
               </div>
             </div>
 
@@ -124,7 +124,7 @@ export default function NoShowCalculator() {
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-status-green)', fontWeight: 600, fontSize: '0.9375rem', marginBottom: '0.25rem' }}>
                   <ShieldCheck size={18} />
-                  <span>Com a CLiK você pode resgatar:</span>
+                  <span>Com o clik. você pode resgatar:</span>
                 </div>
                 <div className="font-mono" style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--accent-status-green)' }}>
                   + R$ {economiaEstimadaMensal.toLocaleString('pt-BR')} / mês

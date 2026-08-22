@@ -21,7 +21,7 @@ const pilares = [
     icon: Users,
     title: '2. Clientes',
     subtitle: 'Transforme uma simples lista de contatos em uma base de clientes real.',
-    desc: 'Esqueça anotações soltas. O CLiK constrói um histórico inteligente de cada cliente: serviços já realizados, faltas, frequência de visitas e valor gerado (LTV).',
+    desc: 'Esqueça anotações soltas. O clik. constrói um histórico inteligente de cada cliente: serviços já realizados, faltas, frequência de visitas e valor gerado (LTV).',
     features: [
       'Histórico completo de atendimentos',
       'Registro de cancelamentos e no-shows',
@@ -49,7 +49,7 @@ const pilares = [
     icon: TrendingUp,
     title: '4. Financeiro e Resultados',
     subtitle: 'Entenda exatamente o que aconteceu, por que aconteceu e onde há oportunidade.',
-    desc: 'A CLiK não mostra apenas números frios. Ela traz visibilidade sobre faturamento, ticket médio, faturamento por serviço e, principalmente, o dinheiro perdido com no-shows e faltas.',
+    desc: 'O clik. não mostra apenas números frios. Ele traz visibilidade sobre faturamento, ticket médio, faturamento por serviço e, principalmente, o dinheiro perdido com no-shows e faltas.',
     features: [
       'Faturamento em tempo real por período',
       'Métrica clara de valor perdido por no-shows',
@@ -63,7 +63,7 @@ const pilares = [
     icon: MessageSquare,
     title: '5. Relacionamento & CRM',
     subtitle: 'Não esqueça seus clientes depois do atendimento.',
-    desc: 'A jornada não termina quando o serviço é concluído. A camada de CRM da CLiK identifica quem está sumido e sugere pontos de contato para você reengajar seus clientes via WhatsApp.',
+    desc: 'A jornada não termina quando o serviço é concluído. A camada de CRM do clik. identifica quem está sumido e sugere pontos de contato para você reengajar seus clientes via WhatsApp.',
     features: [
       'Alertas de clientes que não voltam há 30, 60 ou 90 dias',
       'Segmentação por valor de cliente',
@@ -86,7 +86,7 @@ export default function PilaresSection() {
             Tudo o que seu negócio precisa em 5 pilares conectados.
           </h2>
           <p className="section-desc" style={{ margin: '0 auto' }}>
-            A CLiK conecta o que acontece antes, durante e depois de cada atendimento.
+            O clik. conecta o que acontece antes, durante e depois de cada atendimento.
           </p>
         </div>
 
@@ -162,7 +162,7 @@ export default function PilaresSection() {
               minHeight: '260px'
             }}>
               <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-                TOM DE VOZ CLIK
+                TOM DE VOZ clik.
               </div>
               <div className="font-mono" style={{
                 fontSize: '1.25rem',

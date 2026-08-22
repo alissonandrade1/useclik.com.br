@@ -11,7 +11,7 @@ export default function TransformationSection() {
             De uma operação espalhada para um negócio sob controle.
           </h2>
           <p className="section-desc" style={{ margin: '0 auto' }}>
-            A maioria dos negócios trabalha reagindo ao caos. A CLiK centraliza sua rotina para você voltar a ter domínio sobre seu tempo e faturamento.
+            A maioria dos negócios trabalha reagindo ao caos. O clik. centraliza sua rotina para você voltar a ter domínio sobre seu tempo e faturamento.
           </p>
         </div>
 
@@ -25,7 +25,7 @@ export default function TransformationSection() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
               <XCircle size={24} color="var(--accent-status-red)" />
               <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent-status-red)' }}>
-                Antes da CLiK (Operação Espalhada)
+                Antes do clik. (Operação Espalhada)
               </h3>
             </div>
 
@@ -63,7 +63,7 @@ export default function TransformationSection() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
               <CheckCircle2 size={24} color="var(--accent-status-green)" />
               <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent-status-green)' }}>
-                Depois da CLiK (Operação Centralizada)
+                Depois do clik. (Operação Centralizada)
               </h3>
             </div>
 

@@ -97,7 +97,7 @@ export default function HeroSection() {
                 backgroundColor: 'var(--accent-status-green)'
               }} />
               <span style={{ fontWeight: 600, fontSize: '0.9375rem', fontFamily: 'var(--font-mono)' }}>
-                Studio cLiK<span style={{ color: '#3B82F6' }}>.</span> — Operação Hoje
+                studio clik<span style={{ color: '#3B82F6' }}>.</span> — Operação Hoje
               </span>
               <span className="badge font-mono" style={{ fontSize: '0.75rem' }}>
                 LIVE DEMO
@@ -235,7 +235,7 @@ export default function HeroSection() {
                     <MessageSquare color="var(--accent-status-green)" size={20} />
                     <div>
                       <div style={{ fontWeight: 600 }}>8 clientes não voltam há mais de 30 dias</div>
-                      <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>A CLiK identificou oportunidades automáticas de retorno via WhatsApp.</div>
+                      <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>O clik. identificou oportunidades automáticas de retorno via WhatsApp.</div>
                     </div>
                   </div>
                   <button className="btn btn-sm btn-primary" style={{ backgroundColor: 'var(--accent-status-green)', color: '#000' }}>
@@ -374,7 +374,7 @@ export default function HeroSection() {
             fontSize: '0.8125rem',
             color: 'var(--text-muted)'
           }}>
-            <span>Veja como a CLiK dá visibilidade total da sua operação.</span>
+            <span>Veja como o clik. dá visibilidade total da sua operação.</span>
             <span className="font-mono" style={{ color: 'var(--text-secondary)' }}>useclik.com.br/demo</span>
           </div>
         </div>
