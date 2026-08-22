@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "open-design": {
+      "command": "od",
+      "args": [
+        "mcp",
+        "--daemon-url",
+        "od://app"
+      ]
+    }
+  }
+}
