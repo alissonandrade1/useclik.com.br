@@ -15,7 +15,7 @@ export default function HomePage() {
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', width: '100%', overflowX: 'hidden' }}>
       <Header />
-      <main style={{ flex: 1, width: '100%' }}>
+      <main style={{ flex: 1, width: '100%', paddingTop: '4.5rem' }}>
         <HeroSection />
         <TransformationSection />
         <CycleSection />
