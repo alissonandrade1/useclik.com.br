@@ -87,13 +87,13 @@ export default function HeroSection() {
               href="https://app.useclik.com.br/register" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="btn btn-primary btn-lg"
+              className="btn btn-primary btn-lg btn-mobile-full"
               style={{ textDecoration: 'none' }}
             >
               <span>Inicie agora</span>
               <ArrowRight size={18} />
             </a>
-            <a href="#como-funciona" className="btn btn-secondary btn-lg" style={{ textDecoration: 'none' }}>
+            <a href="#como-funciona" className="btn btn-secondary btn-lg btn-mobile-full" style={{ textDecoration: 'none' }}>
               <span>Ver como funciona</span>
             </a>
           </div>
@@ -173,6 +173,44 @@ export default function HeroSection() {
                 <span>{autoPlay ? 'Pausar Tour Automático' : 'Iniciar Tour Automático'}</span>
               </button>
             </div>
+          </div>
+
+          {/* Mobile Horizontal Scrollable Tab Bar (Visible on mobile/tablet <= 840px) */}
+          <div className="app-mobile-nav-bar">
+            {[
+              { id: 'visao-geral', label: 'Visão geral', icon: LayoutDashboard },
+              { id: 'agendamentos', label: 'Agendamentos', icon: CalendarIcon },
+              { id: 'servicos', label: 'Serviços', icon: Tag },
+              { id: 'disponibilidade', label: 'Disponibilidade', icon: Clock },
+              { id: 'clientes', label: 'Clientes', icon: Users },
+              { id: 'whatsapp', label: 'WhatsApp', icon: MessageSquare },
+            ].map((item) => {
+              const Icon = item.icon;
+              const isActive = activeNav === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => { setActiveNav(item.id); setAutoPlay(false); }}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.375rem',
+                    padding: '0.4rem 0.75rem',
+                    borderRadius: '9999px',
+                    backgroundColor: isActive ? '#1c2235' : '#12141d',
+                    color: isActive ? '#60a5fa' : '#8f94a6',
+                    border: isActive ? '1px solid #3b82f6' : '1px solid #202434',
+                    fontSize: '0.78rem',
+                    fontWeight: isActive ? 600 : 400,
+                    whiteSpace: 'nowrap',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <Icon size={14} color={isActive ? '#3b82f6' : '#8f94a6'} />
+                  <span>{item.label}</span>
+                </button>
+              );
+            })}
           </div>
 
           {/* Main App Container */}

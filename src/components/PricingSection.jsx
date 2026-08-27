@@ -188,6 +188,7 @@ export default function PricingSection() {
           </p>
         </div>
 
+        <div className="scroll-hint-mobile font-mono">← Deslize para ver todos os recursos →</div>
         <div className="pricing-table-wrapper">
           <table className="pricing-table">
             <thead>

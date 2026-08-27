@@ -63,7 +63,7 @@ export default function CTASection() {
               href="https://app.useclik.com.br/register" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="btn btn-lg" 
+              className="btn btn-lg btn-mobile-full" 
               style={{
                 backgroundColor: '#0a0a0c',
                 color: '#ffffff',
@@ -77,7 +77,7 @@ export default function CTASection() {
               <span>Inicie agora</span>
               <ArrowRight size={18} />
             </a>
-            <a href="#como-funciona" className="btn btn-lg" style={{
+            <a href="#como-funciona" className="btn btn-lg btn-mobile-full" style={{
               backgroundColor: 'transparent',
               color: '#0a0a0c',
               border: '1px solid #d1d1d6',
