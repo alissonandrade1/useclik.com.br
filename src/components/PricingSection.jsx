@@ -1,5 +1,5 @@
-import React from 'react';
-import { Check, Star, ArrowRight } from 'lucide-react';
+import React, { useRef } from 'react';
+import { Check, Star, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const plans = [
   {
@@ -86,10 +86,20 @@ const comparisonData = [
 ];
 
 export default function PricingSection() {
+  const cardsContainerRef = useRef(null);
+
+  const scrollLeft = () => {
+    cardsContainerRef.current?.scrollBy({ left: -300, behavior: 'smooth' });
+  };
+
+  const scrollRight = () => {
+    cardsContainerRef.current?.scrollBy({ left: 300, behavior: 'smooth' });
+  };
+
   return (
     <section id="planos" className="section" style={{ backgroundColor: 'var(--bg-surface)' }}>
       <div className="container">
-        <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 4rem auto' }}>
+        <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 3.5rem auto' }}>
           <div className="section-title-sm">PLANOS E ASSINATURA</div>
           <h2 className="section-heading">
             Escolha o plano ideal para a escala do seu negócio.
@@ -99,10 +109,57 @@ export default function PricingSection() {
           </p>
         </div>
 
-        {/* 4 Sleek Plan Cards */}
-        <div className="grid-4" style={{ marginBottom: '4.5rem', alignItems: 'stretch', gap: '1.5rem' }}>
+        {/* Mobile Arrow Navigation Bar */}
+        <div className="pricing-arrows-mobile font-mono" style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
+          <span>Deslize para ver os planos</span>
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <button 
+              onClick={scrollLeft}
+              aria-label="Plano anterior"
+              style={{
+                backgroundColor: '#12141d',
+                border: '1px solid #202434',
+                color: '#ffffff',
+                width: '36px',
+                height: '36px',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer'
+              }}
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <button 
+              onClick={scrollRight}
+              aria-label="Próximo plano"
+              style={{
+                backgroundColor: '#12141d',
+                border: '1px solid #202434',
+                color: '#ffffff',
+                width: '36px',
+                height: '36px',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer'
+              }}
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
+        </div>
+
+        {/* 4 Sleek Plan Cards with Responsive Snap Carousel */}
+        <div 
+          ref={cardsContainerRef}
+          className="grid-4 pricing-cards-scroll" 
+          style={{ marginBottom: '4.5rem', alignItems: 'stretch', gap: '1.5rem' }}
+        >
           {plans.map((p, idx) => (
-            <div key={idx} style={{
+            <div key={idx} className="pricing-card-item" style={{
               padding: '2rem 1.5rem',
               display: 'flex',
               flexDirection: 'column',
@@ -112,6 +169,7 @@ export default function PricingSection() {
               border: p.popular ? '1px solid #ffffff' : '1px solid var(--border-subtle)',
               backgroundColor: p.popular ? 'var(--bg-card)' : 'var(--bg-main)',
               boxShadow: p.popular ? '0 10px 30px rgba(255, 255, 255, 0.05)' : 'none',
+              height: '100%'
             }}>
               {p.popular && (
                 <div style={{
@@ -137,11 +195,11 @@ export default function PricingSection() {
                 </div>
               )}
 
-              <div>
+              <div style={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
                 <h3 style={{ fontSize: '1.35rem', fontWeight: 700, marginBottom: '0.375rem' }}>
                   {p.name}
                 </h3>
-                <p style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', minHeight: '48px', marginBottom: '1.25rem', lineHeight: 1.4 }}>
+                <p style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', minHeight: '44px', marginBottom: '1.25rem', lineHeight: 1.4 }}>
                   {p.desc}
                 </p>
 
@@ -154,7 +212,7 @@ export default function PricingSection() {
                   Recursos inclusos
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem', marginBottom: '1.75rem', fontSize: '0.84rem', minHeight: '250px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem', marginBottom: '1.75rem', fontSize: '0.84rem', flexGrow: 1 }}>
                   {p.features.map((f, i) => (
                     <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: 'var(--text-secondary)' }}>
                       <Check size={16} color={p.popular ? '#ffffff' : 'var(--accent-status-green)'} style={{ marginTop: '2px', flexShrink: 0 }} />
@@ -164,16 +222,19 @@ export default function PricingSection() {
                 </div>
               </div>
 
-              <a 
-                href="https://app.useclik.com.br/register" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`btn ${p.popular ? 'btn-primary' : 'btn-secondary'}`}
-                style={{ width: '100%', textDecoration: 'none' }}
-              >
-                <span>{p.cta}</span>
-                <ArrowRight size={14} />
-              </a>
+              {/* Perfectly Aligned Bottom Button */}
+              <div style={{ marginTop: 'auto', paddingTop: '1rem' }}>
+                <a 
+                  href="https://app.useclik.com.br/register" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`btn ${p.popular ? 'btn-primary' : 'btn-secondary'}`}
+                  style={{ width: '100%', textDecoration: 'none' }}
+                >
+                  <span>{p.cta}</span>
+                  <ArrowRight size={14} />
+                </a>
+              </div>
             </div>
           ))}
         </div>

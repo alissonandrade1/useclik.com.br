@@ -358,11 +358,11 @@ export default function HeroSection() {
 
               {/* VIEW 1: VISÃO GERAL (100% Fictional Thriving Data) */}
               {activeNav === 'visao-geral' && (
-                <div style={{ padding: '1.5rem' }} className="animate-fade-in">
+                <div style={{ padding: '1.5rem' }} className="app-demo-padding animate-fade-in">
                   {/* Header Title & Date Filters */}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
                     <div>
-                      <h2 style={{ fontSize: '1.6rem', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: '0.25rem' }}>
+                      <h2 style={{ fontSize: '1.5rem', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: '0.25rem' }}>
                         Olá, Studio Beleza 👋
                       </h2>
                       <div style={{ fontSize: '0.8125rem', color: '#6b7280', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -391,12 +391,15 @@ export default function HeroSection() {
                   </div>
 
                   {/* 7 Metric Cards Grid with Rich Fictional Data */}
-                  <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                    gap: '0.875rem',
-                    marginBottom: '1.5rem'
-                  }}>
+                  <div 
+                    className="app-metrics-grid"
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                      gap: '0.875rem',
+                      marginBottom: '1.5rem'
+                    }}
+                  >
                     <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)', transition: 'transform 150ms', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                       <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem', whiteSpace: 'nowrap' }} className="font-mono">RECEITA DO MÊS</div>
                       <div style={{ fontSize: '1.35rem', fontWeight: 700, color: '#10b981', whiteSpace: 'nowrap' }} className="font-mono">R$ 18.420,00</div>
