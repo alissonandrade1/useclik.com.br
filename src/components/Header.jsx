@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Menu, X } from 'lucide-react';
+import { ArrowRight, Menu, X, LogIn } from 'lucide-react';
 import Logo from './Logo';
 
 export default function Header() {
@@ -52,9 +52,37 @@ export default function Header() {
         </nav>
 
         {/* CTA Desktop */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <a href="#criar-agenda" className="btn btn-primary btn-sm">
-            <span>Criar minha agenda</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
+          <a 
+            href="https://app.useclik.com.br/login" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ 
+              color: 'var(--text-primary)', 
+              textDecoration: 'none', 
+              fontSize: '0.875rem', 
+              fontWeight: 500,
+              padding: '0.5rem 0.75rem',
+              borderRadius: 'var(--radius-md)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.375rem',
+              transition: 'background-color 150ms'
+            }}
+            onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--bg-surface-hover)'}
+            onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
+          >
+            <LogIn size={15} />
+            <span>Faça login</span>
+          </a>
+
+          <a 
+            href="https://app.useclik.com.br/register" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="btn btn-primary btn-sm"
+          >
+            <span>Inicie agora</span>
             <ArrowRight size={15} />
           </a>
 
@@ -93,8 +121,15 @@ export default function Header() {
           <a href="#calculadora" onClick={() => setMobileMenuOpen(false)} style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Calculadora</a>
           <a href="#planos" onClick={() => setMobileMenuOpen(false)} style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Planos & Preços</a>
           <a href="#segmentos" onClick={() => setMobileMenuOpen(false)} style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Para quem é</a>
+          <hr style={{ borderColor: 'var(--border-subtle)', margin: '0.25rem 0' }} />
+          <a href="https://app.useclik.com.br/login" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: 600 }}>Faça login</a>
+          <a href="https://app.useclik.com.br/register" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-sm" style={{ width: '100%' }}>
+            <span>Inicie agora</span>
+            <ArrowRight size={15} />
+          </a>
         </div>
       )}
     </header>
   );
 }
+

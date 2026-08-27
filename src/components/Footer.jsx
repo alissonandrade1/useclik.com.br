@@ -50,12 +50,13 @@ export default function Footer() {
 
             <div>
               <div style={{ color: 'var(--text-primary)', fontWeight: 600, fontSize: '0.875rem', marginBottom: '1rem', fontFamily: 'var(--font-mono)' }}>
-                PRODUTO
+                PRODUTO & CONTA
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem', fontSize: '0.875rem' }}>
                 <a href="#planos" style={{ color: 'inherit', textDecoration: 'none' }}>Planos & Preços</a>
                 <a href="#segmentos" style={{ color: 'inherit', textDecoration: 'none' }}>Para quem é</a>
-                <a href="#criar-agenda" style={{ color: 'inherit', textDecoration: 'none' }}>Criar minha agenda</a>
+                <a href="https://app.useclik.com.br/register" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>Inicie agora</a>
+                <a href="https://app.useclik.com.br/login" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', fontWeight: 600, textDecoration: 'none' }}>Faça login no CLiK</a>
               </div>
             </div>
           </div>
@@ -74,7 +75,7 @@ export default function Footer() {
           color: 'var(--text-muted)'
         }}>
           <div>
-            © {new Date().getFullYear()} clik. Todos os direitos reservados.
+            © {new Date().getFullYear()} CLiK. Todos os direitos reservados.
           </div>
           <div>
             "Sua agenda é só o começo."
@@ -84,3 +85,4 @@ export default function Footer() {
     </footer>
   );
 }
+

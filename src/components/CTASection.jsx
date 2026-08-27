@@ -59,16 +59,23 @@ export default function CTASection() {
           </p>
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
-            <button className="btn btn-lg" style={{
-              backgroundColor: '#0a0a0c',
-              color: '#ffffff',
-              padding: '0.875rem 2.25rem',
-              fontSize: '1rem',
-              fontWeight: 700
-            }}>
-              <span>Começar gratuitamente</span>
+            <a 
+              href="https://app.useclik.com.br/register" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="btn btn-lg" 
+              style={{
+                backgroundColor: '#0a0a0c',
+                color: '#ffffff',
+                padding: '0.875rem 2.25rem',
+                fontSize: '1rem',
+                fontWeight: 700,
+                textDecoration: 'none'
+              }}
+            >
+              <span>Inicie agora</span>
               <ArrowRight size={18} />
-            </button>
+            </a>
             <a href="#como-funciona" className="btn btn-lg" style={{
               backgroundColor: 'transparent',
               color: '#0a0a0c',
@@ -99,7 +106,7 @@ export default function CTASection() {
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
               <Shield size={16} color="#0a0a0c" />
-              <span>Suporte 24/7</span>
+              <span>Suporte prioritário</span>
             </div>
           </div>
         </div>
@@ -107,3 +114,4 @@ export default function CTASection() {
     </section>
   );
 }
+
