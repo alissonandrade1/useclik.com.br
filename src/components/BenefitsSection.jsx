@@ -49,13 +49,16 @@ export default function BenefitsSection() {
             return (
               <div key={idx} style={{
                 paddingTop: '1.25rem',
-                borderTop: '1px solid var(--border-strong)'
+                borderTop: '1px solid var(--border-strong)',
+                display: 'flex',
+                flexDirection: 'column'
               }}>
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  marginBottom: '1rem'
+                  marginBottom: '1rem',
+                  height: '24px'
                 }}>
                   <span className="font-mono" style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', fontWeight: 600 }}>
                     {b.number}

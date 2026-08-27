@@ -322,7 +322,7 @@ export default function HeroSection() {
               {activeNav === 'visao-geral' && (
                 <div style={{ padding: '1.5rem' }} className="animate-fade-in">
                   {/* Header Title & Date Filters */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
                     <div>
                       <h2 style={{ fontSize: '1.6rem', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: '0.25rem' }}>
                         Olá, Studio Beleza 👋
@@ -355,7 +355,7 @@ export default function HeroSection() {
                   {/* 7 Metric Cards Grid with Rich Fictional Data */}
                   <div style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
                     gap: '0.875rem',
                     marginBottom: '1.5rem'
                   }}>

@@ -67,10 +67,11 @@ export default function CTASection() {
               style={{
                 backgroundColor: '#0a0a0c',
                 color: '#ffffff',
-                padding: '0.875rem 2.25rem',
+                padding: '0.875rem 2rem',
                 fontSize: '1rem',
-                fontWeight: 700,
-                textDecoration: 'none'
+                fontWeight: 600,
+                textDecoration: 'none',
+                minHeight: '48px'
               }}
             >
               <span>Inicie agora</span>
@@ -80,8 +81,11 @@ export default function CTASection() {
               backgroundColor: 'transparent',
               color: '#0a0a0c',
               border: '1px solid #d1d1d6',
-              padding: '0.875rem 1.75rem',
-              fontSize: '1rem'
+              padding: '0.875rem 2rem',
+              fontSize: '1rem',
+              fontWeight: 600,
+              textDecoration: 'none',
+              minHeight: '48px'
             }}>
               <span>Ver como funciona</span>
             </a>

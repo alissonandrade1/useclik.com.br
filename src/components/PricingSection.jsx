@@ -141,7 +141,7 @@ export default function PricingSection() {
                 <h3 style={{ fontSize: '1.35rem', fontWeight: 700, marginBottom: '0.375rem' }}>
                   {p.name}
                 </h3>
-                <p style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', minHeight: '40px', marginBottom: '1.25rem', lineHeight: 1.4 }}>
+                <p style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', minHeight: '48px', marginBottom: '1.25rem', lineHeight: 1.4 }}>
                   {p.desc}
                 </p>
 
@@ -154,7 +154,7 @@ export default function PricingSection() {
                   Recursos inclusos
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem', marginBottom: '1.75rem', fontSize: '0.84rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem', marginBottom: '1.75rem', fontSize: '0.84rem', minHeight: '250px' }}>
                   {p.features.map((f, i) => (
                     <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: 'var(--text-secondary)' }}>
                       <Check size={16} color={p.popular ? '#ffffff' : 'var(--accent-status-green)'} style={{ marginTop: '2px', flexShrink: 0 }} />

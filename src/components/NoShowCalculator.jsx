@@ -99,10 +99,7 @@ export default function NoShowCalculator() {
             </div>
 
             {/* Results Display */}
-            <div style={{
-              borderLeft: '1px solid var(--border-subtle)',
-              paddingLeft: 'clamp(1rem, 3vw, 2.5rem)'
-            }}>
+            <div className="calc-divider">
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem' }}>
                 <AlertTriangle size={18} color="var(--accent-status-red)" />
                 <span className="font-mono" style={{ fontSize: '0.8125rem', color: 'var(--accent-status-red)' }}>PERDA ESTIMADA DE RECEITA</span>

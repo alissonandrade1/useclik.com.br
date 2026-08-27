@@ -46,7 +46,7 @@ export default function SegmentsSection() {
                     {s.name}
                   </h3>
                 </div>
-                <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5, paddingLeft: '1.75rem' }}>
+                <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5, paddingLeft: '2rem' }}>
                   {s.desc}
                 </p>
               </div>

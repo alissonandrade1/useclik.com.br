@@ -61,13 +61,16 @@ export default function CycleSection() {
               <div key={idx} style={{
                 paddingTop: '1.25rem',
                 borderTop: '2px solid var(--border-subtle)',
-                position: 'relative'
+                position: 'relative',
+                display: 'flex',
+                flexDirection: 'column'
               }}>
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  marginBottom: '1rem'
+                  marginBottom: '1rem',
+                  height: '24px'
                 }}>
                   <span className="font-mono" style={{
                     fontSize: '1rem',

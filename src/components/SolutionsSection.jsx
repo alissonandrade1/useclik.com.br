@@ -62,7 +62,7 @@ export default function SolutionsSection() {
                     {item.title}
                   </h3>
                 </div>
-                <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', lineHeight: 1.6, paddingLeft: '2rem' }}>
+                <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', lineHeight: 1.6, paddingLeft: '2.125rem' }}>
                   {item.desc}
                 </p>
               </div>
