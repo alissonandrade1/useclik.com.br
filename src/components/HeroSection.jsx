@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   LayoutDashboard, 
   Calendar as CalendarIcon, 
   Tag, 
   Clock, 
   Users, 
-  Layers, 
   MessageSquare, 
-  Settings, 
   Sun, 
   LogOut, 
   ChevronLeft, 
@@ -19,13 +17,40 @@ import {
   ChevronDown, 
   Edit3, 
   Trash2, 
-  UserPlus
+  UserPlus,
+  Play,
+  Pause,
+  TrendingUp,
+  Sparkles,
+  Smartphone
 } from 'lucide-react';
 import Logo from './Logo';
 
 export default function HeroSection() {
   const [activeNav, setActiveNav] = useState('visao-geral');
   const [agendamentosView, setAgendamentosView] = useState('calendario');
+  const [selectedCalendarDay, setSelectedCalendarDay] = useState(27);
+  const [autoPlay, setAutoPlay] = useState(false);
+  const [saveSuccessNotice, setSaveSuccessNotice] = useState(false);
+  const [activeProf, setActiveProf] = useState('gabriel');
+
+  // Auto-play tabs animation if enabled
+  useEffect(() => {
+    if (!autoPlay) return;
+    const tabs = ['visao-geral', 'agendamentos', 'servicos', 'disponibilidade', 'clientes'];
+    const timer = setInterval(() => {
+      setActiveNav(prev => {
+        const nextIndex = (tabs.indexOf(prev) + 1) % tabs.length;
+        return tabs[nextIndex];
+      });
+    }, 4500);
+    return () => clearInterval(timer);
+  }, [autoPlay]);
+
+  const handleSaveHours = () => {
+    setSaveSuccessNotice(true);
+    setTimeout(() => setSaveSuccessNotice(false), 2500);
+  };
 
   return (
     <section className="section" style={{ paddingTop: 'clamp(3rem, 5vw, 4.5rem)', paddingBottom: 'clamp(3.5rem, 6vw, 5rem)' }}>
@@ -33,7 +58,7 @@ export default function HeroSection() {
         {/* Main Hero Header */}
         <div style={{ textAlign: 'center', maxWidth: '860px', margin: '0 auto 3rem auto' }}>
           <div className="badge badge-mono" style={{ marginBottom: '1.25rem' }}>
-            <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--accent-status-green)' }}></span>
+            <span className="pulse-dot" style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--accent-status-green)' }}></span>
             PLATAFORMA DE GESTÃO PARA NEGÓCIOS DE SERVIÇOS
           </div>
 
@@ -108,10 +133,52 @@ export default function HeroSection() {
           backgroundColor: '#0a0b10',
           borderRadius: 'var(--radius-lg)'
         }}>
+          {/* Top Demo Bar Controls */}
+          <div style={{
+            backgroundColor: '#07080d',
+            borderBottom: '1px solid #1a1c26',
+            padding: '0.625rem 1.25rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            fontSize: '0.75rem',
+            flexWrap: 'wrap',
+            gap: '0.75rem'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
+              <span className="pulse-dot" style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10b981' }} />
+              <span style={{ fontWeight: 600, color: '#e5e7eb' }} className="font-mono">DEMONSTRAÇÃO AO VIVO — SISTEMA REAL</span>
+              <span style={{ fontSize: '0.68rem', backgroundColor: '#1e2436', color: '#60a5fa', padding: '0.125rem 0.5rem', borderRadius: '4px' }} className="font-mono">
+                Studio Beleza & Estilo
+              </span>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <button 
+                onClick={() => setAutoPlay(!autoPlay)}
+                style={{
+                  background: autoPlay ? 'rgba(59, 130, 246, 0.2)' : 'transparent',
+                  border: '1px solid #202434',
+                  color: autoPlay ? '#60a5fa' : '#9ca3af',
+                  padding: '0.25rem 0.625rem',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontSize: '0.72rem',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.375rem'
+                }}
+              >
+                {autoPlay ? <Pause size={12} /> : <Play size={12} />}
+                <span>{autoPlay ? 'Pausar Tour Automático' : 'Iniciar Tour Automático'}</span>
+              </button>
+            </div>
+          </div>
+
           {/* Main App Container */}
-          <div style={{ display: 'flex', minHeight: '620px', flexWrap: 'nowrap' }}>
+          <div style={{ display: 'flex', minHeight: '640px', flexWrap: 'nowrap' }}>
             
-            {/* Real App Left Sidebar */}
+            {/* Real App Left Sidebar (No Planos or Configuracoes) */}
             <aside style={{
               width: '230px',
               backgroundColor: '#07080c',
@@ -127,28 +194,26 @@ export default function HeroSection() {
                 <div style={{ padding: '0 0.5rem 1.25rem 0.5rem', borderBottom: '1px solid #151720', marginBottom: '1.25rem' }}>
                   <Logo size="small" />
                   <div style={{ fontSize: '0.75rem', color: '#62626e', marginTop: '0.125rem' }} className="font-mono">
-                    admin
+                    Studio Beleza & Estilo
                   </div>
                 </div>
 
                 {/* Main Navigation Items */}
-                <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
                   {[
                     { id: 'visao-geral', label: 'Visão geral', icon: LayoutDashboard },
                     { id: 'agendamentos', label: 'Agendamentos', icon: CalendarIcon },
                     { id: 'servicos', label: 'Serviços', icon: Tag },
                     { id: 'disponibilidade', label: 'Disponibilidade', icon: Clock },
                     { id: 'clientes', label: 'Clientes', icon: Users },
-                    { id: 'planos', label: 'Planos & Upgrade', icon: Layers },
                     { id: 'whatsapp', label: 'WhatsApp Bot', icon: MessageSquare, badge: 'Em breve' },
-                    { id: 'configuracoes', label: 'Configurações', icon: Settings },
                   ].map((item) => {
                     const Icon = item.icon;
                     const isActive = activeNav === item.id;
                     return (
                       <button
                         key={item.id}
-                        onClick={() => setActiveNav(item.id)}
+                        onClick={() => { setActiveNav(item.id); setAutoPlay(false); }}
                         style={{
                           display: 'flex',
                           alignItems: 'center',
@@ -158,7 +223,7 @@ export default function HeroSection() {
                           borderRadius: 'var(--radius-sm)',
                           backgroundColor: isActive ? '#1c2235' : 'transparent',
                           color: isActive ? '#60a5fa' : '#8f94a6',
-                          border: 'none',
+                          border: isActive ? '1px solid rgba(59, 130, 246, 0.3)' : '1px solid transparent',
                           cursor: 'pointer',
                           fontSize: '0.84rem',
                           fontWeight: isActive ? 600 : 400,
@@ -192,7 +257,7 @@ export default function HeroSection() {
               <div style={{ borderTop: '1px solid #151720', paddingTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', padding: '0.5rem 0.75rem', color: '#8f94a6', fontSize: '0.8125rem' }}>
                   <Sun size={15} />
-                  <span>Aparência</span>
+                  <span>Aparência Escura</span>
                 </div>
                 <button style={{ 
                   display: 'flex', 
@@ -230,39 +295,40 @@ export default function HeroSection() {
                 justifyContent: 'space-between',
                 backgroundColor: '#0b0c12'
               }}>
-                <div style={{ fontSize: '0.8125rem', color: '#8f94a6' }}>
-                  Qui, 27 de ago
+                <div style={{ fontSize: '0.8125rem', color: '#8f94a6', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span>Qui, 27 de ago</span>
+                  <span style={{ color: '#3b82f6', fontWeight: 600 }}>• 14 agendamentos hoje</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
                   <div style={{
-                    width: '26px',
-                    height: '26px',
+                    width: '28px',
+                    height: '28px',
                     borderRadius: '50%',
-                    backgroundColor: '#3b82f6',
+                    backgroundColor: '#2563eb',
                     color: '#ffffff',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontWeight: 700,
-                    fontSize: '0.75rem'
+                    fontSize: '0.78rem'
                   }}>
-                    A
+                    SB
                   </div>
-                  <span style={{ fontSize: '0.84rem', fontWeight: 500, color: '#d1d5db' }}>admin</span>
+                  <span style={{ fontSize: '0.84rem', fontWeight: 600, color: '#d1d5db' }}>Studio Beleza</span>
                 </div>
               </div>
 
-              {/* VIEW 1: VISÃO GERAL */}
+              {/* VIEW 1: VISÃO GERAL (100% Fictional Thriving Data) */}
               {activeNav === 'visao-geral' && (
-                <div style={{ padding: '1.5rem' }}>
+                <div style={{ padding: '1.5rem' }} className="animate-fade-in">
                   {/* Header Title & Date Filters */}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
                     <div>
                       <h2 style={{ fontSize: '1.6rem', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: '0.25rem' }}>
-                        Olá, admin
+                        Olá, Studio Beleza 👋
                       </h2>
                       <div style={{ fontSize: '0.8125rem', color: '#6b7280', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <span className="font-mono">/admin-1d1c6f</span>
+                        <span className="font-mono" style={{ color: '#3b82f6' }}>/studio-beleza</span>
                         <span>•</span>
                         <span className="font-mono" style={{ textTransform: 'uppercase' }}>AGOSTO 2026</span>
                       </div>
@@ -286,52 +352,53 @@ export default function HeroSection() {
                     </div>
                   </div>
 
-                  {/* 7 Metric Cards Grid matching Screenshot 1 */}
+                  {/* 7 Metric Cards Grid with Rich Fictional Data */}
                   <div style={{
                     display: 'grid',
                     gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
                     gap: '0.875rem',
                     marginBottom: '1.5rem'
                   }}>
-                    <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
-                      <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem' }} className="font-mono">RECEITA</div>
-                      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff' }} className="font-mono">R$ 0,00</div>
+                    <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)', transition: 'transform 150ms' }}>
+                      <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem' }} className="font-mono">RECEITA DO MÊS</div>
+                      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#10b981' }} className="font-mono">R$ 18.420,00</div>
+                      <div style={{ fontSize: '0.72rem', color: '#10b981', marginTop: '0.25rem', fontWeight: 600 }}>+24.5% vs mês anterior</div>
                     </div>
 
                     <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
                       <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem' }} className="font-mono">AGENDAMENTOS</div>
-                      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff' }} className="font-mono">2</div>
-                      <div style={{ fontSize: '0.72rem', color: '#6b7280', marginTop: '0.25rem' }}>0 concluídos · 1 confirmados</div>
+                      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff' }} className="font-mono">168</div>
+                      <div style={{ fontSize: '0.72rem', color: '#6b7280', marginTop: '0.25rem' }}>152 concluidos · 14 confirmados</div>
                     </div>
 
                     <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
                       <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem' }} className="font-mono">TICKET MÉDIO</div>
-                      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff' }} className="font-mono">R$ 0,00</div>
-                      <div style={{ fontSize: '0.72rem', color: '#6b7280', marginTop: '0.25rem' }}>Receita projetada R$ 0,00</div>
+                      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff' }} className="font-mono">R$ 109,64</div>
+                      <div style={{ fontSize: '0.72rem', color: '#3b82f6', marginTop: '0.25rem' }}>Projetada R$ 20.200,00</div>
                     </div>
 
                     <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
                       <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem' }} className="font-mono">NOVOS CLIENTES</div>
-                      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff' }} className="font-mono">1</div>
-                      <div style={{ fontSize: '0.72rem', color: '#6b7280', marginTop: '0.25rem' }}>1 no total</div>
+                      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff' }} className="font-mono">42</div>
+                      <div style={{ fontSize: '0.72rem', color: '#10b981', marginTop: '0.25rem' }}>+12 nesta semana</div>
                     </div>
 
                     <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
                       <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem' }} className="font-mono">LTV MÉDIO</div>
-                      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#9ca3af' }} className="font-mono">—</div>
-                      <div style={{ fontSize: '0.72rem', color: '#6b7280', marginTop: '0.25rem' }}>Configure preços nos serviços</div>
+                      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff' }} className="font-mono">R$ 840,00</div>
+                      <div style={{ fontSize: '0.72rem', color: '#8f94a6', marginTop: '0.25rem' }}>Recorrência de 3.2x</div>
                     </div>
 
                     <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
                       <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem' }} className="font-mono">TAXA DE CONCLUSÃO</div>
-                      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff' }} className="font-mono">0.0%</div>
-                      <div style={{ fontSize: '0.72rem', color: '#ef4444', marginTop: '0.25rem' }}>1 no-show · 50.0%</div>
+                      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#10b981' }} className="font-mono">96.4%</div>
+                      <div style={{ fontSize: '0.72rem', color: '#6b7280', marginTop: '0.25rem' }}>Apenas 2 no-shows (1.2%)</div>
                     </div>
 
                     <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
                       <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem' }} className="font-mono">CHURN (60 DIAS)</div>
-                      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff' }} className="font-mono">0</div>
-                      <div style={{ fontSize: '0.72rem', color: '#6b7280', marginTop: '0.25rem' }}>clientes sem retorno</div>
+                      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff' }} className="font-mono">2</div>
+                      <div style={{ fontSize: '0.72rem', color: '#10b981', marginTop: '0.25rem' }}>Retenção de 98.8%</div>
                     </div>
                   </div>
 
@@ -347,15 +414,19 @@ export default function HeroSection() {
                       <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#9ca3af', letterSpacing: '0.05em' }} className="font-mono">
                         AGENDAMENTOS — ÚLTIMOS 30 DIAS
                       </div>
-                      <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>por dia / status</div>
+                      <div style={{ fontSize: '0.75rem', color: '#10b981', display: 'flex', alignItems: 'center', gap: '0.375rem' }} className="font-mono">
+                        <TrendingUp size={14} />
+                        <span>Crescimento constante (+18%)</span>
+                      </div>
                     </div>
-                    <div style={{ height: '80px', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '4px', paddingBottom: '0.5rem', borderBottom: '1px solid #1e2232' }}>
-                      {Array.from({ length: 28 }).map((_, i) => (
+                    <div style={{ height: '90px', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '4px', paddingBottom: '0.5rem', borderBottom: '1px solid #1e2232' }}>
+                      {[40, 55, 30, 65, 75, 50, 80, 45, 60, 85, 95, 70, 80, 90, 65, 75, 88, 100, 70, 85, 90, 95, 80, 88, 92, 100, 85, 90].map((h, i) => (
                         <div key={i} style={{
                           flex: 1,
-                          height: i === 25 ? '70px' : (i % 5 === 0 ? '25px' : '6px'),
-                          backgroundColor: i === 25 ? '#3b82f6' : '#1e2436',
-                          borderRadius: '2px'
+                          height: `${h}%`,
+                          backgroundColor: i >= 24 ? '#3b82f6' : '#1c2438',
+                          borderRadius: '2px',
+                          transition: 'all 200ms ease'
                         }} />
                       ))}
                     </div>
@@ -366,27 +437,35 @@ export default function HeroSection() {
                     </div>
                   </div>
 
-                  {/* Bottom Row (3 Cards matching Screenshot 2) */}
+                  {/* Bottom Row (3 Cards with Rich Fictional Data) */}
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
                     {/* Próximos agendamentos */}
                     <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1.25rem', borderRadius: 'var(--radius-md)' }}>
                       <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#9ca3af', letterSpacing: '0.05em', marginBottom: '1rem' }} className="font-mono">
                         PRÓXIMOS AGENDAMENTOS
                       </div>
-                      <div style={{ backgroundColor: '#0e1017', border: '1px solid #1c202d', borderRadius: 'var(--radius-sm)', padding: '0.875rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                          <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: '#2563eb', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '0.875rem' }}>J</div>
-                          <div>
-                            <div style={{ fontWeight: 600, fontSize: '0.875rem' }}>José Alisson</div>
-                            <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>corte • kk</div>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
+                        {[
+                          { name: 'Lucas Silva', service: 'Corte & Barba Premium', time: 'Hoje, 14:30', badge: 'CONFIRMADO', color: '#10b981' },
+                          { name: 'Camila Rocha', service: 'Lash Lifting & Sobrancelha', time: 'Hoje, 15:45', badge: 'CONFIRMADO', color: '#10b981' },
+                          { name: 'Rafael Mendes', service: 'Corte Degradê', time: 'Hoje, 17:00', badge: 'CONFIRMADO', color: '#10b981' },
+                        ].map((item, idx) => (
+                          <div key={idx} style={{ backgroundColor: '#0e1017', border: '1px solid #1c202d', borderRadius: 'var(--radius-sm)', padding: '0.625rem 0.875rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
+                              <div style={{ width: '28px', height: '28px', borderRadius: '50%', backgroundColor: '#2563eb', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '0.75rem' }}>{item.name[0]}</div>
+                              <div>
+                                <div style={{ fontWeight: 600, fontSize: '0.8125rem' }}>{item.name}</div>
+                                <div style={{ fontSize: '0.7rem', color: '#6b7280' }}>{item.service}</div>
+                              </div>
+                            </div>
+                            <div style={{ textAlign: 'right' }}>
+                              <div style={{ fontSize: '0.7rem', color: '#9ca3af', fontWeight: 600 }} className="font-mono">{item.time}</div>
+                              <span style={{ fontSize: '0.6rem', backgroundColor: 'rgba(16, 185, 129, 0.15)', color: item.color, border: '1px solid rgba(16, 185, 129, 0.3)', padding: '0.125rem 0.375rem', borderRadius: '4px', fontWeight: 700 }} className="font-mono">
+                                {item.badge}
+                              </span>
+                            </div>
                           </div>
-                        </div>
-                        <div style={{ textAlign: 'right' }}>
-                          <div style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 600 }} className="font-mono">28/08, 10:30</div>
-                          <span style={{ fontSize: '0.65rem', backgroundColor: 'rgba(16, 185, 129, 0.15)', color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '0.125rem 0.5rem', borderRadius: '4px', fontWeight: 700 }} className="font-mono">
-                            CONFIRMADO
-                          </span>
-                        </div>
+                        ))}
                       </div>
                     </div>
 
@@ -395,12 +474,20 @@ export default function HeroSection() {
                       <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#9ca3af', letterSpacing: '0.05em', marginBottom: '1rem' }} className="font-mono">
                         SERVIÇOS MAIS USADOS
                       </div>
-                      <div style={{ borderBottom: '2px solid #3b82f6', paddingBottom: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <span style={{ fontWeight: 600, fontSize: '0.875rem' }}><span style={{ color: '#6b7280' }}>#1</span> corte</span>
-                        <span className="font-mono" style={{ fontWeight: 700, color: '#3b82f6' }}>2×</span>
-                      </div>
-                      <div style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '0.375rem' }}>
-                        R$ 0,00 em receita
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                        {[
+                          { rank: '#1', name: 'Corte + Barba Premium', count: '84×', rev: 'R$ 7.560,00' },
+                          { rank: '#2', name: 'Design de Sobrancelha', count: '52×', rev: 'R$ 4.160,00' },
+                          { rank: '#3', name: 'Lash Lifting Completo', count: '32×', rev: 'R$ 4.480,00' },
+                        ].map((s, idx) => (
+                          <div key={idx} style={{ borderBottom: idx === 2 ? 'none' : '1px solid #1c202d', paddingBottom: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <div>
+                              <span style={{ fontWeight: 600, fontSize: '0.8125rem' }}><span style={{ color: '#6b7280' }}>{s.rank}</span> {s.name}</span>
+                              <div style={{ fontSize: '0.7rem', color: '#6b7280' }}>{s.rev} em receita</div>
+                            </div>
+                            <span className="font-mono" style={{ fontWeight: 700, color: '#3b82f6', fontSize: '0.875rem' }}>{s.count}</span>
+                          </div>
+                        ))}
                       </div>
                     </div>
 
@@ -409,18 +496,22 @@ export default function HeroSection() {
                       <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#9ca3af', letterSpacing: '0.05em', marginBottom: '1rem' }} className="font-mono">
                         SAÚDE DO NEGÓCIO
                       </div>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem', fontSize: '0.8125rem' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.8125rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                           <span style={{ color: '#8f94a6' }}>Taxa de conclusão</span>
-                          <span className="font-mono" style={{ fontWeight: 700, color: '#ef4444' }}>0.0%</span>
+                          <span className="font-mono" style={{ fontWeight: 700, color: '#10b981' }}>96.4%</span>
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                           <span style={{ color: '#8f94a6' }}>Taxa de no-show</span>
-                          <span className="font-mono" style={{ fontWeight: 700, color: '#ef4444' }}>50.0%</span>
+                          <span className="font-mono" style={{ fontWeight: 700, color: '#10b981' }}>1.2% (apenas 2)</span>
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                           <span style={{ color: '#8f94a6' }}>Taxa de retorno</span>
-                          <span className="font-mono" style={{ fontWeight: 700, color: '#10b981' }}>100.0%</span>
+                          <span className="font-mono" style={{ fontWeight: 700, color: '#3b82f6' }}>88.5% (recorrentes)</span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <span style={{ color: '#8f94a6' }}>Satisfação Clientes</span>
+                          <span className="font-mono" style={{ fontWeight: 700, color: '#f59e0b' }}>4.9 ★★★★★</span>
                         </div>
                       </div>
                     </div>
@@ -430,11 +521,11 @@ export default function HeroSection() {
 
               {/* VIEW 2: AGENDAMENTOS */}
               {activeNav === 'agendamentos' && (
-                <div style={{ padding: '1.5rem' }}>
+                <div style={{ padding: '1.5rem' }} className="animate-fade-in">
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
                     <div>
                       <h2 style={{ fontSize: '1.5rem', fontWeight: 700 }}>Agendamentos</h2>
-                      <p style={{ fontSize: '0.8125rem', color: '#6b7280' }}>2 confirmados</p>
+                      <p style={{ fontSize: '0.8125rem', color: '#10b981', fontWeight: 600 }}>14 confirmados para hoje</p>
                     </div>
 
                     <div style={{ display: 'flex', backgroundColor: '#13151f', padding: '0.25rem', borderRadius: 'var(--radius-sm)', border: '1px solid #202434' }}>
@@ -472,66 +563,73 @@ export default function HeroSection() {
                   </div>
 
                   {agendamentosView === 'lista' ? (
-                    /* Lista View matching Screenshot 4 */
+                    /* Lista View with Rich Data */
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                       <div>
                         <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#10b981', letterSpacing: '0.05em', marginBottom: '0.75rem' }} className="font-mono">
-                          CONFIRMADOS · 2
+                          CONFIRMADOS HOJE · 4
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                          <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', borderRadius: 'var(--radius-md)', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
-                              <div style={{ width: '36px', height: '36px', borderRadius: '50%', backgroundColor: '#2563eb', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>J</div>
-                              <div>
-                                <div style={{ fontWeight: 600, fontSize: '0.9375rem' }}>José Alisson</div>
-                                <div style={{ fontSize: '0.8125rem', color: '#6b7280' }}>corte · 28 de ago., 13:30</div>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
+                          {[
+                            { name: 'Lucas Silva', service: 'Corte + Barba Premium', time: 'Hoje, 14:30', status: 'Confirmado', prof: 'Gabriel Barbeiro' },
+                            { name: 'Camila Rocha', service: 'Lash Lifting & Sobrancelha', time: 'Hoje, 15:45', status: 'Confirmado', prof: 'Dra. Vanessa' },
+                            { name: 'Mariana Costa', service: 'Design de Sobrancelha', time: 'Hoje, 16:30', status: 'Confirmado', prof: 'Camila Designer' },
+                            { name: 'Rodrigo Alves', service: 'Barboterapia Especial', time: 'Hoje, 17:30', status: 'Confirmado', prof: 'Gabriel Barbeiro' },
+                          ].map((item, idx) => (
+                            <div key={idx} style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', borderRadius: 'var(--radius-md)', padding: '0.875rem 1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
+                                <div style={{ width: '36px', height: '36px', borderRadius: '50%', backgroundColor: '#2563eb', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>{item.name[0]}</div>
+                                <div>
+                                  <div style={{ fontWeight: 600, fontSize: '0.9375rem' }}>{item.name}</div>
+                                  <div style={{ fontSize: '0.8125rem', color: '#6b7280' }}>{item.service} · <span style={{ color: '#3b82f6' }}>{item.prof}</span></div>
+                                </div>
+                              </div>
+                              <div style={{ textAlign: 'right' }}>
+                                <div style={{ fontSize: '0.8125rem', fontWeight: 600, marginBottom: '0.125rem' }} className="font-mono">{item.time}</div>
+                                <span style={{ fontSize: '0.7rem', backgroundColor: 'rgba(16, 185, 129, 0.15)', color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '0.125rem 0.5rem', borderRadius: '9999px', fontWeight: 600 }}>
+                                  {item.status}
+                                </span>
                               </div>
                             </div>
-                            <span style={{ fontSize: '0.75rem', backgroundColor: 'rgba(16, 185, 129, 0.15)', color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '0.25rem 0.75rem', borderRadius: '9999px', fontWeight: 600 }}>
-                              Confirmado
-                            </span>
-                          </div>
-
-                          <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', borderRadius: 'var(--radius-md)', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
-                              <div style={{ width: '36px', height: '36px', borderRadius: '50%', backgroundColor: '#2563eb', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>J</div>
-                              <div>
-                                <div style={{ fontWeight: 600, fontSize: '0.9375rem' }}>José Alisson</div>
-                                <div style={{ fontSize: '0.8125rem', color: '#6b7280' }}>corte · 27 de ago., 14:30</div>
-                              </div>
-                            </div>
-                            <span style={{ fontSize: '0.75rem', backgroundColor: 'rgba(16, 185, 129, 0.15)', color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '0.25rem 0.75rem', borderRadius: '9999px', fontWeight: 600 }}>
-                              Confirmado
-                            </span>
-                          </div>
+                          ))}
                         </div>
                       </div>
 
                       <div>
-                        <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#ef4444', letterSpacing: '0.05em', marginBottom: '0.75rem' }} className="font-mono">
-                          NÃO COMPARECEU · 1
+                        <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#3b82f6', letterSpacing: '0.05em', marginBottom: '0.75rem' }} className="font-mono">
+                          CONCLUÍDOS HOJE · 3
                         </div>
-                        <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', borderRadius: 'var(--radius-md)', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
-                            <div style={{ width: '36px', height: '36px', borderRadius: '50%', backgroundColor: '#2563eb', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>J</div>
-                            <div>
-                              <div style={{ fontWeight: 600, fontSize: '0.9375rem' }}>José Alisson</div>
-                              <div style={{ fontSize: '0.8125rem', color: '#6b7280' }}>corte · 27 de ago., 13:30</div>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
+                          {[
+                            { name: 'Gabriel Souza', service: 'Corte Degradê', time: 'Hoje, 09:00', status: 'Concluído' },
+                            { name: 'Amanda Lima', service: 'Limpeza de Pele', time: 'Hoje, 10:15', status: 'Concluído' },
+                          ].map((item, idx) => (
+                            <div key={idx} style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', borderRadius: 'var(--radius-md)', padding: '0.875rem 1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
+                                <div style={{ width: '36px', height: '36px', borderRadius: '50%', backgroundColor: '#059669', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>{item.name[0]}</div>
+                                <div>
+                                  <div style={{ fontWeight: 600, fontSize: '0.9375rem' }}>{item.name}</div>
+                                  <div style={{ fontSize: '0.8125rem', color: '#6b7280' }}>{item.service}</div>
+                                </div>
+                              </div>
+                              <span style={{ fontSize: '0.7rem', backgroundColor: 'rgba(59, 130, 246, 0.15)', color: '#60a5fa', border: '1px solid rgba(59, 130, 246, 0.3)', padding: '0.125rem 0.5rem', borderRadius: '9999px', fontWeight: 600 }}>
+                                {item.status}
+                              </span>
                             </div>
-                          </div>
-                          <span style={{ fontSize: '0.75rem', backgroundColor: 'rgba(239, 68, 68, 0.12)', color: '#ef4444', border: '1px solid rgba(239, 68, 68, 0.25)', padding: '0.25rem 0.75rem', borderRadius: '9999px', fontWeight: 600 }}>
-                            Não compareceu
-                          </span>
+                          ))}
                         </div>
                       </div>
                     </div>
                   ) : (
-                    /* Calendário View matching Screenshot 3 */
+                    /* Calendário View Interactive */
                     <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', borderRadius: 'var(--radius-md)', padding: '1.25rem' }}>
-                      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '2rem', marginBottom: '1.5rem' }}>
-                        <span style={{ color: '#8f94a6', cursor: 'pointer' }}>‹</span>
-                        <h3 style={{ fontSize: '1.125rem', fontWeight: 700 }}>Agosto 2026</h3>
-                        <span style={{ color: '#8f94a6', cursor: 'pointer' }}>›</span>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                        <div style={{ display: 'flex', items: 'center', gap: '1rem' }}>
+                          <span style={{ color: '#8f94a6', cursor: 'pointer' }}>‹</span>
+                          <h3 style={{ fontSize: '1.125rem', fontWeight: 700 }}>Agosto 2026</h3>
+                          <span style={{ color: '#8f94a6', cursor: 'pointer' }}>›</span>
+                        </div>
+                        <span style={{ fontSize: '0.75rem', color: '#3b82f6' }} className="font-mono">Clique nos dias para visualizar agendamentos</span>
                       </div>
 
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '4px', textAlign: 'center', fontSize: '0.75rem', color: '#6b7280', marginBottom: '0.5rem', fontWeight: 600 }}>
@@ -539,42 +637,41 @@ export default function HeroSection() {
                       </div>
 
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '4px' }}>
-                        {/* Empty padding days for Aug 2026 */}
                         {Array.from({ length: 6 }).map((_, i) => (
                           <div key={`empty-${i}`} style={{ minHeight: '52px' }} />
                         ))}
 
-                        {/* Days 1 to 31 */}
                         {Array.from({ length: 31 }).map((_, i) => {
                           const day = i + 1;
-                          const isDay27 = day === 27;
-                          const isDay28 = day === 28;
+                          const isSelected = selectedCalendarDay === day;
+                          const hasAppointments = [12, 18, 24, 27, 28, 29, 30].includes(day);
 
                           return (
-                            <div key={day} style={{
-                              minHeight: '58px',
-                              backgroundColor: (isDay27 || isDay28) ? '#0f1422' : '#0e1017',
-                              border: isDay27 ? '1.5px solid #3b82f6' : '1px solid #1c202d',
-                              borderRadius: '6px',
-                              padding: '0.375rem',
-                              display: 'flex',
-                              flexDirection: 'column',
-                              justifyContent: 'space-between'
-                            }}>
-                              <span style={{ fontSize: '0.75rem', fontWeight: 600, color: (isDay27 || isDay28) ? '#3b82f6' : '#9ca3af' }}>{day}</span>
-                              {isDay27 && (
+                            <div 
+                              key={day} 
+                              onClick={() => setSelectedCalendarDay(day)}
+                              style={{
+                                minHeight: '58px',
+                                backgroundColor: isSelected ? '#152038' : '#0e1017',
+                                border: isSelected ? '1.5px solid #3b82f6' : '1px solid #1c202d',
+                                borderRadius: '6px',
+                                padding: '0.375rem',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'space-between',
+                                cursor: 'pointer',
+                                transition: 'all 150ms'
+                              }}
+                            >
+                              <span style={{ fontSize: '0.75rem', fontWeight: 600, color: isSelected ? '#60a5fa' : '#9ca3af' }}>{day}</span>
+                              {hasAppointments && (
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                                  <div style={{ fontSize: '0.6rem', backgroundColor: '#064e3b', color: '#34d399', padding: '1px 3px', borderRadius: '2px', overflow: 'hidden', whiteSpace: 'nowrap' }} className="font-mono">
-                                    14:30 José
+                                  <div style={{ fontSize: '0.58rem', backgroundColor: '#064e3b', color: '#34d399', padding: '1px 3px', borderRadius: '2px', overflow: 'hidden', whiteSpace: 'nowrap' }} className="font-mono">
+                                    {day === 27 ? '14:30 Lucas' : '09:00 Camila'}
                                   </div>
-                                  <div style={{ fontSize: '0.6rem', backgroundColor: '#064e3b', color: '#34d399', padding: '1px 3px', borderRadius: '2px', overflow: 'hidden', whiteSpace: 'nowrap' }} className="font-mono">
-                                    13:30 José
+                                  <div style={{ fontSize: '0.58rem', backgroundColor: '#1e3a8a', color: '#93c5fd', padding: '1px 3px', borderRadius: '2px', overflow: 'hidden', whiteSpace: 'nowrap' }} className="font-mono">
+                                    {day === 27 ? '15:45 Camila' : '11:00 Rafael'}
                                   </div>
-                                </div>
-                              )}
-                              {isDay28 && (
-                                <div style={{ fontSize: '0.6rem', backgroundColor: '#064e3b', color: '#34d399', padding: '1px 3px', borderRadius: '2px', overflow: 'hidden', whiteSpace: 'nowrap' }} className="font-mono">
-                                  13:30 José
                                 </div>
                               )}
                             </div>
@@ -586,13 +683,13 @@ export default function HeroSection() {
                 </div>
               )}
 
-              {/* VIEW 3: SERVIÇOS */}
+              {/* VIEW 3: SERVIÇOS (Rich Fictional Data) */}
               {activeNav === 'servicos' && (
-                <div style={{ padding: '1.5rem' }}>
+                <div style={{ padding: '1.5rem' }} className="animate-fade-in">
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
                     <div>
                       <h2 style={{ fontSize: '1.5rem', fontWeight: 700 }}>Serviços</h2>
-                      <p style={{ fontSize: '0.8125rem', color: '#6b7280' }}>Gerencie o que você oferece aos seus clientes</p>
+                      <p style={{ fontSize: '0.8125rem', color: '#6b7280' }}>4 serviços ativos configurados</p>
                     </div>
 
                     <button style={{
@@ -613,56 +710,96 @@ export default function HeroSection() {
                     </button>
                   </div>
 
-                  <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', borderRadius: 'var(--radius-md)', padding: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                      <div style={{ width: '4px', height: '36px', backgroundColor: '#3b82f6', borderRadius: '2px' }} />
-                      <div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                          <span style={{ fontWeight: 700, fontSize: '1rem' }}>corte</span>
-                          <span style={{ fontSize: '0.65rem', backgroundColor: '#1e3a8a', color: '#93c5fd', padding: '0.125rem 0.5rem', borderRadius: '4px', fontWeight: 600 }}>Ativo</span>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                    {[
+                      { name: 'Corte + Barba Premium', duration: '1h', price: 'R$ 90,00', count: '84 agendamentos este mês' },
+                      { name: 'Design de Sobrancelha', duration: '45min', price: 'R$ 75,00', count: '52 agendamentos este mês' },
+                      { name: 'Lash Lifting Completo', duration: '1h 15min', price: 'R$ 140,00', count: '32 agendamentos este mês' },
+                      { name: 'Limpeza de Pele Profunda', duration: '1h 30min', price: 'R$ 160,00', count: '24 agendamentos este mês' },
+                    ].map((s, idx) => (
+                      <div key={idx} style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', borderRadius: 'var(--radius-md)', padding: '1rem 1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                          <div style={{ width: '4px', height: '36px', backgroundColor: '#3b82f6', borderRadius: '2px' }} />
+                          <div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                              <span style={{ fontWeight: 700, fontSize: '1rem' }}>{s.name}</span>
+                              <span style={{ fontSize: '0.65rem', backgroundColor: '#1e3a8a', color: '#93c5fd', padding: '0.125rem 0.5rem', borderRadius: '4px', fontWeight: 600 }}>Ativo</span>
+                            </div>
+                            <div style={{ fontSize: '0.8125rem', color: '#6b7280', marginTop: '0.25rem' }}>
+                              {s.duration} • <span style={{ color: '#10b981', fontWeight: 600 }} className="font-mono">{s.price}</span> • <span style={{ color: '#8f94a6' }}>{s.count}</span>
+                            </div>
+                          </div>
                         </div>
-                        <div style={{ fontSize: '0.8125rem', color: '#6b7280', marginTop: '0.25rem' }}>
-                          1h • Preço não informado
+
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                          <button style={{ background: 'transparent', border: '1px solid #202434', color: '#9ca3af', padding: '0.375rem', borderRadius: '4px', cursor: 'pointer' }}><Edit3 size={14} /></button>
+                          <button style={{ background: 'transparent', border: '1px solid #202434', color: '#ef4444', padding: '0.375rem', borderRadius: '4px', cursor: 'pointer' }}><Trash2 size={14} /></button>
                         </div>
                       </div>
-                    </div>
-
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      <button style={{ background: 'transparent', border: '1px solid #202434', color: '#9ca3af', padding: '0.375rem', borderRadius: '4px', cursor: 'pointer' }}><Edit3 size={14} /></button>
-                      <button style={{ background: 'transparent', border: '1px solid #202434', color: '#ef4444', padding: '0.375rem', borderRadius: '4px', cursor: 'pointer' }}><Trash2 size={14} /></button>
-                    </div>
+                    ))}
                   </div>
                 </div>
               )}
 
-              {/* VIEW 4: DISPONIBILIDADE */}
+              {/* VIEW 4: DISPONIBILIDADE (Interactive with Feedback) */}
               {activeNav === 'disponibilidade' && (
-                <div style={{ padding: '1.5rem' }}>
-                  <div style={{ marginBottom: '1.5rem' }}>
+                <div style={{ padding: '1.5rem' }} className="animate-fade-in">
+                  <div style={{ marginBottom: '1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <p style={{ fontSize: '0.875rem', color: '#9ca3af' }}>Configure horários de atendimento, pausas e dias disponíveis.</p>
+                    {saveSuccessNotice && (
+                      <span style={{ fontSize: '0.75rem', backgroundColor: '#064e3b', color: '#34d399', padding: '0.25rem 0.75rem', borderRadius: '4px', fontWeight: 600 }} className="animate-fade-in font-mono">
+                        ✓ Horários salvos com sucesso!
+                      </span>
+                    )}
                   </div>
 
                   {/* Employee switcher */}
                   <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
-                    <div style={{ backgroundColor: '#2563eb', color: '#fff', padding: '0.625rem 1rem', borderRadius: 'var(--radius-sm)', display: 'flex', alignItems: 'center', gap: '0.625rem', cursor: 'pointer' }}>
-                      <div style={{ width: '28px', height: '28px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '0.8125rem' }}>J</div>
+                    <div 
+                      onClick={() => setActiveProf('gabriel')}
+                      style={{ 
+                        backgroundColor: activeProf === 'gabriel' ? '#2563eb' : '#12141d', 
+                        border: activeProf === 'gabriel' ? '1px solid #3b82f6' : '1px solid #1e2232',
+                        color: '#fff', 
+                        padding: '0.625rem 1rem', 
+                        borderRadius: 'var(--radius-sm)', 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        gap: '0.625rem', 
+                        cursor: 'pointer' 
+                      }}
+                    >
+                      <div style={{ width: '28px', height: '28px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '0.8125rem' }}>G</div>
                       <div>
-                        <div style={{ fontWeight: 600, fontSize: '0.84rem' }}>José Alisson</div>
-                        <div style={{ fontSize: '0.7rem', opacity: 0.8 }}>Proprietário</div>
+                        <div style={{ fontWeight: 600, fontSize: '0.84rem' }}>Gabriel Santos</div>
+                        <div style={{ fontSize: '0.7rem', opacity: 0.8 }}>Barbeiro Senior</div>
                       </div>
                     </div>
 
-                    <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', color: '#9ca3af', padding: '0.625rem 1rem', borderRadius: 'var(--radius-sm)', display: 'flex', alignItems: 'center', gap: '0.625rem', cursor: 'pointer' }}>
-                      <div style={{ width: '28px', height: '28px', borderRadius: '50%', backgroundColor: '#059669', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '0.8125rem' }}>K</div>
+                    <div 
+                      onClick={() => setActiveProf('vanessa')}
+                      style={{ 
+                        backgroundColor: activeProf === 'vanessa' ? '#2563eb' : '#12141d', 
+                        border: activeProf === 'vanessa' ? '1px solid #3b82f6' : '1px solid #1e2232',
+                        color: '#fff', 
+                        padding: '0.625rem 1rem', 
+                        borderRadius: 'var(--radius-sm)', 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        gap: '0.625rem', 
+                        cursor: 'pointer' 
+                      }}
+                    >
+                      <div style={{ width: '28px', height: '28px', borderRadius: '50%', backgroundColor: '#059669', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '0.8125rem' }}>V</div>
                       <div>
-                        <div style={{ fontWeight: 600, fontSize: '0.84rem' }}>kk</div>
-                        <div style={{ fontSize: '0.7rem', color: '#6b7280' }}>Sem função</div>
+                        <div style={{ fontWeight: 600, fontSize: '0.84rem' }}>Dra. Vanessa</div>
+                        <div style={{ fontSize: '0.7rem', color: '#9ca3af' }}>Estética Facial</div>
                       </div>
                     </div>
 
                     <div style={{ border: '1px dashed #2a2e40', color: '#8f94a6', padding: '0.625rem 1rem', borderRadius: 'var(--radius-sm)', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.84rem', cursor: 'pointer' }}>
                       <UserPlus size={15} />
-                      <span>+ Funcionário</span>
+                      <span>+ Atendente</span>
                     </div>
                   </div>
 
@@ -671,27 +808,32 @@ export default function HeroSection() {
                     <div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                         <h3 style={{ fontSize: '1.1rem', fontWeight: 700 }}>Horários semanais</h3>
-                        <button style={{ backgroundColor: '#3b82f6', color: '#fff', border: 'none', padding: '0.5rem 1.25rem', borderRadius: 'var(--radius-sm)', fontWeight: 600, fontSize: '0.8125rem' }}>Salvar horários</button>
+                        <button 
+                          onClick={handleSaveHours}
+                          style={{ backgroundColor: '#3b82f6', color: '#fff', border: 'none', padding: '0.5rem 1.25rem', borderRadius: 'var(--radius-sm)', fontWeight: 600, fontSize: '0.8125rem', cursor: 'pointer' }}
+                        >
+                          Salvar horários
+                        </button>
                       </div>
 
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                         {['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'].map((day, idx) => {
-                          const isMonday = idx === 1;
+                          const isActiveDay = idx >= 1 && idx <= 6;
                           return (
-                            <div key={day} style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', borderRadius: 'var(--radius-sm)', padding: '0.75rem 1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <div key={day} style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', borderRadius: 'var(--radius-sm)', padding: '0.625rem 1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                                <div style={{ width: '32px', height: '18px', backgroundColor: isMonday ? '#3b82f6' : '#202434', borderRadius: '9999px', position: 'relative' }}>
-                                  <div style={{ width: '14px', height: '14px', borderRadius: '50%', backgroundColor: '#fff', position: 'absolute', top: '2px', left: isMonday ? '16px' : '2px' }} />
+                                <div style={{ width: '32px', height: '18px', backgroundColor: isActiveDay ? '#3b82f6' : '#202434', borderRadius: '9999px', position: 'relative' }}>
+                                  <div style={{ width: '14px', height: '14px', borderRadius: '50%', backgroundColor: '#fff', position: 'absolute', top: '2px', left: isActiveDay ? '16px' : '2px' }} />
                                 </div>
                                 <span style={{ fontWeight: 500, fontSize: '0.875rem' }}>{day}</span>
                               </div>
 
-                              {isMonday && (
+                              {isActiveDay && (
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                  <span className="font-mono" style={{ backgroundColor: '#0e1017', border: '1px solid #202434', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.8125rem' }}>09:00</span>
+                                  <span className="font-mono" style={{ backgroundColor: '#0e1017', border: '1px solid #202434', padding: '0.2rem 0.5rem', borderRadius: '4px', fontSize: '0.8125rem' }}>08:30</span>
                                   <span style={{ fontSize: '0.75rem', color: '#6b7280' }}>até</span>
-                                  <span className="font-mono" style={{ backgroundColor: '#0e1017', border: '1px solid #202434', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.8125rem' }}>18:00</span>
-                                  <span style={{ color: '#3b82f6', fontSize: '0.75rem', fontWeight: 600, marginLeft: '0.5rem' }}>+ Pausa</span>
+                                  <span className="font-mono" style={{ backgroundColor: '#0e1017', border: '1px solid #202434', padding: '0.2rem 0.5rem', borderRadius: '4px', fontSize: '0.8125rem' }}>19:30</span>
+                                  <span style={{ color: '#3b82f6', fontSize: '0.72rem', fontWeight: 600, marginLeft: '0.375rem', cursor: 'pointer' }}>+ Pausa</span>
                                 </div>
                               )}
                             </div>
@@ -709,31 +851,31 @@ export default function HeroSection() {
                         </div>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', textAlign: 'center', fontSize: '0.75rem', gap: '4px' }}>
                           {Array.from({ length: 31 }).map((_, i) => (
-                            <span key={i} style={{ padding: '2px 0', color: i >= 26 ? '#3b82f6' : '#9ca3af', fontWeight: i >= 26 ? 700 : 400 }}>{i + 1}</span>
+                            <span key={i} style={{ padding: '2px 0', color: i >= 20 ? '#3b82f6' : '#9ca3af', fontWeight: i >= 20 ? 700 : 400 }}>{i + 1}</span>
                           ))}
                         </div>
                         <p style={{ fontSize: '0.68rem', color: '#6b7280', textAlign: 'center', marginTop: '0.75rem' }}>
-                          Clique num dia para marcar/desmarcar ausência — <span style={{ color: '#3b82f6' }}>salva automaticamente</span>
+                          Marcar ausência salva automaticamente
                         </p>
                       </div>
 
                       <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', borderRadius: 'var(--radius-md)', padding: '1rem' }}>
-                        <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#9ca3af', letterSpacing: '0.05em', marginBottom: '0.5rem' }} className="font-mono">SERVIÇOS</div>
-                        <div style={{ fontSize: '0.875rem', fontWeight: 600 }}>corte</div>
-                        <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>1h · R$ 0.00</div>
+                        <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#9ca3af', letterSpacing: '0.05em', marginBottom: '0.5rem' }} className="font-mono">SERVIÇOS VINCULADOS</div>
+                        <div style={{ fontSize: '0.84rem', fontWeight: 600 }}>Corte + Barba Premium</div>
+                        <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>1h · R$ 90,00</div>
                       </div>
                     </div>
                   </div>
                 </div>
               )}
 
-              {/* VIEW 5: CLIENTES */}
+              {/* VIEW 5: CLIENTES (CRM & LTV Fictional Data) */}
               {activeNav === 'clientes' && (
-                <div style={{ padding: '1.5rem' }}>
+                <div style={{ padding: '1.5rem' }} className="animate-fade-in">
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
                     <div>
-                      <h2 style={{ fontSize: '1.5rem', fontWeight: 700 }}>Clientes</h2>
-                      <p style={{ fontSize: '0.8125rem', color: '#6b7280' }}>1 cliente cadastrado</p>
+                      <h2 style={{ fontSize: '1.5rem', fontWeight: 700 }}>Clientes (CRM)</h2>
+                      <p style={{ fontSize: '0.8125rem', color: '#6b7280' }}>42 clientes ativos cadastrados</p>
                     </div>
 
                     <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
@@ -748,49 +890,70 @@ export default function HeroSection() {
                     </div>
                   </div>
 
-                  <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', borderRadius: 'var(--radius-md)', padding: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                      <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#2563eb', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '1rem' }}>J</div>
-                      <div>
-                        <div style={{ fontWeight: 600, fontSize: '0.9375rem' }}>José Alisson</div>
-                        <div style={{ fontSize: '0.78rem', color: '#6b7280' }} className="font-mono">ploner.mkt0@gmail.com 98448201</div>
-                      </div>
-                    </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                    {[
+                      { name: 'Lucas Silva', email: 'lucas.silva@email.com', phone: '11 99482-1102', visits: '14 visitas', ltv: 'R$ 1.260,00', lastVisit: '24/08/2026', badge: 'Recorrente 🌟', badgeColor: '#10b981' },
+                      { name: 'Camila Rocha', email: 'camila.rocha@email.com', phone: '11 98823-4410', visits: '8 visitas', ltv: 'R$ 1.120,00', lastVisit: '18/08/2026', badge: 'VIP 💎', badgeColor: '#3b82f6' },
+                      { name: 'Mariana Costa', email: 'mariana.costa@email.com', phone: '11 97712-3099', visits: '6 visitas', ltv: 'R$ 680,00', lastVisit: '10/08/2026', badge: 'Recorrente', badgeColor: '#10b981' },
+                      { name: 'Rodrigo Alves', email: 'rodrigo.alves@email.com', phone: '11 96621-9988', visits: '12 visitas', ltv: 'R$ 1.080,00', lastVisit: 'há 34 dias', badge: 'Alerta Retorno ⚠️', badgeColor: '#f59e0b' },
+                    ].map((client, idx) => (
+                      <div key={idx} style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', borderRadius: 'var(--radius-md)', padding: '1rem 1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                          <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#2563eb', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '1rem' }}>{client.name[0]}</div>
+                          <div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                              <span style={{ fontWeight: 600, fontSize: '0.9375rem' }}>{client.name}</span>
+                              <span style={{ fontSize: '0.65rem', backgroundColor: `${client.badgeColor}22`, color: client.badgeColor, border: `1px solid ${client.badgeColor}44`, padding: '0.125rem 0.5rem', borderRadius: '4px', fontWeight: 600 }}>{client.badge}</span>
+                            </div>
+                            <div style={{ fontSize: '0.78rem', color: '#6b7280' }} className="font-mono">{client.email} · {client.phone}</div>
+                          </div>
+                        </div>
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-                      <div style={{ textAlign: 'center' }}>
-                        <div style={{ fontWeight: 700, fontSize: '0.9375rem' }} className="font-mono">2</div>
-                        <div style={{ fontSize: '0.7rem', color: '#6b7280' }}>serviços</div>
-                      </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+                          <div style={{ textAlign: 'center' }}>
+                            <div style={{ fontWeight: 700, fontSize: '0.9375rem' }} className="font-mono">{client.visits}</div>
+                            <div style={{ fontSize: '0.7rem', color: '#6b7280' }}>frequência</div>
+                          </div>
 
-                      <div style={{ textAlign: 'center' }}>
-                        <div style={{ fontWeight: 700, fontSize: '0.9375rem', color: '#9ca3af' }} className="font-mono">—</div>
-                        <div style={{ fontSize: '0.7rem', color: '#6b7280' }}>LTV</div>
-                      </div>
+                          <div style={{ textAlign: 'center' }}>
+                            <div style={{ fontWeight: 700, fontSize: '0.9375rem', color: '#10b981' }} className="font-mono">{client.ltv}</div>
+                            <div style={{ fontSize: '0.7rem', color: '#6b7280' }}>LTV Total</div>
+                          </div>
 
-                      <div style={{ textAlign: 'right' }}>
-                        <div style={{ fontSize: '0.7rem', color: '#6b7280', fontWeight: 700 }} className="font-mono">ÚLTIMA VISITA</div>
-                        <div style={{ fontSize: '0.8125rem', color: '#d1d5db' }}>28 de ago. de 2026</div>
-                      </div>
+                          <div style={{ textAlign: 'right' }}>
+                            <div style={{ fontSize: '0.7rem', color: '#6b7280', fontWeight: 700 }} className="font-mono">ÚLTIMA VISITA</div>
+                            <div style={{ fontSize: '0.8125rem', color: '#d1d5db' }}>{client.lastVisit}</div>
+                          </div>
 
-                      <div style={{ display: 'flex', gap: '0.375rem' }}>
-                        <button style={{ backgroundColor: '#1a1d29', border: '1px solid #282c3f', color: '#9ca3af', padding: '0.375rem', borderRadius: '4px', cursor: 'pointer' }}><Mail size={14} /></button>
-                        <button style={{ backgroundColor: '#1a1d29', border: '1px solid #282c3f', color: '#9ca3af', padding: '0.375rem', borderRadius: '4px', cursor: 'pointer' }}><MessageSquare size={14} /></button>
+                          <div style={{ display: 'flex', gap: '0.375rem' }}>
+                            <button style={{ backgroundColor: '#1a1d29', border: '1px solid #282c3f', color: '#9ca3af', padding: '0.375rem', borderRadius: '4px', cursor: 'pointer' }}><Mail size={14} /></button>
+                            <button style={{ backgroundColor: '#1a1d29', border: '1px solid #282c3f', color: '#10b981', padding: '0.375rem', borderRadius: '4px', cursor: 'pointer' }}><MessageSquare size={14} /></button>
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
               )}
 
-              {/* VIEW 6, 7, 8: FALLBACK PLACEHOLDERS FOR OTHER TABS */}
-              {['planos', 'whatsapp', 'configuracoes'].includes(activeNav) && (
-                <div style={{ padding: '3rem', textAlign: 'center', color: '#8f94a6' }}>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem', color: '#fff' }}>
-                    {activeNav === 'planos' && 'Planos & Upgrade'}
-                    {activeNav === 'whatsapp' && 'WhatsApp Bot (Em breve)'}
-                    {activeNav === 'configuracoes' && 'Configurações'}
+              {/* VIEW 6: WHATSAPP BOT (Em breve) */}
+              {activeNav === 'whatsapp' && (
+                <div style={{ padding: '2rem', textAlign: 'center' }} className="animate-fade-in">
+                  <div style={{ maxWidth: '480px', margin: '0 auto' }}>
+                    <div style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem auto' }}>
+                      <Smartphone size={24} />
+                    </div>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem' }}>WhatsApp Bot & Automações (Em Breve)</h3>
+                    <p style={{ fontSize: '0.875rem', color: '#8f94a6', lineHeight: 1.5, marginBottom: '1.5rem' }}>
+                      Lembretes automáticos 24h antes, confirmações via WhatsApp e reengajamento automático de clientes que não voltam há mais de 30 dias.
+                    </p>
+                    <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', borderRadius: 'var(--radius-md)', padding: '1rem', textAlign: 'left' }}>
+                      <div style={{ fontSize: '0.75rem', color: '#10b981', fontWeight: 600, marginBottom: '0.5rem' }} className="font-mono">💬 Exemplo de Notificação Automática:</div>
+                      <div style={{ fontSize: '0.8125rem', color: '#d1d5db', backgroundColor: '#0e1017', padding: '0.75rem', borderRadius: '6px', borderLeft: '3px solid #10b981' }}>
+                        "Olá Lucas! Confirmando seu atendimento amanhã às 14:30 no Studio Beleza & Estilo. Digite 1 para confirmar ou 2 para remarcar."
+                      </div>
+                    </div>
                   </div>
-                  <p style={{ fontSize: '0.875rem' }}>Gerencie recursos avançados e automações do seu estabelecimento no CLiK.</p>
                 </div>
               )}
 
@@ -801,4 +964,5 @@ export default function HeroSection() {
     </section>
   );
 }
+
 
