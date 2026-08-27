@@ -359,46 +359,46 @@ export default function HeroSection() {
                     gap: '0.875rem',
                     marginBottom: '1.5rem'
                   }}>
-                    <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)', transition: 'transform 150ms' }}>
-                      <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem' }} className="font-mono">RECEITA DO MÊS</div>
-                      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#10b981' }} className="font-mono">R$ 18.420,00</div>
-                      <div style={{ fontSize: '0.72rem', color: '#10b981', marginTop: '0.25rem', fontWeight: 600 }}>+24.5% vs mês anterior</div>
+                    <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)', transition: 'transform 150ms', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                      <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem', whiteSpace: 'nowrap' }} className="font-mono">RECEITA DO MÊS</div>
+                      <div style={{ fontSize: '1.35rem', fontWeight: 700, color: '#10b981', whiteSpace: 'nowrap' }} className="font-mono">R$ 18.420,00</div>
+                      <div style={{ fontSize: '0.72rem', color: '#10b981', marginTop: '0.25rem', fontWeight: 600, whiteSpace: 'nowrap' }}>+24.5% vs mês anterior</div>
                     </div>
 
-                    <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
-                      <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem' }} className="font-mono">AGENDAMENTOS</div>
-                      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff' }} className="font-mono">168</div>
-                      <div style={{ fontSize: '0.72rem', color: '#6b7280', marginTop: '0.25rem' }}>152 concluidos · 14 confirmados</div>
+                    <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                      <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem', whiteSpace: 'nowrap' }} className="font-mono">AGENDAMENTOS</div>
+                      <div style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', whiteSpace: 'nowrap' }} className="font-mono">168</div>
+                      <div style={{ fontSize: '0.72rem', color: '#6b7280', marginTop: '0.25rem', whiteSpace: 'nowrap' }}>152 concluidos · 14 confirmados</div>
                     </div>
 
-                    <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
-                      <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem' }} className="font-mono">TICKET MÉDIO</div>
-                      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff' }} className="font-mono">R$ 109,64</div>
-                      <div style={{ fontSize: '0.72rem', color: '#3b82f6', marginTop: '0.25rem' }}>Projetada R$ 20.200,00</div>
+                    <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                      <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem', whiteSpace: 'nowrap' }} className="font-mono">TICKET MÉDIO</div>
+                      <div style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', whiteSpace: 'nowrap' }} className="font-mono">R$ 109,64</div>
+                      <div style={{ fontSize: '0.72rem', color: '#3b82f6', marginTop: '0.25rem', whiteSpace: 'nowrap' }}>Projetada R$ 20.200,00</div>
                     </div>
 
-                    <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
-                      <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem' }} className="font-mono">NOVOS CLIENTES</div>
-                      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff' }} className="font-mono">42</div>
-                      <div style={{ fontSize: '0.72rem', color: '#10b981', marginTop: '0.25rem' }}>+12 nesta semana</div>
+                    <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                      <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem', whiteSpace: 'nowrap' }} className="font-mono">NOVOS CLIENTES</div>
+                      <div style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', whiteSpace: 'nowrap' }} className="font-mono">42</div>
+                      <div style={{ fontSize: '0.72rem', color: '#10b981', marginTop: '0.25rem', whiteSpace: 'nowrap' }}>+12 nesta semana</div>
                     </div>
 
-                    <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
-                      <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem' }} className="font-mono">LTV MÉDIO</div>
-                      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff' }} className="font-mono">R$ 840,00</div>
-                      <div style={{ fontSize: '0.72rem', color: '#8f94a6', marginTop: '0.25rem' }}>Recorrência de 3.2x</div>
+                    <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                      <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem', whiteSpace: 'nowrap' }} className="font-mono">LTV MÉDIO</div>
+                      <div style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', whiteSpace: 'nowrap' }} className="font-mono">R$ 840,00</div>
+                      <div style={{ fontSize: '0.72rem', color: '#8f94a6', marginTop: '0.25rem', whiteSpace: 'nowrap' }}>Recorrência de 3.2x</div>
                     </div>
 
-                    <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
-                      <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem' }} className="font-mono">TAXA DE CONCLUSÃO</div>
-                      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#10b981' }} className="font-mono">96.4%</div>
-                      <div style={{ fontSize: '0.72rem', color: '#6b7280', marginTop: '0.25rem' }}>Apenas 2 no-shows (1.2%)</div>
+                    <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                      <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem', whiteSpace: 'nowrap' }} className="font-mono">TAXA DE CONCLUSÃO</div>
+                      <div style={{ fontSize: '1.35rem', fontWeight: 700, color: '#10b981', whiteSpace: 'nowrap' }} className="font-mono">96.4%</div>
+                      <div style={{ fontSize: '0.72rem', color: '#6b7280', marginTop: '0.25rem', whiteSpace: 'nowrap' }}>Apenas 2 no-shows (1.2%)</div>
                     </div>
 
-                    <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
-                      <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem' }} className="font-mono">CHURN (60 DIAS)</div>
-                      <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ffffff' }} className="font-mono">2</div>
-                      <div style={{ fontSize: '0.72rem', color: '#10b981', marginTop: '0.25rem' }}>Retenção de 98.8%</div>
+                    <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2232', padding: '1rem', borderRadius: 'var(--radius-md)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                      <div style={{ fontSize: '0.7rem', color: '#8f94a6', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '0.5rem', whiteSpace: 'nowrap' }} className="font-mono">CHURN (60 DIAS)</div>
+                      <div style={{ fontSize: '1.35rem', fontWeight: 700, color: '#ffffff', whiteSpace: 'nowrap' }} className="font-mono">2</div>
+                      <div style={{ fontSize: '0.72rem', color: '#10b981', marginTop: '0.25rem', whiteSpace: 'nowrap' }}>Retenção de 98.8%</div>
                     </div>
                   </div>
 

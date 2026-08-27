@@ -145,9 +145,9 @@ export default function PricingSection() {
                   {p.desc}
                 </p>
 
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.25rem', marginBottom: '1.5rem' }}>
-                  <span className="font-mono" style={{ fontSize: '2.25rem', fontWeight: 800 }}>{p.price}</span>
-                  <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>{p.period}</span>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.375rem', marginBottom: '1.5rem', flexWrap: 'nowrap', whiteSpace: 'nowrap' }}>
+                  <span className="font-mono" style={{ fontSize: 'clamp(1.5rem, 2.2vw, 2rem)', fontWeight: 800, whiteSpace: 'nowrap' }}>{p.price}</span>
+                  <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>{p.period}</span>
                 </div>
 
                 <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginBottom: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
