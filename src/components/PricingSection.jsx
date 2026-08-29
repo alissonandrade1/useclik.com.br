@@ -39,6 +39,7 @@ const plans = [
   {
     name: 'Pro',
     price: 'R$ 59,90',
+    priceOld: 'R$ 79,00',
     period: '/mês',
     desc: 'A solução completa para salões, barbearias e clínicas em crescimento.',
     popular: true,
@@ -204,6 +205,9 @@ export default function PricingSection() {
                 </p>
 
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.375rem', marginBottom: '1.5rem', flexWrap: 'nowrap', whiteSpace: 'nowrap' }}>
+                  {p.priceOld && (
+                    <span className="font-mono" style={{ fontSize: 'clamp(0.9rem, 1.4vw, 1.1rem)', fontWeight: 600, color: 'var(--text-muted)', textDecoration: 'line-through', whiteSpace: 'nowrap', opacity: 0.7 }}>{p.priceOld}</span>
+                  )}
                   <span className="font-mono" style={{ fontSize: 'clamp(1.5rem, 2.2vw, 2rem)', fontWeight: 800, whiteSpace: 'nowrap' }}>{p.price}</span>
                   <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>{p.period}</span>
                 </div>
@@ -225,7 +229,7 @@ export default function PricingSection() {
               {/* Perfectly Aligned Bottom Button */}
               <div style={{ marginTop: 'auto', paddingTop: '1rem' }}>
                 <a 
-                  href="https://app.useclik.com.br/register" 
+                  href="https://app.useclik.com.br/register"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`btn ${p.popular ? 'btn-primary' : 'btn-secondary'}`}
