@@ -456,3 +456,66 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--text-muted);
 }
 
+/* ============================
+   MOBILE HERO PHONE MOCKUP
+   ============================ */
+@media (max-width: 640px) {
+  .mobile-hero-phone {
+    display: block !important;
+  }
+  #demonstracao {
+    display: none !important;
+  }
+}
+
+/* ============================
+   BENEFITS GRID — MOBILE
+   ============================ */
+@media (max-width: 640px) {
+  .grid-4 {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1.5rem 1rem !important;
+  }
+}
+@media (max-width: 400px) {
+  .grid-4 {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ============================
+   TRANSFORMATION — MOBILE STACK
+   ============================ */
+@media (max-width: 640px) {
+  .grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+}
+
+/* ============================
+   SECTION SPACING — MOBILE
+   ============================ */
+@media (max-width: 480px) {
+  .section {
+    padding: clamp(2.5rem, 5vw, 3.5rem) 0;
+  }
+}
+
+/* ============================
+   PRICING — GUARANTEE NOTICE
+   ============================ */
+.pricing-guarantee {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 0.875rem 1.5rem;
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  color: var(--accent-status-green);
+  font-weight: 500;
+}
+

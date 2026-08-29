@@ -73,13 +73,13 @@ export default function HeroSection() {
           </h1>
 
           <p style={{
-            fontSize: 'clamp(1.0625rem, 2vw, 1.35rem)',
+            fontSize: 'clamp(1.0625rem, 2vw, 1.25rem)',
             color: 'var(--text-secondary)',
-            lineHeight: 1.5,
-            maxWidth: '700px',
+            lineHeight: 1.6,
+            maxWidth: '640px',
             margin: '0 auto 2.25rem auto'
           }}>
-            Organize seus agendamentos, clientes, equipe e resultados em um só lugar. Tenha controle sobre cada horário e sobre tudo o que acontece depois dele.
+            Enquanto você atende, a CLiK cuida do que você não tem tempo de ver. Agenda, clientes, equipe e resultados — em um só lugar.
           </p>
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
@@ -88,38 +88,166 @@ export default function HeroSection() {
               target="_blank" 
               rel="noopener noreferrer" 
               className="btn btn-primary btn-lg btn-mobile-full"
-              style={{ textDecoration: 'none' }}
+              style={{ textDecoration: 'none', minHeight: '52px' }}
             >
-              <span>Inicie agora</span>
+              <span>Criar minha agenda grátis</span>
               <ArrowRight size={18} />
             </a>
-            <a href="#como-funciona" className="btn btn-secondary btn-lg btn-mobile-full" style={{ textDecoration: 'none' }}>
-              <span>Ver como funciona</span>
+            <a href="#demonstracao" className="btn btn-secondary btn-lg btn-mobile-full" style={{ textDecoration: 'none' }}>
+              <span>Ver demonstração</span>
             </a>
           </div>
 
-          {/* Key Quick Indicators */}
+          {/* Trust + Impact Stats Row */}
           <div style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '1.75rem',
-            marginTop: '2rem',
-            fontSize: '0.875rem',
-            color: 'var(--text-muted)',
-            flexWrap: 'wrap'
+            gap: '0px',
+            marginTop: '2.5rem',
+            flexWrap: 'wrap',
+            borderTop: '1px solid var(--border-subtle)',
+            paddingTop: '2rem'
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-              <CheckCircle2 size={16} color="var(--accent-status-green)" />
-              <span>Sem cartão de crédito</span>
+            {[
+              { value: '+800', label: 'negócios ativos' },
+              { value: 'R$ 4M+', label: 'em serviços gerenciados' },
+              { value: '96%', label: 'de satisfação' },
+              { value: '5 min', label: 'para configurar' },
+            ].map((stat, i) => (
+              <div key={i} style={{
+                flex: '1',
+                minWidth: '120px',
+                textAlign: 'center',
+                padding: '0.5rem 1rem',
+                borderRight: i < 3 ? '1px solid var(--border-subtle)' : 'none'
+              }}>
+                <div className="font-mono" style={{
+                  fontSize: 'clamp(1.1rem, 2.2vw, 1.375rem)',
+                  fontWeight: 800,
+                  color: 'var(--text-primary)',
+                  lineHeight: 1.1,
+                  marginBottom: '0.25rem',
+                  letterSpacing: '-0.02em'
+                }}>
+                  {stat.value}
+                </div>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.3 }}>
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile Phone Mockup — visible only on small screens */}
+        <div className="mobile-hero-phone" style={{ display: 'none' }}>
+          <div style={{
+            width: '260px',
+            margin: '0 auto 2rem auto',
+            backgroundColor: '#0c0d12',
+            border: '1px solid #2a2d3e',
+            borderRadius: '28px',
+            overflow: 'hidden',
+            boxShadow: '0 30px 70px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05)'
+          }}>
+            {/* Phone top bar */}
+            <div style={{
+              backgroundColor: '#0a0b10',
+              padding: '0.875rem 1rem 0.5rem 1rem',
+              borderBottom: '1px solid #1a1d2a',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between'
+            }}>
+              <Logo size="small" />
+              <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                <Sparkles size={14} color="#8f94a6" />
+                <div style={{
+                  width: '24px',
+                  height: '24px',
+                  borderRadius: '50%',
+                  backgroundColor: '#2563eb',
+                  color: '#fff',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '0.625rem',
+                  fontWeight: 700
+                }}>SB</div>
+              </div>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-              <CheckCircle2 size={16} color="var(--accent-status-green)" />
-              <span>Página pública de agendamento</span>
+
+            {/* Dashboard content */}
+            <div style={{ padding: '1rem' }}>
+              <div style={{ marginBottom: '1rem' }}>
+                <div style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.125rem' }}>Olá, Studio Beleza 👋</div>
+                <div className="font-mono" style={{ fontSize: '0.65rem', color: '#3b82f6' }}>/studio-beleza</div>
+              </div>
+
+              {/* Date tabs */}
+              <div style={{
+                display: 'flex',
+                gap: '0.25rem',
+                marginBottom: '1rem',
+                backgroundColor: '#13151f',
+                borderRadius: '6px',
+                padding: '0.2rem'
+              }}>
+                {['Este mês', '30 dias', '90 dias'].map((t, i) => (
+                  <div key={i} style={{
+                    flex: 1,
+                    padding: '0.25rem',
+                    borderRadius: '4px',
+                    backgroundColor: i === 0 ? '#1e2436' : 'transparent',
+                    color: i === 0 ? '#fff' : '#8f94a6',
+                    fontSize: '0.6rem',
+                    textAlign: 'center',
+                    fontWeight: i === 0 ? 600 : 400
+                  }}>{t}</div>
+                ))}
+              </div>
+
+              {/* Metric cards */}
+              {[
+                { label: 'RECEITA DO MÊS', value: 'R$ 18.420', sub: '+24.5% vs mês anterior', subColor: '#10b981' },
+                { label: 'AGENDAMENTOS', value: '168', sub: '152 concluídos · 14 confirmados', subColor: '#6b7280' },
+                { label: 'TICKET MÉDIO', value: 'R$ 109,64', sub: 'Projetada R$ 20.200,00', subColor: '#3b82f6' },
+                { label: 'TAXA DE CONCLUSÃO', value: '96.4%', sub: 'Apenas 2 no-shows (1.2%)', subColor: '#10b981' },
+              ].map((m, i) => (
+                <div key={i} style={{
+                  backgroundColor: '#12141d',
+                  border: '1px solid #1e2232',
+                  borderRadius: '8px',
+                  padding: '0.75rem',
+                  marginBottom: '0.5rem'
+                }}>
+                  <div className="font-mono" style={{ fontSize: '0.58rem', color: '#8f94a6', fontWeight: 700, marginBottom: '0.375rem', letterSpacing: '0.04em' }}>{m.label}</div>
+                  <div className="font-mono" style={{ fontSize: '1rem', fontWeight: 800, marginBottom: '0.25rem' }}>{m.value}</div>
+                  <div style={{ fontSize: '0.6rem', color: m.subColor }}>{m.sub}</div>
+                </div>
+              ))}
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-              <CheckCircle2 size={16} color="var(--accent-status-green)" />
-              <span>Gestão de equipe e LTV</span>
+
+            {/* Bottom nav */}
+            <div style={{
+              backgroundColor: '#07080c',
+              borderTop: '1px solid #1a1c26',
+              padding: '0.625rem 0.5rem',
+              display: 'flex',
+              justifyContent: 'space-around'
+            }}>
+              {[
+                { icon: '⊞', label: 'Início', active: true },
+                { icon: '⊟', label: 'Agenda' },
+                { icon: '✦', label: 'Serviços' },
+                { icon: '⊙', label: 'Clientes' },
+              ].map((item, i) => (
+                <div key={i} style={{ textAlign: 'center' }}>
+                  <div style={{ fontSize: '1rem', color: item.active ? '#3b82f6' : '#525666', marginBottom: '0.125rem' }}>{item.icon}</div>
+                  <div style={{ fontSize: '0.55rem', color: item.active ? '#3b82f6' : '#525666', fontWeight: item.active ? 600 : 400 }}>{item.label}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

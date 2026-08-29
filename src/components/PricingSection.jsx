@@ -110,6 +110,14 @@ export default function PricingSection() {
           </p>
         </div>
 
+        {/* Guarantee Notice */}
+        <div className="pricing-guarantee" style={{ maxWidth: '560px', margin: '0 auto 2.5rem auto' }}>
+          <span style={{ fontSize: '1.125rem' }}>🛡️</span>
+          <span>
+            Comece de graça. Sem cartão de crédito. Cancele quando quiser, sem burocracia.
+          </span>
+        </div>
+
         {/* Mobile Arrow Navigation Bar */}
         <div className="pricing-arrows-mobile font-mono" style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
           <span>Deslize para ver os planos</span>
