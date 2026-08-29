@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     q: 'Funciona para o meu tipo de negócio?',
-    a: 'Se o seu negócio funciona com horários e atendimentos presenciais — barbearia, salão, nail designer, lash, sobrancelha, massagem, estúdio de tatuagem, clínica estética, personal trainer — a CLiK foi feita para você. O produto não é exclusivo para beleza: serve para qualquer negócio que vive de agenda.'
+    a: 'Se o seu negócio funciona com horários e atendimentos presenciais — barbearia, salão, nail designer, lash, sobrancelha, massagem, estúdio de tatuagem, clínica estética, personal trainer — a clik foi feita para você. O produto não é exclusivo para beleza: serve para qualquer negócio que vive de agenda.'
   },
   {
     q: 'Como meus clientes fazem o agendamento?',

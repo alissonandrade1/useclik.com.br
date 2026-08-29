@@ -94,6 +94,7 @@ export default function Header() {
               href="https://app.useclik.com.br/login" 
               target="_blank" 
               rel="noopener noreferrer"
+              className="desktop-nav"
               style={{ 
                 color: 'var(--text-primary)', 
                 textDecoration: 'none', 

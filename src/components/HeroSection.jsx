@@ -79,7 +79,7 @@ export default function HeroSection() {
             maxWidth: '640px',
             margin: '0 auto 2.25rem auto'
           }}>
-            Enquanto você atende, a CLiK cuida do que você não tem tempo de ver. Agenda, clientes, equipe e resultados — em um só lugar.
+            Enquanto você atende, a clik cuida do que você não tem tempo de ver. Agenda, clientes, equipe e resultados — em um só lugar.
           </p>
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
@@ -98,41 +98,40 @@ export default function HeroSection() {
             </a>
           </div>
 
-          {/* Trust + Impact Stats Row */}
+          {/* Benefit Stats Row — real & sensible */}
           <div style={{
             display: 'flex',
-            alignItems: 'center',
+            alignItems: 'stretch',
             justifyContent: 'center',
-            gap: '0px',
             marginTop: '2.5rem',
-            flexWrap: 'wrap',
             borderTop: '1px solid var(--border-subtle)',
-            paddingTop: '2rem'
+            paddingTop: '2rem',
+            flexWrap: 'wrap'
           }}>
             {[
-              { value: '+800', label: 'negócios ativos' },
-              { value: 'R$ 4M+', label: 'em serviços gerenciados' },
-              { value: '96%', label: 'de satisfação' },
-              { value: '5 min', label: 'para configurar' },
-            ].map((stat, i) => (
+              { value: '5 min', label: 'para configurar e começar' },
+              { value: '1 link', label: 'para seus clientes agendarem' },
+              { value: '24/7', label: 'agendamentos sem você responder' },
+              { value: 'grátis', label: 'para começar, sem cartão' },
+            ].map((stat, i, arr) => (
               <div key={i} style={{
                 flex: '1',
-                minWidth: '120px',
+                minWidth: '130px',
                 textAlign: 'center',
-                padding: '0.5rem 1rem',
-                borderRight: i < 3 ? '1px solid var(--border-subtle)' : 'none'
+                padding: '0.5rem 1.25rem',
+                borderRight: i < arr.length - 1 ? '1px solid var(--border-subtle)' : 'none'
               }}>
                 <div className="font-mono" style={{
-                  fontSize: 'clamp(1.1rem, 2.2vw, 1.375rem)',
+                  fontSize: 'clamp(1rem, 2.2vw, 1.375rem)',
                   fontWeight: 800,
                   color: 'var(--text-primary)',
                   lineHeight: 1.1,
-                  marginBottom: '0.25rem',
+                  marginBottom: '0.3rem',
                   letterSpacing: '-0.02em'
                 }}>
                   {stat.value}
                 </div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.3 }}>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.35 }}>
                   {stat.label}
                 </div>
               </div>

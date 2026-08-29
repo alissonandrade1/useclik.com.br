@@ -9,26 +9,26 @@ const beforeItems = [
   },
   {
     title: 'Histórico dos clientes só na sua cabeça',
-    desc: 'Quem já veio? Quando foi a última vez? Qual serviço fez? Você não sabe. E perde oportunidades por isso.'
+    desc: 'Quem já veio? Quando foi a última vez? Qual serviço fez? Você não sabe — e perde oportunidades por isso.'
   },
   {
     title: 'Clientes que somem sem você perceber',
-    desc: 'O Marcos não volta há 45 dias. A Ana cancelou duas vezes seguidas. Você só descobre tarde demais — ou nunca.'
+    desc: 'O Marcos não volta há 45 dias. A Ana cancelou duas vezes seguidas. Você só descobre tarde demais.'
   },
   {
-    title: 'Resultado financeiro no feeling',
-    desc: 'No fim do mês você tenta lembrar quanto faturou. Soma no papel. Ainda assim não sabe qual serviço está valendo mais.'
+    title: 'Faturamento no feeling',
+    desc: 'No fim do mês você tenta lembrar quanto faturou. Soma no papel. Ainda assim não tem certeza.'
   },
   {
-    title: 'No-show sem impacto visível — mas com custo real',
-    desc: 'Cada falta é um horário vazio. Cada horário vazio é dinheiro que não entra. Isso acumula mais do que parece.'
+    title: 'No-show sem custo visível — mas real',
+    desc: 'Cada falta é um horário vazio. Cada horário vazio é dinheiro que não entrou. Isso acumula mais do que parece.'
   }
 ];
 
 const afterItems = [
   {
-    title: 'Clientes agendam sozinhos, 24 horas por dia',
-    desc: 'Link único compartilhado no Instagram e WhatsApp. O cliente escolhe serviço, profissional e horário — sem você precisar responder.'
+    title: 'Clientes agendam sozinhos, 24h por dia',
+    desc: 'Link único compartilhado onde quiser. O cliente escolhe serviço, profissional e horário — sem te chamar.'
   },
   {
     title: 'Histórico de cada cliente sempre acessível',
@@ -36,15 +36,15 @@ const afterItems = [
   },
   {
     title: 'Alertas de clientes que não voltaram',
-    desc: 'A CLiK identifica quem está sumido há mais de 30 dias. Você decide agir — antes de perder o cliente de vez.'
+    desc: 'A clik identifica quem está sumido há mais de 30 dias. Você decide agir antes de perder o cliente.'
   },
   {
-    title: 'Faturamento, ticket médio e produção por profissional',
-    desc: 'Veja quanto entrou no mês, qual serviço gerou mais receita e quem da equipe está performando melhor.'
+    title: 'Faturamento, ticket médio e produção da equipe',
+    desc: 'Veja quanto entrou no mês, qual serviço gerou mais e quem da equipe está performando melhor.'
   },
   {
-    title: 'No-show visível e com custo calculado',
-    desc: 'Cada falta aparece no sistema. Você vê o impacto acumulado e consegue agir antes que vire um problema maior.'
+    title: 'No-show visível com impacto calculado',
+    desc: 'Cada falta aparece no sistema com o custo real. Você vê o acumulado e consegue agir com dados.'
   }
 ];
 
@@ -54,72 +54,62 @@ export default function TransformationSection() {
       <div className="container">
 
         {/* Header */}
-        <div style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 3.5rem auto' }}>
+        <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 3.5rem auto' }}>
           <div className="section-title-sm">ANTES E DEPOIS</div>
           <h2 className="section-heading">
-            Sua rotina agora. E com a CLiK.
+            Sua rotina agora. E com a clik.
           </h2>
           <p className="section-desc" style={{ margin: '0 auto' }}>
             Não é sobre ter um sistema. É sobre sair do modo de apagar incêndio e finalmente entender o que está acontecendo no seu negócio.
           </p>
         </div>
 
-        {/* Comparison */}
-        <div className="grid-2" style={{ gap: '1.5rem', alignItems: 'stretch' }}>
+        {/* Comparison — mobile: vertical stack with clear labels */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '1.25rem',
+          alignItems: 'start'
+        }}>
 
           {/* ANTES */}
           <div style={{
             backgroundColor: 'var(--bg-main)',
             border: '1px solid var(--border-subtle)',
             borderRadius: 'var(--radius-lg)',
-            padding: 'clamp(1.5rem, 3.5vw, 2.5rem)',
-            display: 'flex',
-            flexDirection: 'column'
+            overflow: 'hidden'
           }}>
+            {/* Label header */}
             <div style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '0.75rem',
-              marginBottom: '2rem',
-              paddingBottom: '1.25rem',
-              borderBottom: '1px solid var(--border-subtle)'
+              gap: '0.625rem',
+              padding: '1rem 1.5rem',
+              backgroundColor: 'rgba(239,68,68,0.06)',
+              borderBottom: '1px solid rgba(239,68,68,0.15)'
             }}>
-              <div style={{
-                width: '32px',
-                height: '32px',
-                borderRadius: '50%',
-                backgroundColor: 'var(--accent-status-red-bg)',
-                border: '1px solid rgba(239,68,68,0.25)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0
-              }}>
-                <XCircle size={16} color="var(--accent-status-red)" />
-              </div>
+              <XCircle size={18} color="var(--accent-status-red)" />
               <div>
-                <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.2 }}>
-                  Hoje
-                </h3>
-                <span style={{ fontSize: '0.8125rem', color: 'var(--accent-status-red)', fontWeight: 500 }}>
+                <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)' }}>Hoje</span>
+                <span style={{ fontSize: '0.8125rem', color: 'var(--accent-status-red)', fontWeight: 500, marginLeft: '0.5rem' }}>
                   Operação espalhada
                 </span>
               </div>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.375rem' }}>
+            <div style={{ padding: 'clamp(1.25rem, 3vw, 1.75rem)', display: 'flex', flexDirection: 'column', gap: '1.125rem' }}>
               {beforeItems.map((item, index) => (
-                <div key={index} style={{ display: 'flex', gap: '0.875rem', alignItems: 'flex-start' }}>
+                <div key={index} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
                   <span style={{
                     color: 'var(--accent-status-red)',
                     fontWeight: 700,
-                    fontSize: '0.8125rem',
-                    marginTop: '3px',
+                    fontSize: '0.875rem',
+                    marginTop: '2px',
                     flexShrink: 0,
                     opacity: 0.8
                   }}>✕</span>
                   <div>
-                    <div style={{ fontWeight: 600, fontSize: '0.9375rem', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>
+                    <div style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--text-primary)', marginBottom: '0.2rem' }}>
                       {item.title}
                     </div>
                     <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', lineHeight: 1.55 }}>
@@ -136,36 +126,21 @@ export default function TransformationSection() {
             backgroundColor: 'var(--bg-main)',
             border: '1px solid var(--border-strong)',
             borderRadius: 'var(--radius-lg)',
-            padding: 'clamp(1.5rem, 3.5vw, 2.5rem)',
-            display: 'flex',
-            flexDirection: 'column',
-            boxShadow: '0 10px 40px rgba(0,0,0,0.4)'
+            overflow: 'hidden',
+            boxShadow: '0 8px 30px rgba(0,0,0,0.3)'
           }}>
+            {/* Label header */}
             <div style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '0.75rem',
-              marginBottom: '2rem',
-              paddingBottom: '1.25rem',
-              borderBottom: '1px solid var(--border-subtle)'
+              gap: '0.625rem',
+              padding: '1rem 1.5rem',
+              backgroundColor: 'rgba(16,185,129,0.06)',
+              borderBottom: '1px solid rgba(16,185,129,0.15)'
             }}>
-              <div style={{
-                width: '32px',
-                height: '32px',
-                borderRadius: '50%',
-                backgroundColor: 'var(--accent-status-green-bg)',
-                border: '1px solid rgba(16,185,129,0.25)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0
-              }}>
-                <CheckCircle2 size={16} color="var(--accent-status-green)" />
-              </div>
+              <CheckCircle2 size={18} color="var(--accent-status-green)" />
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', flexWrap: 'wrap' }}>
-                <h3 style={{ fontSize: '1.125rem', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.2 }}>
-                  Com a
-                </h3>
+                <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)' }}>Com a</span>
                 <Logo size="small" />
                 <span style={{ fontSize: '0.8125rem', color: 'var(--accent-status-green)', fontWeight: 500 }}>
                   Operação sob controle
@@ -173,18 +148,18 @@ export default function TransformationSection() {
               </div>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.375rem' }}>
+            <div style={{ padding: 'clamp(1.25rem, 3vw, 1.75rem)', display: 'flex', flexDirection: 'column', gap: '1.125rem' }}>
               {afterItems.map((item, index) => (
-                <div key={index} style={{ display: 'flex', gap: '0.875rem', alignItems: 'flex-start' }}>
+                <div key={index} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
                   <span style={{
                     color: 'var(--accent-status-green)',
                     fontWeight: 700,
-                    fontSize: '0.8125rem',
-                    marginTop: '3px',
+                    fontSize: '0.875rem',
+                    marginTop: '2px',
                     flexShrink: 0
                   }}>✓</span>
                   <div>
-                    <div style={{ fontWeight: 600, fontSize: '0.9375rem', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>
+                    <div style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--text-primary)', marginBottom: '0.2rem' }}>
                       {item.title}
                     </div>
                     <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', lineHeight: 1.55 }}>
@@ -196,13 +171,16 @@ export default function TransformationSection() {
             </div>
 
             {/* Bottom CTA */}
-            <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border-subtle)' }}>
+            <div style={{
+              padding: '1rem 1.5rem 1.5rem 1.5rem',
+              borderTop: '1px solid var(--border-subtle)'
+            }}>
               <a
                 href="https://app.useclik.com.br/register"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-primary btn-mobile-full"
-                style={{ textDecoration: 'none', display: 'inline-flex' }}
+                className="btn btn-primary"
+                style={{ textDecoration: 'none', width: '100%' }}
               >
                 <span>Quero ter controle do meu negócio</span>
                 <ArrowRight size={16} />
