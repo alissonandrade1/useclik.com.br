@@ -5,8 +5,6 @@ import {
   Clock,
   Tag,
   Users,
-  MessageSquare,
-  Settings,
   Sun,
   Check,
   Copy,
@@ -14,161 +12,129 @@ import {
   Search,
   ChevronLeft,
   ChevronRight,
-  Sparkles,
 } from 'lucide-react';
 import Logo from './Logo';
 
 const systemScenes = [
-  { id: 'visao-geral', label: 'Visão geral', icon: LayoutGrid },
-  { id: 'agendamentos', label: 'Agendamentos', icon: Calendar },
-  { id: 'equipe', label: 'Equipe & Horários', icon: Clock },
-  { id: 'clientes', label: 'Serviços & CRM', icon: Users },
+  { id: 'visao', label: 'Visão geral', icon: LayoutGrid },
+  { id: 'agenda', label: 'Agendamentos', icon: Calendar },
+  { id: 'equipe', label: 'Equipe e horários', icon: Clock },
+  { id: 'clientes', label: 'Serviços e clientes', icon: Users },
 ];
 
-const chartBars = [
-  { h: 42, green: 34, cancel: 0 },
-  { h: 58, green: 50, cancel: 8 },
-  { h: 52, green: 52, cancel: 0 },
-  { h: 74, green: 68, cancel: 6 },
-  { h: 86, green: 86, cancel: 0 },
-  { h: 94, green: 90, cancel: 4 },
-  { h: 35, green: 35, cancel: 0 },
-  { h: 62, green: 62, cancel: 0 },
-  { h: 70, green: 64, cancel: 6 },
-  { h: 82, green: 82, cancel: 0 },
-  { h: 90, green: 86, cancel: 4 },
-  { h: 100, green: 100, cancel: 0 },
-  { h: 48, green: 48, cancel: 0 },
-  { h: 76, green: 76, cancel: 0 },
-];
+const bars = [38, 52, 48, 68, 80, 92, 34, 58, 66, 78, 86, 96, 54, 74];
 
 const clientSteps = [
-  { step: 0, label: '1. Serviço', progress: '33%' },
-  { step: 1, label: '2. Horário', progress: '66%' },
-  { step: 2, label: '3. Dados', progress: '90%' },
-  { step: 3, label: '✓ Pronto', progress: '100%' },
+  { step: 0, label: '1. Serviço', pct: '33%' },
+  { step: 1, label: '2. Data e hora', pct: '66%' },
+  { step: 2, label: '3. Dados', pct: '90%' },
+  { step: 3, label: 'Confirmado', pct: '100%' },
 ];
 
 export default function ProductMotionSection() {
-  const [activeScene, setActiveScene] = useState(0);
-  const [pauseSystem, setPauseSystem] = useState(false);
+  const [scene, setScene] = useState(0);
+  const [pauseSys, setPauseSys] = useState(false);
 
-  const [bookingStep, setBookingStep] = useState(0);
-  const [pauseBooking, setPauseBooking] = useState(false);
-  const [copiedDemo, setCopiedDemo] = useState(false);
-
-  useEffect(() => {
-    if (pauseSystem) return undefined;
-    const timer = setInterval(() => {
-      setActiveScene((prev) => (prev + 1) % systemScenes.length);
-    }, 4600);
-    return () => clearInterval(timer);
-  }, [pauseSystem]);
+  const [bStep, setBStep] = useState(0);
+  const [pauseClient, setPauseClient] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    if (pauseBooking) return undefined;
-    const timer = setInterval(() => {
-      setBookingStep((prev) => (prev + 1) % clientSteps.length);
-    }, 2800);
-    return () => clearInterval(timer);
-  }, [pauseBooking]);
+    if (pauseSys) return undefined;
+    const t = setInterval(() => setScene((s) => (s + 1) % systemScenes.length), 4400);
+    return () => clearInterval(t);
+  }, [pauseSys]);
 
-  const handleCopyDemo = () => {
-    setCopiedDemo(true);
-    setTimeout(() => setCopiedDemo(false), 1800);
+  useEffect(() => {
+    if (pauseClient) return undefined;
+    const t = setInterval(() => setBStep((s) => (s + 1) % clientSteps.length), 2700);
+    return () => clearInterval(t);
+  }, [pauseClient]);
+
+  const onCopy = () => {
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
   };
 
   return (
-    <section
-      id="sistema"
-      className="section"
-      style={{ backgroundColor: 'var(--bg-main)' }}
-    >
+    <section id="sistema" className="section" style={{ backgroundColor: 'var(--bg-main)' }}>
       <div className="container">
-        {/* Section Heading */}
-        <div style={{ maxWidth: '720px', marginBottom: '2.75rem' }}>
-          <div className="eyebrow eyebrow-green" style={{ marginBottom: '1rem' }}>
-            <Sparkles size={13} />
-            <span>DOIS LADOS DA MESMA OPERAÇÃO</span>
-          </div>
-          <h2 className="section-title" style={{ marginBottom: '0.85rem' }}>
-            Controle completo pra você. Três toques pro seu cliente agendar.
+        <div className="section-header">
+          <span className="section-label">funcionalidades na prática</span>
+          <h2 className="section-title">
+            Controle da operação de um lado. Agendamento fácil do outro.
           </h2>
           <p className="section-subtitle">
-            À esquerda, o painel onde sua barbearia acompanha agenda, equipe, serviços e receita.
-            À direita, a página limpa onde seu cliente reserva sozinho em segundos — sem baixar aplicativo.
+            Você acompanha agenda, profissionais, serviços e retorno de clientes. Na direita, seu
+            cliente escolhe o horário sozinho pelo link — sem baixar aplicativo.
           </p>
         </div>
 
-        {/* Two-Column Motion Design Grid */}
-        <div className="motion-showcase-grid">
-          {/* =========================================================
-              LEFT COLUMN: SYSTEM DASHBOARD MOTION (Barbershop)
-             ========================================================= */}
+        <div className="showcase-layout">
+          {/* LEFT: SYSTEM DASHBOARD MOTION */}
           <div
-            onMouseEnter={() => setPauseSystem(true)}
-            onMouseLeave={() => setPauseSystem(false)}
+            onMouseEnter={() => setPauseSys(true)}
+            onMouseLeave={() => setPauseSys(false)}
             style={{
+              backgroundColor: 'var(--bg-void)',
+              border: '1px solid var(--border-subtle)',
+              borderRadius: 'var(--radius-lg)',
+              overflow: 'hidden',
               display: 'flex',
               flexDirection: 'column',
-              backgroundColor: 'var(--bg-void)',
-              border: '1px solid var(--border-default)',
-              borderRadius: 'var(--radius-xl)',
-              overflow: 'hidden',
-              boxShadow: '0 24px 60px rgba(0, 0, 0, 0.55)',
             }}
           >
-            {/* Top Motion Selector Bar */}
+            {/* Scene Selector Strip */}
             <div
               style={{
-                padding: '0.85rem 1rem',
+                padding: '0.55rem 0.75rem',
                 backgroundColor: 'var(--bg-surface)',
                 borderBottom: '1px solid var(--border-subtle)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                gap: '0.75rem',
-                flexWrap: 'wrap',
+                gap: '0.5rem',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap' }}>
-                {systemScenes.map((scene, idx) => {
-                  const Icon = scene.icon;
-                  const isActive = activeScene === idx;
+              <div className="tabs-scroll">
+                {systemScenes.map((item, idx) => {
+                  const Icon = item.icon;
+                  const active = scene === idx;
                   return (
                     <button
-                      key={scene.id}
+                      key={item.id}
                       type="button"
-                      onClick={() => setActiveScene(idx)}
+                      onClick={() => setScene(idx)}
                       style={{
                         position: 'relative',
                         overflow: 'hidden',
                         display: 'inline-flex',
                         alignItems: 'center',
-                        gap: '0.4rem',
-                        padding: '0.42rem 0.75rem',
-                        borderRadius: 'var(--radius-sm)',
-                        border: `1px solid ${isActive ? 'var(--border-strong)' : 'transparent'}`,
-                        backgroundColor: isActive ? 'var(--bg-elevated)' : 'transparent',
-                        color: isActive ? 'var(--text-primary)' : 'var(--text-muted)',
-                        fontSize: '0.76rem',
-                        fontWeight: isActive ? 600 : 500,
+                        gap: '0.35rem',
+                        padding: '0.35rem 0.65rem',
+                        borderRadius: 'var(--radius-xs)',
+                        border: `1px solid ${active ? 'var(--border-default)' : 'transparent'}`,
+                        backgroundColor: active ? 'var(--bg-elevated)' : 'transparent',
+                        color: active ? 'var(--text-primary)' : 'var(--text-muted)',
+                        fontSize: '0.74rem',
+                        fontWeight: active ? 600 : 400,
                         cursor: 'pointer',
-                        transition: 'all 180ms ease',
+                        whiteSpace: 'nowrap',
+                        flexShrink: 0,
                       }}
                     >
-                      <Icon size={13} color={isActive ? 'var(--accent-green)' : 'currentColor'} />
-                      <span>{scene.label}</span>
-                      {isActive && !pauseSystem && (
+                      <Icon size={12} />
+                      <span>{item.label}</span>
+                      {active && !pauseSys && (
                         <span
-                          key={`prog-${activeScene}`}
+                          key={`line-${scene}`}
                           style={{
                             position: 'absolute',
                             bottom: 0,
                             left: 0,
-                            height: '2px',
-                            backgroundColor: 'var(--accent-green)',
-                            animation: 'progressLinear 4600ms linear forwards',
+                            height: '1.5px',
+                            backgroundColor: '#fafafa',
+                            animation: 'progressFill 4400ms linear forwards',
                           }}
                         />
                       )}
@@ -176,22 +142,24 @@ export default function ProductMotionSection() {
                   );
                 })}
               </div>
-
-              <span className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
-                {pauseSystem ? '⏸ Pausado' : '● Painel do estabelecimento'}
+              <span
+                className="font-mono desktop-nav"
+                style={{ fontSize: '0.66rem', color: 'var(--text-muted)', flexShrink: 0 }}
+              >
+                painel do negócio
               </span>
             </div>
 
-            {/* App Window Shell (Matches v1_151721.mp4) */}
-            <div style={{ display: 'flex', flex: 1, minHeight: '455px' }}>
+            {/* App Interface */}
+            <div style={{ display: 'flex', flex: 1, minHeight: '375px' }}>
               {/* Sidebar */}
               <aside
-                className="dashboard-sidebar-mockup"
+                className="mockup-sidebar"
                 style={{
-                  width: '172px',
-                  backgroundColor: '#101013',
+                  width: '150px',
+                  backgroundColor: '#0e0e11',
                   borderRight: '1px solid var(--border-subtle)',
-                  padding: '1rem 0.75rem',
+                  padding: '0.85rem 0.6rem',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
@@ -199,407 +167,236 @@ export default function ProductMotionSection() {
                 }}
               >
                 <div>
-                  <div style={{ padding: '0 0.4rem 0.9rem', borderBottom: '1px solid var(--border-subtle)' }}>
+                  <div
+                    style={{
+                      padding: '0 0.35rem 0.7rem',
+                      borderBottom: '1px solid var(--border-subtle)',
+                    }}
+                  >
                     <Logo size="small" />
                     <div
                       style={{
-                        fontSize: '0.7rem',
+                        fontSize: '0.66rem',
                         color: 'var(--text-muted)',
-                        marginTop: '0.2rem',
-                        whiteSpace: 'nowrap',
+                        marginTop: '2px',
                         overflow: 'hidden',
                         textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
                       }}
                     >
-                      Barbearia Navalha Club
+                      Navalha Club
                     </div>
                   </div>
 
-                  <div
-                    style={{
-                      fontSize: '0.65rem',
-                      color: 'var(--text-muted)',
-                      padding: '0.85rem 0.4rem 0.4rem',
-                      fontWeight: 600,
-                    }}
-                  >
-                    Operação
-                  </div>
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                  <div style={{ marginTop: '0.6rem', display: 'flex', flexDirection: 'column', gap: '2px' }}>
                     {[
-                      { label: 'Visão geral', icon: LayoutGrid, match: 0 },
-                      { label: 'Agendamentos', icon: Calendar, match: 1 },
-                      { label: 'Equipe & Horários', icon: Clock, match: 2 },
-                      { label: 'Serviços', icon: Tag, match: 3 },
-                      { label: 'Clientes', icon: Users, match: 3 },
+                      { label: 'Visão geral', icon: LayoutGrid, idx: 0 },
+                      { label: 'Agendamentos', icon: Calendar, idx: 1 },
+                      { label: 'Equipe & Horários', icon: Clock, idx: 2 },
+                      { label: 'Serviços', icon: Tag, idx: 3 },
+                      { label: 'Clientes', icon: Users, idx: 3 },
                     ].map((nav, i) => {
                       const NavIcon = nav.icon;
-                      const selected =
-                        activeScene === nav.match &&
-                        !(nav.label === 'Serviços' && activeScene !== 3);
+                      const sel = scene === nav.idx && !(nav.label === 'Serviços' && scene !== 3);
                       return (
                         <button
                           key={i}
                           type="button"
-                          onClick={() => setActiveScene(nav.match)}
+                          onClick={() => setScene(nav.idx)}
                           style={{
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '0.5rem',
-                            padding: '0.48rem 0.55rem',
-                            borderRadius: '7px',
+                            gap: '0.45rem',
+                            padding: '0.4rem 0.45rem',
+                            borderRadius: '6px',
                             border: 'none',
-                            backgroundColor: selected ? '#1b1b21' : 'transparent',
-                            color: selected ? '#fafafa' : 'var(--text-secondary)',
-                            fontSize: '0.75rem',
-                            fontWeight: selected ? 600 : 400,
+                            backgroundColor: sel ? '#19191f' : 'transparent',
+                            color: sel ? '#fafafa' : 'var(--text-muted)',
+                            fontSize: '0.72rem',
+                            fontWeight: sel ? 600 : 400,
                             cursor: 'pointer',
                             textAlign: 'left',
                             width: '100%',
                           }}
                         >
-                          <NavIcon size={13} />
-                          <span>{nav.label}</span>
+                          <NavIcon size={12} />
+                          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                            {nav.label}
+                          </span>
                         </button>
                       );
                     })}
-                  </div>
-
-                  <div
-                    style={{
-                      fontSize: '0.65rem',
-                      color: 'var(--text-muted)',
-                      padding: '0.9rem 0.4rem 0.35rem',
-                      fontWeight: 600,
-                    }}
-                  >
-                    Sistema
-                  </div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      padding: '0.42rem 0.55rem',
-                      color: 'var(--text-muted)',
-                      fontSize: '0.73rem',
-                    }}
-                  >
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem' }}>
-                      <MessageSquare size={13} /> WhatsApp
-                    </span>
-                    <span
-                      style={{
-                        fontSize: '0.6rem',
-                        padding: '1px 5px',
-                        borderRadius: '99px',
-                        backgroundColor: '#1b1b21',
-                      }}
-                    >
-                      Breve
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.45rem',
-                      padding: '0.42rem 0.55rem',
-                      color: 'var(--text-muted)',
-                      fontSize: '0.73rem',
-                    }}
-                  >
-                    <Settings size={13} /> Configurações
                   </div>
                 </div>
 
                 <div
                   style={{
                     borderTop: '1px solid var(--border-subtle)',
-                    paddingTop: '0.65rem',
+                    paddingTop: '0.55rem',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
+                    fontSize: '0.66rem',
                     color: 'var(--text-muted)',
-                    fontSize: '0.7rem',
-                    paddingLeft: '0.4rem',
-                    paddingRight: '0.4rem',
+                    paddingLeft: '0.35rem',
+                    paddingRight: '0.35rem',
                   }}
                 >
                   <span>Tema</span>
-                  <Sun size={13} />
+                  <Sun size={12} />
                 </div>
               </aside>
 
-              {/* Main Workspace Area */}
+              {/* Main Content */}
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-                {/* Dashboard Top Strip */}
+                {/* Topbar */}
                 <div
                   style={{
-                    height: '44px',
+                    height: '38px',
                     borderBottom: '1px solid var(--border-subtle)',
-                    padding: '0 1.1rem',
+                    padding: '0 0.9rem',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
+                    fontSize: '0.7rem',
                     gap: '0.5rem',
-                    fontSize: '0.74rem',
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                    <span style={{ color: 'var(--text-muted)' }}>Qua, 18 de nov</span>
-                    <span className="status-pill status-pill-green">● Plano Pro</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <span style={{ color: 'var(--text-muted)' }}>Qua, 18 nov</span>
+                    <span className="ui-status ui-status-green">● Plano Pro</span>
                   </div>
-
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                    <button
-                      type="button"
-                      onClick={handleCopyDemo}
-                      style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '0.35rem',
-                        backgroundColor: 'var(--bg-surface)',
-                        border: '1px solid var(--border-default)',
-                        borderRadius: '6px',
-                        padding: '0.25rem 0.55rem',
-                        color: 'var(--text-primary)',
-                        fontSize: '0.7rem',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      <Copy size={11} />
-                      <span>{copiedDemo ? 'Link copiado!' : 'Copiar meu link'}</span>
-                    </button>
-                    <div
-                      style={{
-                        width: '24px',
-                        height: '24px',
-                        borderRadius: '50%',
-                        backgroundColor: '#1f1f26',
-                        border: '1px solid var(--border-default)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '0.65rem',
-                        fontWeight: 700,
-                      }}
-                    >
-                      NC
-                    </div>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={onCopy}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.3rem',
+                      background: 'var(--bg-surface)',
+                      border: '1px solid var(--border-subtle)',
+                      borderRadius: '5px',
+                      padding: '0.2rem 0.5rem',
+                      color: 'var(--text-secondary)',
+                      fontSize: '0.68rem',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <Copy size={10} />
+                    <span>{copied ? 'Copiado' : 'Copiar link'}</span>
+                  </button>
                 </div>
 
-                {/* Animated Scene Body */}
-                <div style={{ padding: '1.15rem', flex: 1 }}>
-                  {/* SCENE 0: VISÃO GERAL */}
-                  {activeScene === 0 && (
-                    <div key="scene-0" className="animate-scene">
+                {/* Scene Views */}
+                <div style={{ padding: '0.9rem', flex: 1 }}>
+                  {scene === 0 && (
+                    <div key="s0" className="scene-enter">
                       <div
                         style={{
                           display: 'flex',
-                          alignItems: 'center',
                           justifyContent: 'space-between',
-                          marginBottom: '0.85rem',
+                          alignItems: 'baseline',
+                          marginBottom: '0.65rem',
                           gap: '0.5rem',
                           flexWrap: 'wrap',
                         }}
                       >
                         <div>
-                          <div style={{ fontSize: '1.05rem', fontWeight: 700 }}>
-                            Olá, Navalha Club
-                          </div>
-                          <div style={{ fontSize: '0.73rem', color: 'var(--text-muted)' }}>
-                            Resumo operacional · Novembro ·{' '}
-                            <span className="font-mono" style={{ color: 'var(--text-secondary)' }}>
-                              app.useclik.com.br/navalhaclub
-                            </span>
+                          <div style={{ fontSize: '0.92rem', fontWeight: 700 }}>Olá, Navalha Club</div>
+                          <div className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
+                            app.useclik.com.br/navalhaclub
                           </div>
                         </div>
-                        <div
-                          style={{
-                            display: 'inline-flex',
-                            backgroundColor: 'var(--bg-surface)',
-                            border: '1px solid var(--border-subtle)',
-                            borderRadius: '7px',
-                            padding: '2px',
-                            fontSize: '0.68rem',
-                          }}
-                        >
-                          <span
-                            style={{
-                              backgroundColor: '#1d1d24',
-                              padding: '3px 8px',
-                              borderRadius: '5px',
-                              fontWeight: 600,
-                            }}
-                          >
-                            Este mês
-                          </span>
-                          <span style={{ padding: '3px 8px', color: 'var(--text-muted)' }}>30d</span>
-                          <span style={{ padding: '3px 8px', color: 'var(--text-muted)' }}>90d</span>
-                        </div>
+                        <span className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
+                          Novembro
+                        </span>
                       </div>
 
-                      {/* 3 Primary Metric Cards */}
-                      <div className="metrics-3-grid" style={{ marginBottom: '0.75rem' }}>
-                        <div
-                          style={{
-                            backgroundColor: 'var(--bg-surface)',
-                            border: '1px solid var(--border-subtle)',
-                            borderRadius: '10px',
-                            padding: '0.8rem',
-                          }}
-                        >
-                          <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
-                            Receita realizada
-                          </div>
+                      <div className="kpi-3-grid" style={{ marginBottom: '0.55rem' }}>
+                        {[
+                          { k: 'Receita realizada', v: 'R$ 14.820', s: '+18% no mês' },
+                          { k: 'Atendimentos', v: '196', s: '184 concluídos · 12 hoje' },
+                          { k: 'Ticket médio', v: 'R$ 75,60', s: 'Projetado: R$ 16.400' },
+                        ].map((m, i) => (
                           <div
-                            className="font-mono"
-                            style={{ fontSize: '1.15rem', fontWeight: 800, marginTop: '0.25rem' }}
-                          >
-                            R$ 14.820
-                          </div>
-                          <div
+                            key={i}
                             style={{
-                              fontSize: '0.68rem',
-                              color: 'var(--accent-green)',
-                              marginTop: '0.2rem',
+                              backgroundColor: 'var(--bg-surface)',
+                              border: '1px solid var(--border-subtle)',
+                              borderRadius: '8px',
+                              padding: '0.65rem 0.7rem',
                             }}
                           >
-                            +18% vs. mês anterior
+                            <div style={{ fontSize: '0.66rem', color: 'var(--text-muted)' }}>{m.k}</div>
+                            <div className="font-mono" style={{ fontSize: '1rem', fontWeight: 700, margin: '2px 0' }}>
+                              {m.v}
+                            </div>
+                            <div style={{ fontSize: '0.64rem', color: 'var(--text-secondary)' }}>{m.s}</div>
                           </div>
-                        </div>
-
-                        <div
-                          style={{
-                            backgroundColor: 'var(--bg-surface)',
-                            border: '1px solid var(--border-subtle)',
-                            borderRadius: '10px',
-                            padding: '0.8rem',
-                          }}
-                        >
-                          <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
-                            Atendimentos
-                          </div>
-                          <div
-                            className="font-mono"
-                            style={{ fontSize: '1.15rem', fontWeight: 800, marginTop: '0.25rem' }}
-                          >
-                            196
-                          </div>
-                          <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
-                            184 concluídos · 12 hoje
-                          </div>
-                        </div>
-
-                        <div
-                          style={{
-                            backgroundColor: 'var(--bg-surface)',
-                            border: '1px solid var(--border-subtle)',
-                            borderRadius: '10px',
-                            padding: '0.8rem',
-                          }}
-                        >
-                          <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
-                            Ticket médio
-                          </div>
-                          <div
-                            className="font-mono"
-                            style={{ fontSize: '1.15rem', fontWeight: 800, marginTop: '0.25rem' }}
-                          >
-                            R$ 75,60
-                          </div>
-                          <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
-                            Projetado: R$ 16.400
-                          </div>
-                        </div>
+                        ))}
                       </div>
 
-                      {/* 4 Sub-metrics Strip */}
                       <div
-                        className="metrics-4-grid"
+                        className="kpi-4-grid"
                         style={{
                           backgroundColor: 'var(--bg-surface)',
                           border: '1px solid var(--border-subtle)',
-                          borderRadius: '10px',
-                          padding: '0.65rem 0.8rem',
-                          marginBottom: '0.75rem',
+                          borderRadius: '8px',
+                          padding: '0.55rem 0.7rem',
+                          marginBottom: '0.55rem',
                         }}
                       >
-                        <div>
-                          <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>Novos clientes</div>
-                          <div className="font-mono" style={{ fontSize: '0.88rem', fontWeight: 700 }}>
-                            28
+                        {[
+                          { k: 'Novos', v: '28' },
+                          { k: 'LTV médio', v: 'R$ 410' },
+                          { k: 'Presença', v: '96,8%', g: true },
+                          { k: 'Sem retorno 60d+', v: '6' },
+                        ].map((item, i) => (
+                          <div key={i}>
+                            <div style={{ fontSize: '0.62rem', color: 'var(--text-muted)' }}>{item.k}</div>
+                            <div
+                              className="font-mono"
+                              style={{
+                                fontSize: '0.8rem',
+                                fontWeight: 700,
+                                color: item.g ? 'var(--accent-green)' : 'var(--text-primary)',
+                              }}
+                            >
+                              {item.v}
+                            </div>
                           </div>
-                        </div>
-                        <div>
-                          <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>LTV médio</div>
-                          <div className="font-mono" style={{ fontSize: '0.88rem', fontWeight: 700 }}>
-                            R$ 410
-                          </div>
-                        </div>
-                        <div>
-                          <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>Comparecimento</div>
-                          <div
-                            className="font-mono"
-                            style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--accent-green)' }}
-                          >
-                            96.8%
-                          </div>
-                        </div>
-                        <div>
-                          <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>Inativos 60d+</div>
-                          <div className="font-mono" style={{ fontSize: '0.88rem', fontWeight: 700 }}>
-                            6
-                          </div>
-                        </div>
+                        ))}
                       </div>
 
-                      {/* Attendance Bar Chart */}
                       <div
                         style={{
                           backgroundColor: 'var(--bg-surface)',
                           border: '1px solid var(--border-subtle)',
-                          borderRadius: '10px',
-                          padding: '0.85rem',
+                          borderRadius: '8px',
+                          padding: '0.65rem 0.75rem',
                         }}
                       >
                         <div
                           style={{
                             display: 'flex',
                             justifyContent: 'space-between',
-                            alignItems: 'center',
-                            marginBottom: '0.65rem',
+                            fontSize: '0.68rem',
+                            marginBottom: '0.45rem',
                           }}
                         >
-                          <span style={{ fontSize: '0.75rem', fontWeight: 600 }}>
-                            Volume diário de cortes (últimos 14 dias)
-                          </span>
-                          <div style={{ display: 'flex', gap: '0.6rem', fontSize: '0.65rem', color: 'var(--text-muted)' }}>
-                            <span>● Concluídos</span>
-                            <span style={{ color: 'var(--accent-green)' }}>● Confirmados</span>
-                          </div>
+                          <span style={{ fontWeight: 600 }}>Volume diário (14 dias)</span>
+                          <span style={{ color: 'var(--text-muted)' }}>Concluídos e confirmados</span>
                         </div>
-                        <div
-                          style={{
-                            height: '74px',
-                            display: 'flex',
-                            alignItems: 'flex-end',
-                            gap: '6px',
-                          }}
-                        >
-                          {chartBars.map((bar, idx) => (
+                        <div style={{ height: '56px', display: 'flex', alignItems: 'flex-end', gap: '5px' }}>
+                          {bars.map((h, i) => (
                             <div
-                              key={idx}
+                              key={i}
                               style={{
                                 flex: 1,
-                                height: `${bar.h}%`,
-                                backgroundColor: idx >= 11 ? 'var(--accent-green)' : '#e4e4e7',
-                                opacity: idx >= 11 ? 0.9 : 0.78,
-                                borderRadius: '3px 3px 0 0',
-                                transition: 'height 400ms ease',
+                                height: `${h}%`,
+                                backgroundColor: i >= 11 ? 'var(--accent-green)' : '#d4d4d8',
+                                opacity: i >= 11 ? 0.85 : 0.7,
+                                borderRadius: '2px 2px 0 0',
                               }}
                             />
                           ))}
@@ -608,168 +405,85 @@ export default function ProductMotionSection() {
                     </div>
                   )}
 
-                  {/* SCENE 1: AGENDAMENTOS */}
-                  {activeScene === 1 && (
-                    <div key="scene-1" className="animate-scene">
+                  {scene === 1 && (
+                    <div key="s1" className="scene-enter">
                       <div
                         style={{
                           display: 'flex',
-                          alignItems: 'center',
                           justifyContent: 'space-between',
-                          marginBottom: '0.8rem',
+                          alignItems: 'center',
+                          marginBottom: '0.65rem',
                           gap: '0.5rem',
                         }}
                       >
-                        <div>
-                          <div style={{ fontSize: '1.05rem', fontWeight: 700 }}>Agendamentos</div>
-                          <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                            Acompanhe e gerencie todos os horários da barbearia.
-                          </div>
-                        </div>
+                        <div style={{ fontSize: '0.92rem', fontWeight: 700 }}>Agendamentos do dia</div>
                         <span
                           style={{
                             backgroundColor: '#fafafa',
-                            color: '#09090b',
-                            fontSize: '0.72rem',
-                            fontWeight: 700,
-                            padding: '0.38rem 0.75rem',
-                            borderRadius: '7px',
+                            color: '#0a0a0b',
+                            fontSize: '0.68rem',
+                            fontWeight: 600,
+                            padding: '0.28rem 0.6rem',
+                            borderRadius: '5px',
                             display: 'inline-flex',
                             alignItems: 'center',
-                            gap: '0.3rem',
+                            gap: '3px',
                           }}
                         >
-                          <Plus size={12} /> Novo agendamento
+                          <Plus size={11} /> Novo
                         </span>
                       </div>
 
-                      {/* Search & Status Filter Pills */}
                       <div
                         style={{
                           display: 'flex',
                           alignItems: 'center',
-                          gap: '0.45rem',
-                          marginBottom: '0.85rem',
+                          gap: '0.4rem',
+                          marginBottom: '0.65rem',
                           flexWrap: 'wrap',
                         }}
                       >
                         <div
                           style={{
                             flex: 1,
-                            minWidth: '150px',
+                            minWidth: '140px',
                             backgroundColor: 'var(--bg-surface)',
                             border: '1px solid var(--border-subtle)',
-                            borderRadius: '7px',
-                            padding: '0.38rem 0.65rem',
+                            borderRadius: '6px',
+                            padding: '0.3rem 0.55rem',
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '0.4rem',
-                            fontSize: '0.7rem',
+                            gap: '0.35rem',
+                            fontSize: '0.68rem',
                             color: 'var(--text-muted)',
                           }}
                         >
-                          <Search size={12} />
-                          <span>Buscar cliente, protocolo ou corte...</span>
+                          <Search size={11} />
+                          <span>Buscar cliente ou protocolo...</span>
                         </div>
-                        <span
-                          style={{
-                            backgroundColor: '#fafafa',
-                            color: '#09090b',
-                            fontSize: '0.68rem',
-                            fontWeight: 700,
-                            padding: '0.3rem 0.65rem',
-                            borderRadius: '99px',
-                          }}
-                        >
-                          Todos 14
-                        </span>
-                        <span className="status-pill status-pill-neutral">Confirmados 11</span>
-                        <span className="status-pill status-pill-neutral">Concluídos 3</span>
+                        <span className="ui-status ui-status-neutral">Confirmados 11</span>
+                        <span className="ui-status ui-status-neutral">Concluídos 3</span>
                       </div>
 
-                      {/* Expanded Booking Card (Matches frame_10) */}
-                      <div
-                        style={{
-                          backgroundColor: 'var(--bg-surface)',
-                          border: '1px solid var(--accent-green-border)',
-                          borderRadius: '10px',
-                          padding: '0.85rem',
-                          marginBottom: '0.6rem',
-                        }}
-                      >
-                        <div
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            paddingBottom: '0.65rem',
-                            borderBottom: '1px solid var(--border-subtle)',
-                          }}
-                        >
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-                            <div>
-                              <div className="font-mono" style={{ fontSize: '0.84rem', fontWeight: 700 }}>
-                                15:00
-                              </div>
-                              <div style={{ fontSize: '0.66rem', color: 'var(--text-muted)' }}>18 de nov</div>
-                            </div>
-                            <div>
-                              <div style={{ fontSize: '0.85rem', fontWeight: 700 }}>Gabriel Ferreira</div>
-                              <div style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>
-                                Corte + Barba Terapia · Rafael Costa
-                              </div>
-                            </div>
-                          </div>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
-                            <span className="font-mono" style={{ fontSize: '0.82rem', fontWeight: 700 }}>
-                              R$ 85,00
-                            </span>
-                            <span className="status-pill status-pill-green">● Confirmado</span>
-                          </div>
-                        </div>
-
-                        <div
-                          className="mini-three-grid"
-                          style={{
-                            gap: '0.6rem',
-                            paddingTop: '0.65rem',
-                            fontSize: '0.7rem',
-                          }}
-                        >
-                          <div>
-                            <div style={{ color: 'var(--text-muted)', fontSize: '0.62rem' }}>WHATSAPP</div>
-                            <div className="font-mono" style={{ marginTop: '2px' }}>
-                              (11) 99824-3190
-                            </div>
-                          </div>
-                          <div>
-                            <div style={{ color: 'var(--text-muted)', fontSize: '0.62rem' }}>PROTOCOLO</div>
-                            <div className="font-mono" style={{ marginTop: '2px' }}>
-                              CLK-94B7M2
-                            </div>
-                          </div>
-                          <div>
-                            <div style={{ color: 'var(--text-muted)', fontSize: '0.62rem' }}>ORIGEM</div>
-                            <div style={{ marginTop: '2px', color: 'var(--accent-green)' }}>
-                              Página pública
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Next Compact Rows */}
                       {[
                         {
-                          time: '16:00',
-                          client: 'Bruno Cavalcanti',
-                          service: 'Corte Degradê · Lucas Martins',
-                          price: 'R$ 55,00',
+                          t: '15:00',
+                          c: 'Gabriel Ferreira',
+                          s: 'Corte + Barba · Rafael Costa',
+                          p: 'R$ 85,00',
+                          meta: '(11) 99824-3190 · Protocolo CLK-94B7M2 · Página pública',
                         },
                         {
-                          time: '17:00',
-                          client: 'Pedro Henrique',
-                          service: 'Barba na Toalha Quente · Rafael Costa',
-                          price: 'R$ 45,00',
+                          t: '16:00',
+                          c: 'Bruno Cavalcanti',
+                          s: 'Corte Degradê · Lucas Martins',
+                          p: 'R$ 55,00',
+                        },
+                        {
+                          t: '17:00',
+                          c: 'Pedro Henrique',
+                          s: 'Barba Toalha Quente · Rafael Costa',
+                          p: 'R$ 45,00',
                         },
                       ].map((row, idx) => (
                         <div
@@ -777,341 +491,200 @@ export default function ProductMotionSection() {
                           style={{
                             backgroundColor: 'var(--bg-surface)',
                             border: '1px solid var(--border-subtle)',
-                            borderRadius: '9px',
-                            padding: '0.62rem 0.85rem',
+                            borderRadius: '8px',
+                            padding: '0.6rem 0.75rem',
                             marginBottom: '0.45rem',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
                           }}
                         >
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-                            <span className="font-mono" style={{ fontSize: '0.8rem', fontWeight: 700 }}>
-                              {row.time}
-                            </span>
-                            <div>
-                              <div style={{ fontSize: '0.8rem', fontWeight: 600 }}>{row.client}</div>
-                              <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
-                                {row.service}
+                          <div
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              alignItems: 'center',
+                              gap: '0.5rem',
+                            }}
+                          >
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.7rem', minWidth: 0 }}>
+                              <span className="font-mono" style={{ fontSize: '0.76rem', fontWeight: 700 }}>
+                                {row.t}
+                              </span>
+                              <div style={{ minWidth: 0 }}>
+                                <div style={{ fontSize: '0.78rem', fontWeight: 600 }}>{row.c}</div>
+                                <div style={{ fontSize: '0.66rem', color: 'var(--text-muted)' }}>
+                                  {row.s}
+                                </div>
                               </div>
                             </div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexShrink: 0 }}>
+                              <span className="font-mono" style={{ fontSize: '0.74rem', fontWeight: 600 }}>
+                                {row.p}
+                              </span>
+                              <span className="ui-status ui-status-green">● Confirmado</span>
+                            </div>
                           </div>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                            <span className="font-mono" style={{ fontSize: '0.76rem', fontWeight: 600 }}>
-                              {row.price}
-                            </span>
-                            <span className="status-pill status-pill-green">● Confirmado</span>
-                          </div>
+                          {row.meta && (
+                            <div
+                              className="font-mono"
+                              style={{
+                                marginTop: '0.45rem',
+                                paddingTop: '0.45rem',
+                                borderTop: '1px solid var(--border-subtle)',
+                                fontSize: '0.64rem',
+                                color: 'var(--text-muted)',
+                              }}
+                            >
+                              {row.meta}
+                            </div>
+                          )}
                         </div>
                       ))}
                     </div>
                   )}
 
-                  {/* SCENE 2: EQUIPE & HORÁRIOS */}
-                  {activeScene === 2 && (
-                    <div key="scene-2" className="animate-scene">
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                          marginBottom: '0.85rem',
-                        }}
-                      >
-                        <div>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                            <span style={{ fontSize: '1.05rem', fontWeight: 700 }}>Equipe & Horários</span>
-                            <span className="status-pill status-pill-neutral">● 3 barbeiros ativos</span>
-                          </div>
-                          <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                            Expediente semanal, pausas de almoço e folgas individuais.
-                          </div>
-                        </div>
+                  {scene === 2 && (
+                    <div key="s2" className="scene-enter">
+                      <div style={{ fontSize: '0.92rem', fontWeight: 700, marginBottom: '0.55rem' }}>
+                        Equipe & expediente semanal
                       </div>
 
-                      {/* Barber Cards */}
-                      <div style={{ display: 'flex', gap: '0.55rem', marginBottom: '0.9rem', flexWrap: 'wrap' }}>
+                      <div style={{ display: 'flex', gap: '0.45rem', marginBottom: '0.65rem', flexWrap: 'wrap' }}>
                         {[
-                          { init: 'RC', name: 'Rafael Costa', role: 'Titular', active: true },
-                          { init: 'LM', name: 'Lucas Martins', role: 'Barbeiro Sênior', active: false },
-                          { init: 'DA', name: 'Diego Alves', role: 'Barbeiro', active: false },
-                        ].map((prof, idx) => (
+                          { n: 'Rafael Costa', r: 'Titular', a: true },
+                          { n: 'Lucas Martins', r: 'Barbeiro', a: false },
+                          { n: 'Diego Alves', r: 'Barbeiro', a: false },
+                        ].map((p, i) => (
                           <div
-                            key={idx}
+                            key={i}
                             style={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: '0.55rem',
-                              padding: '0.5rem 0.75rem',
-                              borderRadius: '9px',
+                              padding: '0.38rem 0.65rem',
+                              borderRadius: '7px',
                               backgroundColor: 'var(--bg-surface)',
-                              border: `1px solid ${prof.active ? '#fafafa' : 'var(--border-subtle)'}`,
+                              border: `1px solid ${p.a ? 'var(--border-strong)' : 'var(--border-subtle)'}`,
+                              fontSize: '0.72rem',
                             }}
                           >
-                            <div
-                              style={{
-                                width: '26px',
-                                height: '26px',
-                                borderRadius: '50%',
-                                backgroundColor: prof.active ? '#fafafa' : '#1f1f26',
-                                color: prof.active ? '#09090b' : '#fafafa',
-                                fontSize: '0.68rem',
-                                fontWeight: 700,
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                              }}
-                            >
-                              {prof.init}
-                            </div>
-                            <div>
-                              <div style={{ fontSize: '0.76rem', fontWeight: 600 }}>{prof.name}</div>
-                              <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>{prof.role}</div>
-                            </div>
+                            <strong>{p.n}</strong>{' '}
+                            <span style={{ color: 'var(--text-muted)', fontSize: '0.65rem' }}>· {p.r}</span>
                           </div>
                         ))}
                       </div>
 
-                      {/* Weekly Schedule Switches (Matches frame_13) */}
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.38rem' }}>
                         {[
-                          { day: 'Domingo', open: false },
-                          { day: 'Segunda-feira', open: true, start: '09:00', end: '19:00' },
-                          { day: 'Terça-feira', open: true, start: '09:00', end: '20:00' },
-                          { day: 'Quarta-feira', open: true, start: '09:00', end: '20:00' },
-                          { day: 'Sábado', open: true, start: '08:30', end: '18:00' },
-                        ].map((d, idx) => (
+                          { d: 'Domingo', on: false },
+                          { d: 'Segunda-feira', on: true, h: '09:00 às 19:00' },
+                          { d: 'Terça a Sexta', on: true, h: '09:00 às 20:00' },
+                          { d: 'Sábado', on: true, h: '08:30 às 18:00' },
+                        ].map((row, i) => (
                           <div
-                            key={idx}
+                            key={i}
                             style={{
                               backgroundColor: 'var(--bg-surface)',
                               border: '1px solid var(--border-subtle)',
-                              borderRadius: '8px',
-                              padding: '0.52rem 0.8rem',
+                              borderRadius: '7px',
+                              padding: '0.48rem 0.7rem',
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'space-between',
-                              gap: '0.5rem',
+                              fontSize: '0.75rem',
                             }}
                           >
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-                              {/* Toggle Pill */}
-                              <div
-                                style={{
-                                  width: '32px',
-                                  height: '18px',
-                                  borderRadius: '99px',
-                                  backgroundColor: d.open ? 'var(--accent-green)' : '#27272f',
-                                  padding: '2px',
-                                  display: 'flex',
-                                  justifyContent: d.open ? 'flex-end' : 'flex-start',
-                                }}
-                              >
-                                <span
-                                  style={{
-                                    width: '14px',
-                                    height: '14px',
-                                    borderRadius: '50%',
-                                    backgroundColor: d.open ? '#ffffff' : '#71717a',
-                                  }}
-                                />
-                              </div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
                               <span
                                 style={{
-                                  fontSize: '0.78rem',
-                                  fontWeight: 500,
-                                  color: d.open ? 'var(--text-primary)' : 'var(--text-muted)',
+                                  width: '28px',
+                                  height: '16px',
+                                  borderRadius: '99px',
+                                  backgroundColor: row.on ? 'var(--accent-green)' : '#27272e',
+                                  padding: '2px',
+                                  display: 'inline-flex',
+                                  justifyContent: row.on ? 'flex-end' : 'flex-start',
                                 }}
                               >
-                                {d.day}
+                                <span
+                                  style={{
+                                    width: '12px',
+                                    height: '12px',
+                                    borderRadius: '50%',
+                                    backgroundColor: row.on ? '#fff' : '#71717a',
+                                  }}
+                                />
+                              </span>
+                              <span style={{ color: row.on ? 'var(--text-primary)' : 'var(--text-muted)' }}>
+                                {row.d}
                               </span>
                             </div>
-
-                            {d.open ? (
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                                <span
-                                  className="font-mono"
-                                  style={{
-                                    fontSize: '0.72rem',
-                                    backgroundColor: 'var(--bg-void)',
-                                    border: '1px solid var(--border-subtle)',
-                                    padding: '2px 7px',
-                                    borderRadius: '5px',
-                                  }}
-                                >
-                                  {d.start}
-                                </span>
-                                <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>às</span>
-                                <span
-                                  className="font-mono"
-                                  style={{
-                                    fontSize: '0.72rem',
-                                    backgroundColor: 'var(--bg-void)',
-                                    border: '1px solid var(--border-subtle)',
-                                    padding: '2px 7px',
-                                    borderRadius: '5px',
-                                  }}
-                                >
-                                  {d.end}
-                                </span>
-                                <span
-                                  style={{
-                                    fontSize: '0.66rem',
-                                    color: 'var(--text-secondary)',
-                                    border: '1px solid var(--border-subtle)',
-                                    padding: '2px 6px',
-                                    borderRadius: '5px',
-                                  }}
-                                >
-                                  + Pausa
-                                </span>
-                              </div>
-                            ) : (
-                              <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Fechado</span>
-                            )}
+                            <span className="font-mono" style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>
+                              {row.on ? `${row.h} · +Pausa` : 'Fechado'}
+                            </span>
                           </div>
                         ))}
                       </div>
                     </div>
                   )}
 
-                  {/* SCENE 3: SERVIÇOS & CLIENTES (CRM + LTV) */}
-                  {activeScene === 3 && (
-                    <div key="scene-3" className="animate-scene">
-                      <div style={{ marginBottom: '0.85rem' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                          <span style={{ fontSize: '1.05rem', fontWeight: 700 }}>Catálogo & CRM de Clientes</span>
-                          <span className="status-pill status-pill-green">LTV automático</span>
-                        </div>
-                        <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                          Preços visíveis no link público e histórico real de quanto cada cliente já gastou.
-                        </div>
+                  {scene === 3 && (
+                    <div key="s3" className="scene-enter">
+                      <div style={{ fontSize: '0.92rem', fontWeight: 700, marginBottom: '0.55rem' }}>
+                        Serviços ativos & histórico de clientes
                       </div>
 
-                      {/* Services Mini Catalog */}
-                      <div className="sub-two-grid" style={{ marginBottom: '0.85rem' }}>
+                      <div className="form-2-grid" style={{ marginBottom: '0.65rem' }}>
                         {[
-                          { name: 'Corte + Barba Terapia', dur: '1h', val: 'R$ 85,00' },
-                          { name: 'Corte Degradê / Social', dur: '45min', val: 'R$ 55,00' },
-                        ].map((srv, idx) => (
+                          { n: 'Corte + Barba', d: '1h · R$ 85,00' },
+                          { n: 'Corte Degradê', d: '45min · R$ 55,00' },
+                        ].map((s, i) => (
                           <div
-                            key={idx}
+                            key={i}
                             style={{
                               backgroundColor: 'var(--bg-surface)',
                               border: '1px solid var(--border-subtle)',
-                              borderRadius: '9px',
-                              padding: '0.65rem 0.75rem',
+                              borderRadius: '7px',
+                              padding: '0.55rem 0.65rem',
                               display: 'flex',
-                              alignItems: 'center',
                               justifyContent: 'space-between',
+                              alignItems: 'center',
                             }}
                           >
                             <div>
-                              <div style={{ fontSize: '0.78rem', fontWeight: 600 }}>{srv.name}</div>
-                              <div
-                                className="font-mono"
-                                style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', marginTop: '2px' }}
-                              >
-                                {srv.dur} · <strong>{srv.val}</strong>
+                              <div style={{ fontSize: '0.75rem', fontWeight: 600 }}>{s.n}</div>
+                              <div className="font-mono" style={{ fontSize: '0.66rem', color: 'var(--text-muted)' }}>
+                                {s.d}
                               </div>
                             </div>
-                            <span className="status-pill status-pill-green">● Ativo</span>
+                            <span className="ui-status ui-status-green">Ativo</span>
                           </div>
                         ))}
                       </div>
 
-                      {/* CRM Clients List (Matches frame_26) */}
-                      <div
-                        className="font-mono"
-                        style={{
-                          fontSize: '0.66rem',
-                          color: 'var(--text-muted)',
-                          marginBottom: '0.45rem',
-                          letterSpacing: '0.04em',
-                        }}
-                      >
-                        BASE DE CLIENTES · ORDENADO POR MAIOR RECEITA (LTV)
-                      </div>
-
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                         {[
-                          {
-                            init: 'BC',
-                            name: 'Bruno Cavalcanti',
-                            phone: '(11) 99763-1029',
-                            visits: '12 visitas',
-                            ltv: 'R$ 1.020,00',
-                            status: 'Recorrente',
-                            warn: false,
-                          },
-                          {
-                            init: 'MO',
-                            name: 'Matheus Oliveira',
-                            phone: '(11) 99412-8804',
-                            visits: '8 visitas',
-                            ltv: 'R$ 680,00',
-                            status: '64 dias sem voltar',
-                            warn: true,
-                          },
-                          {
-                            init: 'PH',
-                            name: 'Pedro Henrique',
-                            phone: '(11) 99105-4421',
-                            visits: '5 visitas',
-                            ltv: 'R$ 425,00',
-                            status: 'Última há 18d',
-                            warn: false,
-                          },
-                        ].map((cli, idx) => (
+                          { n: 'Bruno Cavalcanti', v: '12 visitas', ltv: 'R$ 1.020', st: 'Recorrente' },
+                          { n: 'Matheus Oliveira', v: '8 visitas', ltv: 'R$ 680', st: '64d sem voltar' },
+                          { n: 'Pedro Henrique', v: '5 visitas', ltv: 'R$ 425', st: 'Última há 18d' },
+                        ].map((c, i) => (
                           <div
-                            key={idx}
+                            key={i}
                             style={{
                               backgroundColor: 'var(--bg-surface)',
-                              border: `1px solid ${cli.warn ? 'var(--accent-amber-border)' : 'var(--border-subtle)'}`,
-                              borderRadius: '9px',
-                              padding: '0.6rem 0.8rem',
+                              border: '1px solid var(--border-subtle)',
+                              borderRadius: '7px',
+                              padding: '0.5rem 0.7rem',
                               display: 'flex',
-                              alignItems: 'center',
                               justifyContent: 'space-between',
-                              gap: '0.5rem',
+                              alignItems: 'center',
+                              fontSize: '0.75rem',
                             }}
                           >
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                              <div
-                                style={{
-                                  width: '28px',
-                                  height: '28px',
-                                  borderRadius: '50%',
-                                  backgroundColor: '#1f1f27',
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  justifyContent: 'center',
-                                  fontSize: '0.68rem',
-                                  fontWeight: 700,
-                                }}
-                              >
-                                {cli.init}
-                              </div>
-                              <div>
-                                <div style={{ fontSize: '0.8rem', fontWeight: 600 }}>{cli.name}</div>
-                                <div className="font-mono" style={{ fontSize: '0.66rem', color: 'var(--text-muted)' }}>
-                                  {cli.phone} · {cli.visits}
-                                </div>
-                              </div>
+                            <div>
+                              <strong>{c.n}</strong>{' '}
+                              <span style={{ color: 'var(--text-muted)', fontSize: '0.68rem' }}>· {c.v}</span>
                             </div>
-
-                            <div style={{ textAlign: 'right' }}>
-                              <div className="font-mono" style={{ fontSize: '0.78rem', fontWeight: 700 }}>
-                                {cli.ltv}
-                              </div>
-                              <span
-                                className={`status-pill ${
-                                  cli.warn ? 'status-pill-amber' : 'status-pill-green'
-                                }`}
-                                style={{ marginTop: '2px' }}
-                              >
-                                {cli.status}
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                              <span className="font-mono" style={{ fontSize: '0.72rem', fontWeight: 600 }}>
+                                {c.ltv}
                               </span>
+                              <span className="ui-status ui-status-neutral">{c.st}</span>
                             </div>
                           </div>
                         ))}
@@ -1123,52 +696,50 @@ export default function ProductMotionSection() {
             </div>
           </div>
 
-          {/* =========================================================
-              RIGHT COLUMN: CLIENT BOOKING FLOW MOTION (v2_151821.mp4)
-             ========================================================= */}
+          {/* RIGHT: CLIENT BOOKING FLOW MOTION */}
           <div
-            onMouseEnter={() => setPauseBooking(true)}
-            onMouseLeave={() => setPauseBooking(false)}
+            onMouseEnter={() => setPauseClient(true)}
+            onMouseLeave={() => setPauseClient(false)}
             style={{
+              backgroundColor: 'var(--bg-void)',
+              border: '1px solid var(--border-subtle)',
+              borderRadius: 'var(--radius-lg)',
+              overflow: 'hidden',
               display: 'flex',
               flexDirection: 'column',
-              backgroundColor: 'var(--bg-void)',
-              border: '1px solid var(--border-default)',
-              borderRadius: 'var(--radius-xl)',
-              overflow: 'hidden',
-              boxShadow: '0 24px 60px rgba(0, 0, 0, 0.55)',
             }}
           >
-            {/* Top Stepper Header */}
+            {/* Step Bar */}
             <div
               style={{
-                padding: '0.85rem 1rem',
+                padding: '0.55rem 0.75rem',
                 backgroundColor: 'var(--bg-surface)',
                 borderBottom: '1px solid var(--border-subtle)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                gap: '0.5rem',
-                flexWrap: 'wrap',
+                gap: '0.4rem',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+              <div className="tabs-scroll">
                 {clientSteps.map((s) => {
-                  const active = bookingStep === s.step;
+                  const active = bStep === s.step;
                   return (
                     <button
                       key={s.step}
                       type="button"
-                      onClick={() => setBookingStep(s.step)}
+                      onClick={() => setBStep(s.step)}
                       style={{
-                        padding: '0.35rem 0.6rem',
-                        borderRadius: '7px',
-                        border: `1px solid ${active ? 'var(--accent-green-border)' : 'transparent'}`,
-                        backgroundColor: active ? 'var(--accent-green-dim)' : 'transparent',
-                        color: active ? 'var(--accent-green)' : 'var(--text-muted)',
+                        padding: '0.32rem 0.55rem',
+                        borderRadius: 'var(--radius-xs)',
+                        border: `1px solid ${active ? 'var(--border-default)' : 'transparent'}`,
+                        backgroundColor: active ? 'var(--bg-elevated)' : 'transparent',
+                        color: active ? 'var(--text-primary)' : 'var(--text-muted)',
                         fontSize: '0.72rem',
-                        fontWeight: active ? 700 : 500,
+                        fontWeight: active ? 600 : 400,
                         cursor: 'pointer',
+                        whiteSpace: 'nowrap',
+                        flexShrink: 0,
                       }}
                     >
                       {s.label}
@@ -1176,16 +747,15 @@ export default function ProductMotionSection() {
                   );
                 })}
               </div>
-
-              <span className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
-                Visão do cliente
+              <span className="font-mono" style={{ fontSize: '0.66rem', color: 'var(--text-muted)', flexShrink: 0 }}>
+                cliente
               </span>
             </div>
 
-            {/* Public Booking Page Canvas (Matches v2_151821.mp4) */}
+            {/* Public Booking Page */}
             <div
               style={{
-                padding: '1.15rem',
+                padding: '0.95rem',
                 flex: 1,
                 display: 'flex',
                 flexDirection: 'column',
@@ -1193,183 +763,107 @@ export default function ProductMotionSection() {
               }}
             >
               <div>
-                {/* Public Page Top Header */}
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginBottom: '0.85rem',
-                  }}
-                >
-                  <Logo size="small" />
-                  <div
-                    style={{
-                      width: '28px',
-                      height: '28px',
-                      borderRadius: '7px',
-                      border: '1px solid var(--border-subtle)',
-                      backgroundColor: 'var(--bg-surface)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'var(--text-secondary)',
-                    }}
-                  >
-                    <Sun size={13} />
-                  </div>
-                </div>
-
-                {/* Barbershop Identity Card */}
+                {/* Store Header */}
                 <div
                   style={{
                     backgroundColor: 'var(--bg-surface)',
                     border: '1px solid var(--border-subtle)',
-                    borderRadius: '12px',
-                    padding: '0.8rem 0.95rem',
+                    borderRadius: '9px',
+                    padding: '0.65rem 0.8rem',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    gap: '0.75rem',
+                    gap: '0.5rem',
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.7rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                     <div
                       style={{
-                        width: '38px',
-                        height: '38px',
+                        width: '32px',
+                        height: '32px',
                         borderRadius: '50%',
-                        backgroundColor: '#1b1b22',
+                        backgroundColor: '#19191f',
                         border: '1px solid var(--border-default)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
+                        fontSize: '0.72rem',
                         fontWeight: 700,
-                        fontSize: '0.82rem',
                       }}
                     >
                       NC
                     </div>
                     <div>
-                      <div style={{ fontSize: '0.88rem', fontWeight: 700 }}>
-                        Barbearia Navalha Club
-                      </div>
-                      <div className="font-mono" style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+                      <div style={{ fontSize: '0.82rem', fontWeight: 700 }}>Barbearia Navalha Club</div>
+                      <div className="font-mono" style={{ fontSize: '0.66rem', color: 'var(--text-muted)' }}>
                         @navalhaclub
                       </div>
                     </div>
                   </div>
-
-                  <span className="status-pill status-pill-green">● Agenda online</span>
+                  <span className="ui-status ui-status-green">● Agenda online</span>
                 </div>
 
-                {/* Emerald Progress Line */}
+                {/* Progress Bar */}
                 <div
                   style={{
                     height: '2px',
-                    width: '100%',
                     backgroundColor: 'var(--border-subtle)',
+                    margin: '0.65rem 0',
                     borderRadius: '99px',
-                    margin: '0.75rem 0',
                     overflow: 'hidden',
                   }}
                 >
                   <div
                     style={{
                       height: '100%',
-                      width: clientSteps[bookingStep].progress,
+                      width: clientSteps[bStep].pct,
                       backgroundColor: 'var(--accent-green)',
-                      transition: 'width 400ms var(--ease-out)',
+                      transition: 'width 320ms ease',
                     }}
                   />
                 </div>
 
-                {/* STEP 0: ESCOLHA O SERVIÇO */}
-                {bookingStep === 0 && (
-                  <div key="b-step-0" className="animate-scene">
+                {/* STEP 0 */}
+                {bStep === 0 && (
+                  <div key="c0" className="scene-enter">
                     <div
                       style={{
                         backgroundColor: 'var(--bg-surface)',
                         border: '1px solid var(--border-subtle)',
-                        borderRadius: '12px',
-                        padding: '0.95rem',
+                        borderRadius: '9px',
+                        padding: '0.8rem',
                       }}
                     >
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.55rem',
-                          marginBottom: '0.8rem',
-                        }}
-                      >
-                        <span
-                          style={{
-                            width: '20px',
-                            height: '20px',
-                            borderRadius: '50%',
-                            backgroundColor: '#fafafa',
-                            color: '#09090b',
-                            fontSize: '0.7rem',
-                            fontWeight: 800,
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                          }}
-                        >
-                          1
-                        </span>
-                        <span style={{ fontSize: '0.85rem', fontWeight: 700 }}>Escolha o serviço</span>
+                      <div style={{ fontSize: '0.78rem', fontWeight: 600, marginBottom: '0.6rem' }}>
+                        1. Escolha o serviço
                       </div>
-
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                         {[
-                          {
-                            name: 'Corte + Barba Terapia',
-                            dur: '1h · Toalha quente inclusa',
-                            price: 'R$ 85,00',
-                            selected: true,
-                          },
-                          {
-                            name: 'Corte Degradê / Social',
-                            dur: '45min · Acabamento na navalha',
-                            price: 'R$ 55,00',
-                            selected: false,
-                          },
-                          {
-                            name: 'Barba na Toalha Quente',
-                            dur: '30min · Hidratação',
-                            price: 'R$ 45,00',
-                            selected: false,
-                          },
-                        ].map((item, idx) => (
+                          { n: 'Corte + Barba', d: '1h', p: 'R$ 85,00', sel: true },
+                          { n: 'Corte Degradê', d: '45min', p: 'R$ 55,00', sel: false },
+                          { n: 'Barba Toalha Quente', d: '30min', p: 'R$ 45,00', sel: false },
+                        ].map((srv, i) => (
                           <div
-                            key={idx}
-                            onClick={() => setBookingStep(1)}
-                            className={item.selected ? 'tap-highlight' : ''}
+                            key={i}
+                            onClick={() => setBStep(1)}
                             style={{
-                              padding: '0.7rem 0.8rem',
-                              borderRadius: '9px',
-                              backgroundColor: item.selected
-                                ? 'rgba(35, 202, 130, 0.08)'
-                                : 'var(--bg-void)',
-                              border: `1px solid ${
-                                item.selected ? 'var(--accent-green)' : 'var(--border-subtle)'
-                              }`,
+                              padding: '0.55rem 0.7rem',
+                              borderRadius: '7px',
+                              backgroundColor: 'var(--bg-void)',
+                              border: `1px solid ${srv.sel ? 'var(--text-primary)' : 'var(--border-subtle)'}`,
                               display: 'flex',
-                              alignItems: 'center',
                               justifyContent: 'space-between',
+                              alignItems: 'center',
                               cursor: 'pointer',
+                              fontSize: '0.76rem',
                             }}
                           >
-                            <div>
-                              <div style={{ fontSize: '0.8rem', fontWeight: 600 }}>{item.name}</div>
-                              <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
-                                {item.dur}
-                              </div>
-                            </div>
-                            <span className="font-mono" style={{ fontSize: '0.78rem', fontWeight: 700 }}>
-                              {item.price}
+                            <span>
+                              <strong>{srv.n}</strong>{' '}
+                              <span style={{ color: 'var(--text-muted)', fontSize: '0.68rem' }}>· {srv.d}</span>
+                            </span>
+                            <span className="font-mono" style={{ fontWeight: 600 }}>
+                              {srv.p}
                             </span>
                           </div>
                         ))}
@@ -1378,170 +872,102 @@ export default function ProductMotionSection() {
                   </div>
                 )}
 
-                {/* STEP 1: DATA E HORÁRIO (Matches frame_03 & frame_06) */}
-                {bookingStep === 1 && (
-                  <div key="b-step-1" className="animate-scene">
-                    {/* Collapsed Step 1 */}
+                {/* STEP 1 */}
+                {bStep === 1 && (
+                  <div key="c1" className="scene-enter">
                     <div
                       style={{
                         backgroundColor: 'var(--bg-surface)',
                         border: '1px solid var(--border-subtle)',
-                        borderRadius: '10px',
-                        padding: '0.6rem 0.85rem',
-                        marginBottom: '0.55rem',
+                        borderRadius: '8px',
+                        padding: '0.45rem 0.7rem',
+                        marginBottom: '0.45rem',
                         display: 'flex',
-                        alignItems: 'center',
                         justifyContent: 'space-between',
+                        fontSize: '0.72rem',
                       }}
                     >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
-                        <span
-                          style={{
-                            width: '18px',
-                            height: '18px',
-                            borderRadius: '50%',
-                            backgroundColor: 'var(--accent-green)',
-                            color: '#051b11',
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                          }}
-                        >
-                          <Check size={11} strokeWidth={3} />
-                        </span>
-                        <div style={{ fontSize: '0.75rem' }}>
-                          <strong>Corte + Barba Terapia</strong>{' '}
-                          <span className="font-mono" style={{ color: 'var(--text-muted)' }}>
-                            · R$ 85,00
-                          </span>
-                        </div>
-                      </div>
-                      <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>Alterar</span>
+                      <span>✓ Corte + Barba · R$ 85,00</span>
+                      <span style={{ color: 'var(--text-muted)' }}>Alterar</span>
                     </div>
 
-                    {/* Active Step 2 */}
                     <div
                       style={{
                         backgroundColor: 'var(--bg-surface)',
                         border: '1px solid var(--border-subtle)',
-                        borderRadius: '12px',
-                        padding: '0.85rem',
+                        borderRadius: '9px',
+                        padding: '0.75rem',
                       }}
                     >
                       <div
                         style={{
                           display: 'flex',
-                          alignItems: 'center',
                           justifyContent: 'space-between',
-                          marginBottom: '0.65rem',
+                          alignItems: 'center',
+                          marginBottom: '0.55rem',
+                          fontSize: '0.76rem',
                         }}
                       >
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                          <span
-                            style={{
-                              width: '20px',
-                              height: '20px',
-                              borderRadius: '50%',
-                              backgroundColor: '#fafafa',
-                              color: '#09090b',
-                              fontSize: '0.7rem',
-                              fontWeight: 800,
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                            }}
-                          >
-                            2
-                          </span>
-                          <span style={{ fontSize: '0.82rem', fontWeight: 700 }}>Data e horário</span>
-                        </div>
-                        <div
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.35rem',
-                            fontSize: '0.72rem',
-                          }}
-                        >
-                          <ChevronLeft size={13} color="var(--text-muted)" />
-                          <span>Novembro</span>
-                          <ChevronRight size={13} color="var(--text-muted)" />
-                        </div>
+                        <strong>2. Data e horário</strong>
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '0.7rem' }}>
+                          <ChevronLeft size={12} /> Novembro <ChevronRight size={12} />
+                        </span>
                       </div>
 
-                      {/* Compact Week Strip */}
                       <div
                         style={{
                           display: 'grid',
                           gridTemplateColumns: 'repeat(7, 1fr)',
-                          gap: '0.3rem',
-                          marginBottom: '0.75rem',
+                          gap: '4px',
+                          marginBottom: '0.6rem',
                         }}
                       >
                         {[
-                          { d: '15', w: 'Dom', off: true },
-                          { d: '16', w: 'Seg' },
-                          { d: '17', w: 'Ter' },
-                          { d: '18', w: 'Qua', active: true },
-                          { d: '19', w: 'Qui' },
-                          { d: '20', w: 'Sex' },
-                          { d: '21', w: 'Sáb' },
-                        ].map((day, idx) => (
+                          { d: '15', w: 'D', off: true },
+                          { d: '16', w: 'S' },
+                          { d: '17', w: 'T' },
+                          { d: '18', w: 'Q', on: true },
+                          { d: '19', w: 'Q' },
+                          { d: '20', w: 'S' },
+                          { d: '21', w: 'S' },
+                        ].map((x, i) => (
                           <div
-                            key={idx}
+                            key={i}
                             style={{
-                              padding: '0.35rem 0.15rem',
-                              borderRadius: '7px',
+                              padding: '0.3rem 0',
+                              borderRadius: '6px',
                               textAlign: 'center',
-                              backgroundColor: day.active ? '#fafafa' : 'var(--bg-void)',
-                              color: day.active
-                                ? '#09090b'
-                                : day.off
-                                ? 'var(--text-muted)'
-                                : 'var(--text-primary)',
-                              opacity: day.off ? 0.45 : 1,
+                              backgroundColor: x.on ? '#fafafa' : 'var(--bg-void)',
+                              color: x.on ? '#0a0a0b' : 'var(--text-primary)',
+                              opacity: x.off ? 0.35 : 1,
                               border: '1px solid var(--border-subtle)',
+                              fontSize: '0.68rem',
                             }}
+                            className="font-mono"
                           >
-                            <div style={{ fontSize: '0.58rem' }}>{day.w}</div>
-                            <div className="font-mono" style={{ fontSize: '0.74rem', fontWeight: 700 }}>
-                              {day.d}
-                            </div>
+                            <div style={{ fontSize: '0.55rem' }}>{x.w}</div>
+                            <strong>{x.d}</strong>
                           </div>
                         ))}
                       </div>
 
-                      <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', marginBottom: '0.45rem' }}>
-                        Horários livres em <strong style={{ color: '#fafafa' }}>quarta, 18 de nov</strong>
-                      </div>
-
-                      <div
-                        style={{
-                          display: 'grid',
-                          gridTemplateColumns: 'repeat(3, 1fr)',
-                          gap: '0.4rem',
-                        }}
-                      >
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.35rem' }}>
                         {['09:00', '10:30', '14:00', '15:00', '16:30', '18:00'].map((slot) => {
-                          const picked = slot === '15:00';
+                          const on = slot === '15:00';
                           return (
                             <div
                               key={slot}
-                              onClick={() => setBookingStep(2)}
-                              className={`font-mono ${picked ? 'tap-highlight' : ''}`}
+                              onClick={() => setBStep(2)}
+                              className="font-mono"
                               style={{
-                                padding: '0.45rem',
-                                borderRadius: '7px',
+                                padding: '0.38rem',
+                                borderRadius: '6px',
                                 textAlign: 'center',
-                                fontSize: '0.74rem',
-                                fontWeight: picked ? 700 : 500,
-                                backgroundColor: picked
-                                  ? 'rgba(35, 202, 130, 0.14)'
-                                  : 'var(--bg-void)',
-                                border: `1px solid ${
-                                  picked ? 'var(--accent-green)' : 'var(--border-subtle)'
-                                }`,
-                                color: picked ? 'var(--accent-green)' : 'var(--text-primary)',
+                                fontSize: '0.72rem',
+                                fontWeight: on ? 700 : 400,
+                                backgroundColor: on ? '#fafafa' : 'var(--bg-void)',
+                                color: on ? '#0a0a0b' : 'var(--text-primary)',
+                                border: '1px solid var(--border-subtle)',
                                 cursor: 'pointer',
                               }}
                             >
@@ -1554,84 +980,41 @@ export default function ProductMotionSection() {
                   </div>
                 )}
 
-                {/* STEP 2: SEUS DADOS PARA CONFIRMAÇÃO (Matches frame_11) */}
-                {bookingStep === 2 && (
-                  <div key="b-step-2" className="animate-scene">
+                {/* STEP 2 */}
+                {bStep === 2 && (
+                  <div key="c2" className="scene-enter">
                     <div
                       style={{
                         backgroundColor: 'var(--bg-surface)',
                         border: '1px solid var(--border-subtle)',
-                        borderRadius: '10px',
-                        padding: '0.5rem 0.8rem',
-                        marginBottom: '0.45rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        fontSize: '0.73rem',
+                        borderRadius: '9px',
+                        padding: '0.8rem',
                       }}
                     >
-                      <Check size={13} color="var(--accent-green)" />
-                      <span>Corte + Barba · 18 de nov. às 15:00</span>
-                    </div>
-
-                    <div
-                      style={{
-                        backgroundColor: 'var(--bg-surface)',
-                        border: '1px solid var(--border-subtle)',
-                        borderRadius: '12px',
-                        padding: '0.9rem',
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.5rem',
-                          marginBottom: '0.7rem',
-                        }}
-                      >
-                        <span
-                          style={{
-                            width: '20px',
-                            height: '20px',
-                            borderRadius: '50%',
-                            backgroundColor: '#fafafa',
-                            color: '#09090b',
-                            fontSize: '0.7rem',
-                            fontWeight: 800,
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                          }}
-                        >
-                          3
-                        </span>
-                        <span style={{ fontSize: '0.82rem', fontWeight: 700 }}>
-                          Seus dados para confirmação
-                        </span>
+                      <div style={{ fontSize: '0.78rem', fontWeight: 600, marginBottom: '0.55rem' }}>
+                        3. Seus dados para confirmação
                       </div>
 
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', fontSize: '0.74rem' }}>
                         <div
                           style={{
                             backgroundColor: 'var(--bg-void)',
                             border: '1px solid var(--border-subtle)',
-                            borderRadius: '7px',
-                            padding: '0.48rem 0.65rem',
-                            fontSize: '0.76rem',
+                            borderRadius: '6px',
+                            padding: '0.42rem 0.6rem',
                           }}
                         >
                           Gabriel Ferreira
                         </div>
-                        <div className="sub-two-grid" style={{ gap: '0.45rem' }}>
+                        <div className="form-2-grid">
                           <div
                             className="font-mono"
                             style={{
                               backgroundColor: 'var(--bg-void)',
                               border: '1px solid var(--border-subtle)',
-                              borderRadius: '7px',
-                              padding: '0.48rem 0.6rem',
-                              fontSize: '0.7rem',
+                              borderRadius: '6px',
+                              padding: '0.42rem 0.55rem',
+                              fontSize: '0.68rem',
                             }}
                           >
                             (11) 99824-3190
@@ -1640,9 +1023,9 @@ export default function ProductMotionSection() {
                             style={{
                               backgroundColor: 'var(--bg-void)',
                               border: '1px solid var(--border-subtle)',
-                              borderRadius: '7px',
-                              padding: '0.48rem 0.6rem',
-                              fontSize: '0.7rem',
+                              borderRadius: '6px',
+                              padding: '0.42rem 0.55rem',
+                              fontSize: '0.68rem',
                               overflow: 'hidden',
                               textOverflow: 'ellipsis',
                               whiteSpace: 'nowrap',
@@ -1654,34 +1037,31 @@ export default function ProductMotionSection() {
 
                         <div
                           style={{
-                            backgroundColor: 'var(--bg-void)',
-                            border: '1px solid var(--border-subtle)',
-                            borderRadius: '8px',
-                            padding: '0.55rem 0.7rem',
                             display: 'flex',
                             justifyContent: 'space-between',
-                            fontSize: '0.74rem',
-                            marginTop: '0.15rem',
+                            padding: '0.4rem 0.1rem',
+                            fontSize: '0.72rem',
+                            color: 'var(--text-secondary)',
                           }}
                         >
-                          <span style={{ color: 'var(--text-muted)' }}>Total a pagar no local</span>
-                          <strong className="font-mono">R$ 85,00</strong>
+                          <span>18 de nov · 15:00 (1h)</span>
+                          <strong className="font-mono" style={{ color: 'var(--text-primary)' }}>
+                            R$ 85,00
+                          </strong>
                         </div>
 
                         <button
                           type="button"
-                          onClick={() => setBookingStep(3)}
-                          className="tap-highlight"
+                          onClick={() => setBStep(3)}
                           style={{
-                            marginTop: '0.25rem',
                             width: '100%',
-                            padding: '0.62rem',
-                            borderRadius: '8px',
+                            padding: '0.55rem',
+                            borderRadius: '6px',
                             border: 'none',
                             backgroundColor: '#fafafa',
-                            color: '#09090b',
-                            fontWeight: 700,
-                            fontSize: '0.8rem',
+                            color: '#0a0a0b',
+                            fontWeight: 600,
+                            fontSize: '0.76rem',
                             cursor: 'pointer',
                           }}
                         >
@@ -1692,89 +1072,67 @@ export default function ProductMotionSection() {
                   </div>
                 )}
 
-                {/* STEP 3: CONFIRMADO! */}
-                {bookingStep === 3 && (
-                  <div key="b-step-3" className="animate-pop">
+                {/* STEP 3 */}
+                {bStep === 3 && (
+                  <div key="c3" className="scene-enter">
                     <div
                       style={{
-                        backgroundColor: 'rgba(35, 202, 130, 0.06)',
-                        border: '1px solid var(--accent-green-border)',
-                        borderRadius: '14px',
-                        padding: '1.35rem 1rem',
-                        textAlign: 'center',
+                        backgroundColor: 'var(--bg-surface)',
+                        border: '1px solid var(--border-default)',
+                        borderRadius: '9px',
+                        padding: '1.1rem 0.9rem',
                       }}
                     >
-                      <div
-                        style={{
-                          width: '44px',
-                          height: '44px',
-                          borderRadius: '50%',
-                          backgroundColor: 'var(--accent-green)',
-                          color: '#051b11',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          marginBottom: '0.75rem',
-                        }}
-                      >
-                        <Check size={22} strokeWidth={3} />
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.45rem' }}>
+                        <span
+                          style={{
+                            width: '22px',
+                            height: '22px',
+                            borderRadius: '50%',
+                            backgroundColor: 'var(--accent-green)',
+                            color: '#051b11',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          <Check size={13} strokeWidth={3} />
+                        </span>
+                        <strong style={{ fontSize: '0.86rem' }}>Agendamento confirmado</strong>
                       </div>
-                      <div style={{ fontSize: '0.98rem', fontWeight: 800, marginBottom: '0.3rem' }}>
-                        Horário reservado em 18 segundos!
-                      </div>
+                      <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>
+                        Reservado sem login e sem esperar resposta manual.
+                      </p>
                       <div
+                        className="font-mono"
                         style={{
-                          fontSize: '0.76rem',
+                          borderTop: '1px solid var(--border-subtle)',
+                          paddingTop: '0.6rem',
+                          fontSize: '0.7rem',
                           color: 'var(--text-secondary)',
-                          marginBottom: '0.9rem',
-                        }}
-                      >
-                        Sem cadastro de senha. Sem esperar resposta no WhatsApp.
-                      </div>
-
-                      <div
-                        style={{
-                          backgroundColor: 'var(--bg-void)',
-                          border: '1px solid var(--border-subtle)',
-                          borderRadius: '9px',
-                          padding: '0.65rem 0.8rem',
-                          textAlign: 'left',
-                          fontSize: '0.73rem',
                           display: 'flex',
                           flexDirection: 'column',
-                          gap: '0.3rem',
+                          gap: '0.25rem',
                         }}
                       >
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <span style={{ color: 'var(--text-muted)' }}>Protocolo</span>
-                          <span className="font-mono" style={{ color: 'var(--accent-green)', fontWeight: 700 }}>
-                            CLK-94B7M2
-                          </span>
-                        </div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <span style={{ color: 'var(--text-muted)' }}>Horário</span>
-                          <span className="font-mono">Qua, 18 nov · 15:00</span>
-                        </div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <span style={{ color: 'var(--text-muted)' }}>Notificação</span>
-                          <span>Enviada p/ e-mail e agenda ✓</span>
-                        </div>
+                        <div>Protocolo: CLK-94B7M2</div>
+                        <div>Data: Qua, 18 de nov às 15:00</div>
+                        <div>Comprovante enviado por e-mail</div>
                       </div>
                     </div>
                   </div>
                 )}
               </div>
 
-              {/* Footer signature matching v2_151821 */}
               <div
                 style={{
                   textAlign: 'center',
-                  paddingTop: '0.85rem',
-                  fontSize: '0.7rem',
+                  paddingTop: '0.7rem',
+                  fontSize: '0.68rem',
                   color: 'var(--text-muted)',
                 }}
               >
-                Agendamento seguro via <Logo size="small" />
+                Agendamento via <Logo size="small" />
               </div>
             </div>
           </div>

@@ -1,137 +1,104 @@
 import React from 'react';
-import {
-  ArrowRight,
-  CheckCircle2,
-  Clock,
-  AlertCircle,
-  Mail,
-  CalendarCheck,
-  TrendingUp,
-  Link2,
-} from 'lucide-react';
-
-const realSolutions = [
-  {
-    title: 'Seu cliente agenda sozinho em 20 segundos',
-    desc: 'Você recebe um link próprio (ex: useclik.com.br/navalhaclub). O cliente escolhe serviço, profissional e horário livre sem esperar você parar o atendimento.',
-  },
-  {
-    title: 'Horário travado na hora + tudo no seu e-mail',
-    desc: 'Confirmou no link, a vaga fecha automaticamente contra duplicidade, chega no seu e-mail e sincroniza com a sua agenda.',
-  },
-  {
-    title: 'Visão real de faltas, caixa e quem sumiu',
-    desc: 'Saiba exatamente quanto entrou no mês, quanto perdeu com no-shows e quais clientes não voltam há 60 dias para chamá-los de volta.',
-  },
-];
+import { ArrowRight, Check } from 'lucide-react';
 
 export default function HeroSection() {
   return (
     <section
-      id="dor-solucao"
+      id="inicio"
       className="section"
       style={{
-        paddingTop: 'clamp(6.25rem, 10vw, 8.25rem)',
-        paddingBottom: 'clamp(4rem, 7vw, 6rem)',
+        paddingTop: 'clamp(4.75rem, 7vw, 5.75rem)',
+        paddingBottom: 'clamp(2.25rem, 4vw, 3.25rem)',
       }}
     >
       <div className="container">
-        <div className="hero-grid">
-          {/* LEFT: Latent Pain + Real Solution + Primary CTA */}
+        <div className="hero-layout">
+          {/* LEFT: Latent Pain + Concrete Solution + Direct CTA */}
           <div>
-            <div className="eyebrow eyebrow-red" style={{ marginBottom: '1.25rem' }}>
-              <span className="pulse-dot-red" />
-              <span>A DOR SILENCIOSA DE QUEM VIVE DE AGENDA</span>
-            </div>
+            <span className="section-label">
+              para barbearias, salões, estúdios e quem vive de horário marcado
+            </span>
 
             <h1
               style={{
-                fontSize: 'clamp(2.1rem, 4.4vw, 3.45rem)',
+                fontSize: 'clamp(1.75rem, 3.3vw, 2.55rem)',
                 fontWeight: 800,
-                letterSpacing: '-0.036em',
-                lineHeight: 1.08,
-                marginBottom: '1.1rem',
+                letterSpacing: '-0.034em',
+                lineHeight: 1.1,
                 color: 'var(--text-primary)',
+                marginBottom: '0.85rem',
               }}
             >
-              Enquanto você atende um cliente, perde o próximo esperando no WhatsApp.
+              Enquanto você atende um cliente, perde outro esperando resposta no WhatsApp.
             </h1>
 
             <p
               style={{
-                fontSize: 'clamp(1.02rem, 1.65vw, 1.15rem)',
+                fontSize: '0.95rem',
                 color: 'var(--text-secondary)',
-                lineHeight: 1.6,
-                marginBottom: '1.65rem',
-                maxWidth: '590px',
+                lineHeight: 1.55,
+                marginBottom: '1rem',
+                maxWidth: '540px',
               }}
             >
-              Você está com a máquina na mão, o celular vibra com{' '}
-              <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>"tem vaga hoje?"</span> e,
-              quando consegue responder duas horas depois, o cliente já fechou em outro lugar — fora o
-              prejuízo da cadeira vazia às 15h de quem marcou de boca e esqueceu de ir.
+              Demorar duas horas para responder <em>"tem horário hoje?"</em> faz o cliente fechar em
+              outro lugar. E quando alguém marca na conversa e esquece de ir, a cadeira fica vazia e
+              você absorve o prejuízo.
             </p>
 
-            {/* Real Solution Box */}
+            {/* Real Solution — Plain, Unboxed, Scannable */}
             <div
               style={{
-                backgroundColor: 'var(--bg-surface)',
-                border: '1px solid var(--border-default)',
-                borderRadius: 'var(--radius-lg)',
-                padding: '1.25rem 1.35rem',
-                marginBottom: '1.75rem',
+                borderLeft: '2px solid var(--border-strong)',
+                paddingLeft: '0.9rem',
+                marginBottom: '1.35rem',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.45rem',
               }}
             >
               <div
-                className="font-mono"
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  fontSize: '0.73rem',
-                  fontWeight: 700,
-                  color: 'var(--accent-green)',
-                  letterSpacing: '0.05em',
-                  textTransform: 'uppercase',
-                  marginBottom: '0.95rem',
+                  fontSize: '0.82rem',
+                  fontWeight: 600,
+                  color: 'var(--text-primary)',
                 }}
               >
-                <span className="pulse-dot" />
-                <span>COMO A CLIK. RESOLVE ISSO DE VERDADE</span>
+                Como a clik. resolve isso na prática:
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-                {realSolutions.map((item, idx) => (
-                  <div
-                    key={idx}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: '0.7rem',
-                    }}
-                  >
-                    <CheckCircle2
-                      size={17}
-                      color="var(--accent-green)"
-                      style={{ marginTop: '2px', flexShrink: 0 }}
-                    />
-                    <div style={{ fontSize: '0.885rem', lineHeight: 1.5 }}>
-                      <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>
-                        {item.title}:
-                      </strong>{' '}
-                      <span style={{ color: 'var(--text-secondary)' }}>{item.desc}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              {[
+                'Um link próprio onde seu cliente escolhe serviço e horário livre sozinho em 20s.',
+                'Horário travado na hora, com confirmação enviada no seu e-mail e na sua agenda.',
+                'Controle direto de faturamento, faltas e clientes que sumiram há mais de 60 dias.',
+              ].map((line, i) => (
+                <div
+                  key={i}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '0.5rem',
+                    fontSize: '0.85rem',
+                    color: 'var(--text-secondary)',
+                    lineHeight: 1.45,
+                  }}
+                >
+                  <Check
+                    size={14}
+                    color="var(--accent-green)"
+                    style={{ marginTop: '3px', flexShrink: 0 }}
+                  />
+                  <span>{line}</span>
+                </div>
+              ))}
             </div>
 
-            {/* Action Buttons right below Latent Pain + Real Solution */}
+            {/* Primary CTA Right Below */}
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.85rem',
+                gap: '0.65rem',
                 flexWrap: 'wrap',
               }}
             >
@@ -139,334 +106,180 @@ export default function HeroSection() {
                 href="https://app.useclik.com.br/register"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-emerald btn-lg btn-mobile-full"
+                className="btn btn-primary btn-lg btn-full-xs"
               >
                 <span>Perca menos clientes</span>
-                <ArrowRight size={18} />
+                <ArrowRight size={16} />
               </a>
 
-              <a href="#sistema" className="btn btn-secondary btn-lg btn-mobile-full">
-                <span>Ver funcionando na prática</span>
+              <a href="#sistema" className="btn btn-secondary btn-lg btn-full-xs">
+                <span>Ver o sistema</span>
               </a>
             </div>
 
-            {/* Frictionless Microcopy */}
             <div
               className="font-mono"
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem 1.15rem',
-                flexWrap: 'wrap',
-                marginTop: '1rem',
-                fontSize: '0.76rem',
+                marginTop: '0.75rem',
+                fontSize: '0.72rem',
                 color: 'var(--text-muted)',
               }}
             >
-              <span>✓ Comece grátis (R$ 0)</span>
-              <span>✓ Sem cartão de crédito</span>
-              <span>✓ Pronto em 3 minutos</span>
+              Comece grátis · Sem cartão de crédito · Configura em 5 minutos
             </div>
           </div>
 
-          {/* RIGHT: Live Reality Diagnostic Card (Before vs. With clik. — Fictitious Barbershop) */}
+          {/* RIGHT: Single Flat Architectural Comparison Panel (No Nested Cards) */}
           <div
             style={{
               backgroundColor: 'var(--bg-surface)',
-              border: '1px solid var(--border-default)',
-              borderRadius: 'var(--radius-xl)',
-              padding: 'clamp(1.15rem, 2.5vw, 1.5rem)',
-              boxShadow: '0 28px 70px rgba(0, 0, 0, 0.65)',
-              position: 'relative',
+              border: '1px solid var(--border-subtle)',
+              borderRadius: 'var(--radius-lg)',
+              overflow: 'hidden',
             }}
           >
-            {/* Card Header */}
+            {/* Top Header Row */}
             <div
               style={{
+                padding: '0.65rem 1rem',
+                borderBottom: '1px solid var(--border-subtle)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                paddingBottom: '0.9rem',
-                marginBottom: '1rem',
-                borderBottom: '1px solid var(--border-subtle)',
-                gap: '0.5rem',
+                fontSize: '0.72rem',
+                color: 'var(--text-muted)',
               }}
+              className="font-mono"
             >
-              <span
-                className="font-mono"
-                style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 600 }}
-              >
-                ROTINA REAL · BARBEARIA NAVALHA CLUB
-              </span>
-              <span className="status-pill status-pill-neutral font-mono">Terça-feira</span>
+              <span>Barbearia Navalha Club · Terça-feira</span>
+              <span>comparativo real</span>
             </div>
 
-            {/* WITHOUT CLIK: Bleeding Slots */}
-            <div
-              style={{
-                backgroundColor: 'rgba(239, 68, 68, 0.04)',
-                border: '1px solid rgba(239, 68, 68, 0.2)',
-                borderRadius: 'var(--radius-md)',
-                padding: '1rem',
-                marginBottom: '0.85rem',
-              }}
-            >
+            {/* Section A: Sem a clik. */}
+            <div style={{ padding: '0.9rem 1rem', borderBottom: '1px solid var(--border-subtle)' }}>
               <div
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  marginBottom: '0.75rem',
-                  gap: '0.5rem',
+                  marginBottom: '0.6rem',
+                  fontSize: '0.75rem',
                 }}
               >
-                <span
-                  className="font-mono"
-                  style={{
-                    fontSize: '0.7rem',
-                    fontWeight: 700,
-                    color: '#f87171',
-                    letterSpacing: '0.04em',
-                  }}
-                >
-                  ✕ SEM CONTROLE (NO IMPROVISO)
+                <span style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>
+                  No improviso (WhatsApp + papel)
                 </span>
-                <span
-                  className="font-mono"
-                  style={{ fontSize: '0.75rem', fontWeight: 700, color: '#f87171' }}
-                >
-                  - R$ 140,00 na tarde
+                <span className="font-mono" style={{ color: '#f87171', fontWeight: 600 }}>
+                  - R$ 140 na tarde
                 </span>
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', fontSize: '0.8rem' }}>
                 <div
                   style={{
                     display: 'flex',
-                    alignItems: 'flex-start',
                     justifyContent: 'space-between',
                     gap: '0.75rem',
-                    backgroundColor: 'var(--bg-void)',
-                    border: '1px solid var(--border-subtle)',
-                    borderRadius: 'var(--radius-sm)',
-                    padding: '0.65rem 0.8rem',
+                    color: 'var(--text-secondary)',
                   }}
                 >
-                  <div style={{ display: 'flex', gap: '0.55rem', alignItems: 'flex-start' }}>
-                    <Clock size={14} color="#f87171" style={{ marginTop: '3px', flexShrink: 0 }} />
-                    <div>
-                      <div style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-primary)' }}>
-                        14:12 · Mensagem perdida durante um corte
-                      </div>
-                      <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)', marginTop: '2px' }}>
-                        Respondido às 16:05 → <em>"Valeu mano, já cortei aqui perto"</em>
-                      </div>
-                    </div>
-                  </div>
-                  <span
-                    className="font-mono"
-                    style={{ fontSize: '0.75rem', color: '#f87171', fontWeight: 700, flexShrink: 0 }}
-                  >
+                  <span>
+                    <strong className="font-mono" style={{ color: 'var(--text-muted)', fontWeight: 500 }}>
+                      14:12
+                    </strong>{' '}
+                    · Mensagem sem resposta durante um corte
+                  </span>
+                  <span className="font-mono" style={{ color: 'var(--text-muted)', flexShrink: 0 }}>
                     -R$ 55
                   </span>
                 </div>
-
                 <div
                   style={{
                     display: 'flex',
-                    alignItems: 'flex-start',
                     justifyContent: 'space-between',
                     gap: '0.75rem',
-                    backgroundColor: 'var(--bg-void)',
-                    border: '1px solid var(--border-subtle)',
-                    borderRadius: 'var(--radius-sm)',
-                    padding: '0.65rem 0.8rem',
+                    color: 'var(--text-secondary)',
                   }}
                 >
-                  <div style={{ display: 'flex', gap: '0.55rem', alignItems: 'flex-start' }}>
-                    <AlertCircle size={14} color="#f87171" style={{ marginTop: '3px', flexShrink: 0 }} />
-                    <div>
-                      <div style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-primary)' }}>
-                        15:00 · Cadeira vazia (No-show)
-                      </div>
-                      <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)', marginTop: '2px' }}>
-                        Cliente agendou de boca na segunda e esqueceu o horário
-                      </div>
-                    </div>
-                  </div>
-                  <span
-                    className="font-mono"
-                    style={{ fontSize: '0.75rem', color: '#f87171', fontWeight: 700, flexShrink: 0 }}
-                  >
+                  <span>
+                    <strong className="font-mono" style={{ color: 'var(--text-muted)', fontWeight: 500 }}>
+                      15:00
+                    </strong>{' '}
+                    · Cliente marcado de boca esqueceu de ir
+                  </span>
+                  <span className="font-mono" style={{ color: 'var(--text-muted)', flexShrink: 0 }}>
                     -R$ 85
                   </span>
                 </div>
               </div>
             </div>
 
-            {/* Connector Pill */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '0.5rem 0',
-              }}
-            >
-              <span
-                className="font-mono"
-                style={{
-                  fontSize: '0.68rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.06em',
-                  padding: '0.28rem 0.75rem',
-                  borderRadius: 'var(--radius-full)',
-                  backgroundColor: 'var(--bg-elevated)',
-                  border: '1px solid var(--accent-green-border)',
-                  color: 'var(--accent-green)',
-                }}
-              >
-                ↓ A MESMA TARDE COM A CLIK. ATIVA
-              </span>
-            </div>
-
-            {/* WITH CLIK: Captured Automatically */}
-            <div
-              style={{
-                backgroundColor: 'rgba(35, 202, 130, 0.05)',
-                border: '1px solid var(--accent-green-border)',
-                borderRadius: 'var(--radius-md)',
-                padding: '1.05rem',
-                marginTop: '0.65rem',
-              }}
-            >
+            {/* Section B: Com a clik. */}
+            <div style={{ padding: '0.95rem 1rem', backgroundColor: '#131317' }}>
               <div
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  marginBottom: '0.8rem',
-                  gap: '0.5rem',
+                  marginBottom: '0.65rem',
+                  fontSize: '0.75rem',
                 }}
               >
-                <span
-                  className="font-mono"
-                  style={{
-                    fontSize: '0.7rem',
-                    fontWeight: 700,
-                    color: 'var(--accent-green)',
-                    letterSpacing: '0.04em',
-                  }}
-                >
-                  ● OPERAÇÃO AUTOMÁTICA 24/7
+                <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
+                  Com o link da clik. ativo
                 </span>
-                <span className="status-pill status-pill-green font-mono">+ R$ 85,00 garantidos</span>
+                <span className="ui-status ui-status-green font-mono">● Agenda online</span>
               </div>
 
-              {/* Captured Booking Row */}
               <div
                 style={{
-                  backgroundColor: 'var(--bg-void)',
-                  border: '1px solid var(--border-default)',
-                  borderRadius: 'var(--radius-sm)',
-                  padding: '0.85rem',
-                  marginBottom: '0.7rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.5rem',
+                  fontSize: '0.8rem',
                 }}
               >
                 <div
                   style={{
                     display: 'flex',
-                    alignItems: 'center',
                     justifyContent: 'space-between',
-                    marginBottom: '0.4rem',
-                    gap: '0.5rem',
-                  }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-                    <Link2 size={13} color="var(--accent-green)" />
-                    <span className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                      useclik.com.br/navalhaclub · 14:13
-                    </span>
-                  </div>
-                  <span className="status-pill status-pill-green">● Confirmado</span>
-                </div>
-
-                <div
-                  style={{
-                    display: 'flex',
                     alignItems: 'baseline',
-                    justifyContent: 'space-between',
-                    gap: '0.5rem',
+                    gap: '0.75rem',
                   }}
                 >
                   <div>
-                    <div style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-                      Gabriel Ferreira
-                    </div>
-                    <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-                      Corte + Barba Terapia · Barbeiro Rafael Costa
-                    </div>
+                    <span className="font-mono" style={{ color: 'var(--accent-green)', fontSize: '0.75rem' }}>
+                      14:13
+                    </span>{' '}
+                    · <strong>Gabriel Ferreira</strong> agendou sozinho (Corte + Barba)
                   </div>
-                  <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                    <div className="font-mono" style={{ fontSize: '0.88rem', fontWeight: 700 }}>
-                      R$ 85,00
-                    </div>
-                    <div className="font-mono" style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
-                      Qua · 15:00
-                    </div>
-                  </div>
+                  <span className="font-mono" style={{ fontWeight: 700, flexShrink: 0 }}>
+                    +R$ 85
+                  </span>
                 </div>
-              </div>
 
-              {/* Post-booking automated triggers */}
-              <div className="mini-three-grid">
-                <div
-                  style={{
-                    backgroundColor: 'var(--bg-void)',
-                    border: '1px solid var(--border-subtle)',
-                    borderRadius: 'var(--radius-xs)',
-                    padding: '0.5rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.4rem',
-                    fontSize: '0.72rem',
-                    color: 'var(--text-secondary)',
-                  }}
-                >
-                  <Mail size={13} color="var(--accent-green)" style={{ flexShrink: 0 }} />
-                  <span>No seu e-mail</span>
+                <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)' }}>
+                  Horário de 15:00 bloqueado na agenda · Aviso enviado no seu e-mail e comprovante no
+                  e-mail do cliente.
                 </div>
+
                 <div
                   style={{
-                    backgroundColor: 'var(--bg-void)',
-                    border: '1px solid var(--border-subtle)',
-                    borderRadius: 'var(--radius-xs)',
-                    padding: '0.5rem',
+                    marginTop: '0.35rem',
+                    paddingTop: '0.6rem',
+                    borderTop: '1px solid var(--border-subtle)',
                     display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.4rem',
-                    fontSize: '0.72rem',
+                    justifyContent: 'space-between',
+                    gap: '0.5rem',
+                    flexWrap: 'wrap',
+                    fontSize: '0.73rem',
                     color: 'var(--text-secondary)',
                   }}
+                  className="font-mono"
                 >
-                  <CalendarCheck size={13} color="var(--accent-green)" style={{ flexShrink: 0 }} />
-                  <span>Na sua agenda</span>
-                </div>
-                <div
-                  style={{
-                    backgroundColor: 'var(--bg-void)',
-                    border: '1px solid var(--border-subtle)',
-                    borderRadius: 'var(--radius-xs)',
-                    padding: '0.5rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.4rem',
-                    fontSize: '0.72rem',
-                    color: 'var(--text-secondary)',
-                  }}
-                >
-                  <TrendingUp size={13} color="var(--accent-green)" style={{ flexShrink: 0 }} />
-                  <span>CRM + LTV</span>
+                  <span>Presença: 96,8%</span>
+                  <span>6 inativos (60d+) listados</span>
+                  <span>LTV calculado</span>
                 </div>
               </div>
             </div>

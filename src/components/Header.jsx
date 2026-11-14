@@ -1,25 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowRight, Menu, X, LogIn } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, Menu, X } from 'lucide-react';
 import Logo from './Logo';
 
-const navItems = [
-  { href: '#dor-solucao', label: 'A Solução' },
-  { href: '#sistema', label: 'Funcionalidades' },
-  { href: '#email-agenda', label: 'E-mail & Agenda' },
-  { href: '#avaliacoes', label: 'Avaliações' },
+const links = [
+  { href: '#sistema', label: 'Produto' },
+  { href: '#email-agenda', label: 'E-mail e agenda' },
+  { href: '#avaliacoes', label: 'Relatos' },
   { href: '#planos', label: 'Planos' },
   { href: '#faq', label: 'FAQ' },
 ];
 
 export default function Header() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  const [open, setOpen] = useState(false);
 
   return (
     <header
@@ -29,83 +21,63 @@ export default function Header() {
         left: 0,
         right: 0,
         zIndex: 100,
-        backgroundColor: scrolled ? 'rgba(9, 9, 11, 0.88)' : 'rgba(9, 9, 11, 0.65)',
-        backdropFilter: 'blur(14px)',
-        WebkitBackdropFilter: 'blur(14px)',
-        borderBottom: `1px solid ${scrolled ? 'var(--border-default)' : 'var(--border-subtle)'}`,
-        transition: 'background-color 200ms ease, border-color 200ms ease',
+        backgroundColor: 'rgba(10, 10, 11, 0.88)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+        borderBottom: '1px solid var(--border-subtle)',
       }}
     >
       <div
         className="container"
         style={{
-          height: '4.25rem',
+          height: '3.5rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: '1rem',
         }}
       >
-        <a href="#dor-solucao" aria-label="clik. início" style={{ display: 'inline-flex', alignItems: 'center' }}>
-          <Logo size="medium" />
-        </a>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+          <a href="#inicio" aria-label="clik. início" style={{ display: 'inline-flex' }}>
+            <Logo size="small" />
+          </a>
 
-        <nav
-          className="desktop-only"
-          style={{
-            alignItems: 'center',
-            gap: '1.65rem',
-          }}
-        >
-          {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              style={{
-                fontSize: '0.875rem',
-                fontWeight: 500,
-                color: 'var(--text-secondary)',
-                transition: 'color 150ms ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = 'var(--text-primary)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'var(--text-secondary)';
-              }}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
+          <nav className="desktop-nav" style={{ alignItems: 'center', gap: '1.35rem' }}>
+            {links.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                style={{
+                  fontSize: '0.825rem',
+                  color: 'var(--text-secondary)',
+                  transition: 'color 140ms ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'var(--text-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'var(--text-secondary)';
+                }}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+        </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
           <a
             href="https://app.useclik.com.br/login"
             target="_blank"
             rel="noopener noreferrer"
-            className="desktop-only"
+            className="desktop-nav"
             style={{
-              alignItems: 'center',
-              gap: '0.35rem',
-              fontSize: '0.85rem',
-              fontWeight: 500,
+              fontSize: '0.825rem',
               color: 'var(--text-secondary)',
-              padding: '0.5rem 0.75rem',
-              borderRadius: 'var(--radius-sm)',
-              transition: 'color 150ms ease, background-color 150ms ease',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = 'var(--text-primary)';
-              e.currentTarget.style.backgroundColor = 'var(--bg-surface)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = 'var(--text-secondary)';
-              e.currentTarget.style.backgroundColor = 'transparent';
+              padding: '0.4rem 0.65rem',
             }}
           >
-            <LogIn size={14} />
-            <span>Entrar</span>
+            Entrar
           </a>
 
           <a
@@ -115,80 +87,80 @@ export default function Header() {
             className="btn btn-primary btn-sm"
           >
             <span>Perca menos clientes</span>
-            <ArrowRight size={14} />
+            <ArrowRight size={13} />
           </a>
 
           <button
             type="button"
-            className="mobile-only"
-            onClick={() => setMobileOpen((prev) => !prev)}
-            aria-label={mobileOpen ? 'Fechar menu' : 'Abrir menu'}
+            className="mobile-btn"
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? 'Fechar menu' : 'Abrir menu'}
             style={{
-              background: 'var(--bg-surface)',
+              background: 'transparent',
               border: '1px solid var(--border-default)',
-              borderRadius: 'var(--radius-sm)',
+              borderRadius: 'var(--radius-xs)',
               color: 'var(--text-primary)',
-              width: '38px',
-              height: '38px',
+              width: '34px',
+              height: '34px',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
             }}
           >
-            {mobileOpen ? <X size={19} /> : <Menu size={19} />}
+            {open ? <X size={17} /> : <Menu size={17} />}
           </button>
         </div>
       </div>
 
-      {mobileOpen && (
+      {open && (
         <div
           style={{
-            backgroundColor: 'var(--bg-surface)',
+            backgroundColor: 'var(--bg-main)',
             borderBottom: '1px solid var(--border-default)',
-            padding: '1.25rem 1.25rem 1.5rem',
+            padding: '1rem 1.25rem 1.25rem',
             display: 'flex',
             flexDirection: 'column',
-            gap: '0.95rem',
+            gap: '0.75rem',
           }}
         >
-          {navItems.map((item) => (
+          {links.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              onClick={() => setMobileOpen(false)}
-              style={{
-                fontSize: '0.95rem',
-                fontWeight: 500,
-                color: 'var(--text-primary)',
-                padding: '0.25rem 0',
-              }}
+              onClick={() => setOpen(false)}
+              style={{ fontSize: '0.9rem', color: 'var(--text-primary)', padding: '0.2rem 0' }}
             >
               {item.label}
             </a>
           ))}
-          <hr style={{ border: 'none', borderTop: '1px solid var(--border-subtle)', margin: '0.25rem 0' }} />
-          <a
-            href="https://app.useclik.com.br/login"
-            target="_blank"
-            rel="noopener noreferrer"
+          <div
             style={{
-              fontSize: '0.9rem',
-              fontWeight: 600,
-              color: 'var(--text-secondary)',
+              borderTop: '1px solid var(--border-subtle)',
+              paddingTop: '0.75rem',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.6rem',
             }}
           >
-            Já tenho conta → Entrar
-          </a>
-          <a
-            href="https://app.useclik.com.br/register"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-primary"
-            style={{ width: '100%' }}
-          >
-            <span>Perca menos clientes</span>
-            <ArrowRight size={16} />
-          </a>
+            <a
+              href="https://app.useclik.com.br/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}
+            >
+              Já tem conta? Entrar →
+            </a>
+            <a
+              href="https://app.useclik.com.br/register"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary"
+              style={{ width: '100%' }}
+            >
+              <span>Perca menos clientes</span>
+              <ArrowRight size={14} />
+            </a>
+          </div>
         </div>
       )}
     </header>

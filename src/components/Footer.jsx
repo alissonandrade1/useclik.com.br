@@ -3,12 +3,10 @@ import { ArrowRight } from 'lucide-react';
 import Logo from './Logo';
 
 export default function Footer() {
-  const [showStickyMobile, setShowStickyMobile] = useState(false);
+  const [showSticky, setShowSticky] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => {
-      setShowStickyMobile(window.scrollY > 520);
-    };
+    const onScroll = () => setShowSticky(window.scrollY > 420);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -19,157 +17,84 @@ export default function Footer() {
         style={{
           backgroundColor: 'var(--bg-void)',
           borderTop: '1px solid var(--border-subtle)',
-          padding: '3.5rem 0 5.5rem',
-          color: 'var(--text-secondary)',
+          padding: '2rem 0 4.5rem',
+          fontSize: '0.8rem',
+          color: 'var(--text-muted)',
         }}
       >
-        <div className="container">
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'flex-start',
-              justifyContent: 'space-between',
-              gap: '2.5rem',
-              flexWrap: 'wrap',
-              paddingBottom: '2.5rem',
-              borderBottom: '1px solid var(--border-subtle)',
-            }}
-          >
-            <div style={{ maxWidth: '320px' }}>
-              <Logo size="medium" />
-              <p
-                style={{
-                  fontSize: '0.84rem',
-                  color: 'var(--text-muted)',
-                  marginTop: '0.75rem',
-                  lineHeight: 1.6,
-                }}
-              >
-                A plataforma para negócios que vivem de agenda. Agendamentos 24h, notificações por
-                e-mail, agenda sincronizada, equipe e CRM em um único lugar.
-              </p>
-            </div>
-
-            <div style={{ display: 'flex', gap: '3rem', flexWrap: 'wrap', fontSize: '0.85rem' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                <span
-                  className="font-mono"
-                  style={{
-                    fontSize: '0.72rem',
-                    fontWeight: 700,
-                    color: 'var(--text-primary)',
-                    letterSpacing: '0.05em',
-                  }}
-                >
-                  PRODUTO
-                </span>
-                <a href="#dor-solucao" style={{ color: 'var(--text-muted)' }}>
-                  A Solução
-                </a>
-                <a href="#sistema" style={{ color: 'var(--text-muted)' }}>
-                  Funcionalidades
-                </a>
-                <a href="#email-agenda" style={{ color: 'var(--text-muted)' }}>
-                  E-mail & Agenda
-                </a>
-                <a href="#avaliacoes" style={{ color: 'var(--text-muted)' }}>
-                  Avaliações
-                </a>
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                <span
-                  className="font-mono"
-                  style={{
-                    fontSize: '0.72rem',
-                    fontWeight: 700,
-                    color: 'var(--text-primary)',
-                    letterSpacing: '0.05em',
-                  }}
-                >
-                  CONTA
-                </span>
-                <a href="#planos" style={{ color: 'var(--text-muted)' }}>
-                  Planos & Preços
-                </a>
-                <a href="#faq" style={{ color: 'var(--text-muted)' }}>
-                  Perguntas Frequentes
-                </a>
-                <a
-                  href="https://app.useclik.com.br/register"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: 'var(--accent-green)', fontWeight: 600 }}
-                >
-                  Criar conta grátis
-                </a>
-                <a
-                  href="https://app.useclik.com.br/login"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: 'var(--text-primary)', fontWeight: 600 }}
-                >
-                  Fazer login →
-                </a>
-              </div>
-            </div>
+        <div
+          className="container"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '1.25rem',
+            flexWrap: 'wrap',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', flexWrap: 'wrap' }}>
+            <Logo size="small" />
+            <span>A plataforma para negócios que vivem de agenda.</span>
           </div>
 
-          <div
-            style={{
-              paddingTop: '1.5rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              gap: '1rem',
-              flexWrap: 'wrap',
-              fontSize: '0.78rem',
-              color: 'var(--text-muted)',
-            }}
-          >
-            <span>© {new Date().getFullYear()} clik. Todos os direitos reservados.</span>
-            <span className="font-mono">useclik.com.br · "Sua agenda é só o começo."</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
+            <a href="#sistema" style={{ color: 'var(--text-secondary)' }}>
+              Produto
+            </a>
+            <a href="#email-agenda" style={{ color: 'var(--text-secondary)' }}>
+              E-mail e agenda
+            </a>
+            <a href="#avaliacoes" style={{ color: 'var(--text-secondary)' }}>
+              Relatos
+            </a>
+            <a href="#planos" style={{ color: 'var(--text-secondary)' }}>
+              Planos
+            </a>
+            <a href="#faq" style={{ color: 'var(--text-secondary)' }}>
+              FAQ
+            </a>
+            <a
+              href="https://app.useclik.com.br/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: 'var(--text-primary)', fontWeight: 500 }}
+            >
+              Entrar →
+            </a>
           </div>
         </div>
       </footer>
 
-      {/* Mobile Sticky Bottom CTA Bar (CRO Boost on Smartphones) */}
-      {showStickyMobile && (
+      {showSticky && (
         <div
-          className="mobile-only"
+          className="mobile-btn"
           style={{
             position: 'fixed',
             bottom: 0,
             left: 0,
             right: 0,
             zIndex: 95,
-            backgroundColor: 'rgba(9, 9, 11, 0.92)',
-            backdropFilter: 'blur(12px)',
-            WebkitBackdropFilter: 'blur(12px)',
+            backgroundColor: 'rgba(10, 10, 11, 0.94)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
             borderTop: '1px solid var(--border-default)',
-            padding: '0.7rem 1rem',
+            padding: '0.6rem 1rem',
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: '0.75rem',
           }}
         >
-          <div style={{ minWidth: 0 }}>
-            <div style={{ fontSize: '0.78rem', fontWeight: 700, color: '#fafafa' }}>
-              Pare de perder horários
-            </div>
-            <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
-              Comece grátis · Sem cartão
-            </div>
-          </div>
+          <span style={{ fontSize: '0.78rem', fontWeight: 500, color: 'var(--text-secondary)' }}>
+            Grátis · Sem cartão
+          </span>
           <a
             href="https://app.useclik.com.br/register"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-emerald btn-sm"
-            style={{ flexShrink: 0 }}
+            className="btn btn-primary btn-sm"
           >
             <span>Perca menos clientes</span>
-            <ArrowRight size={14} />
+            <ArrowRight size={13} />
           </a>
         </div>
       )}
