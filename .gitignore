@@ -20,3 +20,7 @@ out/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Reference screen recordings
+*.mp4
+
