@@ -9,7 +9,6 @@ import {
   Check,
   Copy,
   Plus,
-  Search,
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
@@ -18,17 +17,17 @@ import Logo from './Logo';
 const systemScenes = [
   { id: 'visao', label: 'Visão geral', icon: LayoutGrid },
   { id: 'agenda', label: 'Agendamentos', icon: Calendar },
-  { id: 'equipe', label: 'Equipe e horários', icon: Clock },
-  { id: 'clientes', label: 'Serviços e clientes', icon: Users },
+  { id: 'equipe', label: 'Equipe', icon: Clock },
+  { id: 'clientes', label: 'Clientes', icon: Users },
 ];
 
 const bars = [38, 52, 48, 68, 80, 92, 34, 58, 66, 78, 86, 96, 54, 74];
 
 const clientSteps = [
   { step: 0, label: '1. Serviço', pct: '33%' },
-  { step: 1, label: '2. Data e hora', pct: '66%' },
+  { step: 1, label: '2. Horário', pct: '66%' },
   { step: 2, label: '3. Dados', pct: '90%' },
-  { step: 3, label: 'Confirmado', pct: '100%' },
+  { step: 3, label: 'Pronto', pct: '100%' },
 ];
 
 export default function ProductMotionSection() {
@@ -41,37 +40,32 @@ export default function ProductMotionSection() {
 
   useEffect(() => {
     if (pauseSys) return undefined;
-    const t = setInterval(() => setScene((s) => (s + 1) % systemScenes.length), 4400);
+    const t = setInterval(() => setScene((s) => (s + 1) % systemScenes.length), 4200);
     return () => clearInterval(t);
   }, [pauseSys]);
 
   useEffect(() => {
     if (pauseClient) return undefined;
-    const t = setInterval(() => setBStep((s) => (s + 1) % clientSteps.length), 2700);
+    const t = setInterval(() => setBStep((s) => (s + 1) % clientSteps.length), 2600);
     return () => clearInterval(t);
   }, [pauseClient]);
 
   const onCopy = () => {
     setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
+    setTimeout(() => setCopied(false), 1400);
   };
 
   return (
     <section id="sistema" className="section" style={{ backgroundColor: 'var(--bg-main)' }}>
       <div className="container">
         <div className="section-header">
-          <span className="section-label">funcionalidades na prática</span>
           <h2 className="section-title">
-            Controle da operação de um lado. Agendamento fácil do outro.
+            Seu controle na esquerda. O agendamento do cliente na direita.
           </h2>
-          <p className="section-subtitle">
-            Você acompanha agenda, profissionais, serviços e retorno de clientes. Na direita, seu
-            cliente escolhe o horário sozinho pelo link — sem baixar aplicativo.
-          </p>
         </div>
 
         <div className="showcase-layout">
-          {/* LEFT: SYSTEM DASHBOARD MOTION */}
+          {/* LEFT: SYSTEM MOTION */}
           <div
             onMouseEnter={() => setPauseSys(true)}
             onMouseLeave={() => setPauseSys(false)}
@@ -84,10 +78,9 @@ export default function ProductMotionSection() {
               flexDirection: 'column',
             }}
           >
-            {/* Scene Selector Strip */}
             <div
               style={{
-                padding: '0.55rem 0.75rem',
+                padding: '0.5rem 0.7rem',
                 backgroundColor: 'var(--bg-surface)',
                 borderBottom: '1px solid var(--border-subtle)',
                 display: 'flex',
@@ -111,12 +104,12 @@ export default function ProductMotionSection() {
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '0.35rem',
-                        padding: '0.35rem 0.65rem',
+                        padding: '0.32rem 0.6rem',
                         borderRadius: 'var(--radius-xs)',
                         border: `1px solid ${active ? 'var(--border-default)' : 'transparent'}`,
                         backgroundColor: active ? 'var(--bg-elevated)' : 'transparent',
                         color: active ? 'var(--text-primary)' : 'var(--text-muted)',
-                        fontSize: '0.74rem',
+                        fontSize: '0.73rem',
                         fontWeight: active ? 600 : 400,
                         cursor: 'pointer',
                         whiteSpace: 'nowrap',
@@ -134,7 +127,7 @@ export default function ProductMotionSection() {
                             left: 0,
                             height: '1.5px',
                             backgroundColor: '#fafafa',
-                            animation: 'progressFill 4400ms linear forwards',
+                            animation: 'progressFill 4200ms linear forwards',
                           }}
                         />
                       )}
@@ -144,22 +137,20 @@ export default function ProductMotionSection() {
               </div>
               <span
                 className="font-mono desktop-nav"
-                style={{ fontSize: '0.66rem', color: 'var(--text-muted)', flexShrink: 0 }}
+                style={{ fontSize: '0.65rem', color: 'var(--text-muted)', flexShrink: 0 }}
               >
-                painel do negócio
+                sistema
               </span>
             </div>
 
-            {/* App Interface */}
-            <div style={{ display: 'flex', flex: 1, minHeight: '375px' }}>
-              {/* Sidebar */}
+            <div style={{ display: 'flex', flex: 1, minHeight: '340px' }}>
               <aside
                 className="mockup-sidebar"
                 style={{
-                  width: '150px',
+                  width: '140px',
                   backgroundColor: '#0e0e11',
                   borderRight: '1px solid var(--border-subtle)',
-                  padding: '0.85rem 0.6rem',
+                  padding: '0.8rem 0.55rem',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
@@ -169,30 +160,21 @@ export default function ProductMotionSection() {
                 <div>
                   <div
                     style={{
-                      padding: '0 0.35rem 0.7rem',
+                      padding: '0 0.35rem 0.65rem',
                       borderBottom: '1px solid var(--border-subtle)',
                     }}
                   >
                     <Logo size="small" />
-                    <div
-                      style={{
-                        fontSize: '0.66rem',
-                        color: 'var(--text-muted)',
-                        marginTop: '2px',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
-                      }}
-                    >
+                    <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', marginTop: '2px' }}>
                       Navalha Club
                     </div>
                   </div>
 
-                  <div style={{ marginTop: '0.6rem', display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                  <div style={{ marginTop: '0.55rem', display: 'flex', flexDirection: 'column', gap: '2px' }}>
                     {[
                       { label: 'Visão geral', icon: LayoutGrid, idx: 0 },
                       { label: 'Agendamentos', icon: Calendar, idx: 1 },
-                      { label: 'Equipe & Horários', icon: Clock, idx: 2 },
+                      { label: 'Equipe', icon: Clock, idx: 2 },
                       { label: 'Serviços', icon: Tag, idx: 3 },
                       { label: 'Clientes', icon: Users, idx: 3 },
                     ].map((nav, i) => {
@@ -206,13 +188,13 @@ export default function ProductMotionSection() {
                           style={{
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '0.45rem',
-                            padding: '0.4rem 0.45rem',
+                            gap: '0.4rem',
+                            padding: '0.38rem 0.45rem',
                             borderRadius: '6px',
                             border: 'none',
                             backgroundColor: sel ? '#19191f' : 'transparent',
                             color: sel ? '#fafafa' : 'var(--text-muted)',
-                            fontSize: '0.72rem',
+                            fontSize: '0.71rem',
                             fontWeight: sel ? 600 : 400,
                             cursor: 'pointer',
                             textAlign: 'left',
@@ -220,9 +202,7 @@ export default function ProductMotionSection() {
                           }}
                         >
                           <NavIcon size={12} />
-                          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                            {nav.label}
-                          </span>
+                          <span>{nav.label}</span>
                         </button>
                       );
                     })}
@@ -232,40 +212,34 @@ export default function ProductMotionSection() {
                 <div
                   style={{
                     borderTop: '1px solid var(--border-subtle)',
-                    paddingTop: '0.55rem',
+                    paddingTop: '0.5rem',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    fontSize: '0.66rem',
+                    fontSize: '0.65rem',
                     color: 'var(--text-muted)',
                     paddingLeft: '0.35rem',
                     paddingRight: '0.35rem',
                   }}
                 >
                   <span>Tema</span>
-                  <Sun size={12} />
+                  <Sun size={11} />
                 </div>
               </aside>
 
-              {/* Main Content */}
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-                {/* Topbar */}
                 <div
                   style={{
-                    height: '38px',
+                    height: '36px',
                     borderBottom: '1px solid var(--border-subtle)',
-                    padding: '0 0.9rem',
+                    padding: '0 0.85rem',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    fontSize: '0.7rem',
-                    gap: '0.5rem',
+                    fontSize: '0.68rem',
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <span style={{ color: 'var(--text-muted)' }}>Qua, 18 nov</span>
-                    <span className="ui-status ui-status-green">● Plano Pro</span>
-                  </div>
+                  <span className="ui-status ui-status-green">● Plano Pro</span>
                   <button
                     type="button"
                     onClick={onCopy}
@@ -276,9 +250,9 @@ export default function ProductMotionSection() {
                       background: 'var(--bg-surface)',
                       border: '1px solid var(--border-subtle)',
                       borderRadius: '5px',
-                      padding: '0.2rem 0.5rem',
+                      padding: '0.18rem 0.48rem',
                       color: 'var(--text-secondary)',
-                      fontSize: '0.68rem',
+                      fontSize: '0.66rem',
                       cursor: 'pointer',
                     }}
                   >
@@ -287,36 +261,14 @@ export default function ProductMotionSection() {
                   </button>
                 </div>
 
-                {/* Scene Views */}
-                <div style={{ padding: '0.9rem', flex: 1 }}>
+                <div style={{ padding: '0.85rem', flex: 1 }}>
                   {scene === 0 && (
                     <div key="s0" className="scene-enter">
-                      <div
-                        style={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'baseline',
-                          marginBottom: '0.65rem',
-                          gap: '0.5rem',
-                          flexWrap: 'wrap',
-                        }}
-                      >
-                        <div>
-                          <div style={{ fontSize: '0.92rem', fontWeight: 700 }}>Olá, Navalha Club</div>
-                          <div className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
-                            app.useclik.com.br/navalhaclub
-                          </div>
-                        </div>
-                        <span className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
-                          Novembro
-                        </span>
-                      </div>
-
                       <div className="kpi-3-grid" style={{ marginBottom: '0.55rem' }}>
                         {[
-                          { k: 'Receita realizada', v: 'R$ 14.820', s: '+18% no mês' },
-                          { k: 'Atendimentos', v: '196', s: '184 concluídos · 12 hoje' },
-                          { k: 'Ticket médio', v: 'R$ 75,60', s: 'Projetado: R$ 16.400' },
+                          { k: 'Receita', v: 'R$ 14.820' },
+                          { k: 'Atendimentos', v: '196' },
+                          { k: 'Presença', v: '96,8%', g: true },
                         ].map((m, i) => (
                           <div
                             key={i}
@@ -324,14 +276,21 @@ export default function ProductMotionSection() {
                               backgroundColor: 'var(--bg-surface)',
                               border: '1px solid var(--border-subtle)',
                               borderRadius: '8px',
-                              padding: '0.65rem 0.7rem',
+                              padding: '0.6rem 0.65rem',
                             }}
                           >
-                            <div style={{ fontSize: '0.66rem', color: 'var(--text-muted)' }}>{m.k}</div>
-                            <div className="font-mono" style={{ fontSize: '1rem', fontWeight: 700, margin: '2px 0' }}>
+                            <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>{m.k}</div>
+                            <div
+                              className="font-mono"
+                              style={{
+                                fontSize: '1rem',
+                                fontWeight: 700,
+                                marginTop: '2px',
+                                color: m.g ? 'var(--accent-green)' : 'var(--text-primary)',
+                              }}
+                            >
                               {m.v}
                             </div>
-                            <div style={{ fontSize: '0.64rem', color: 'var(--text-secondary)' }}>{m.s}</div>
                           </div>
                         ))}
                       </div>
@@ -342,26 +301,19 @@ export default function ProductMotionSection() {
                           backgroundColor: 'var(--bg-surface)',
                           border: '1px solid var(--border-subtle)',
                           borderRadius: '8px',
-                          padding: '0.55rem 0.7rem',
+                          padding: '0.5rem 0.65rem',
                           marginBottom: '0.55rem',
                         }}
                       >
                         {[
+                          { k: 'Ticket', v: 'R$ 75' },
                           { k: 'Novos', v: '28' },
-                          { k: 'LTV médio', v: 'R$ 410' },
-                          { k: 'Presença', v: '96,8%', g: true },
-                          { k: 'Sem retorno 60d+', v: '6' },
+                          { k: 'LTV', v: 'R$ 410' },
+                          { k: 'Inativos', v: '6' },
                         ].map((item, i) => (
                           <div key={i}>
-                            <div style={{ fontSize: '0.62rem', color: 'var(--text-muted)' }}>{item.k}</div>
-                            <div
-                              className="font-mono"
-                              style={{
-                                fontSize: '0.8rem',
-                                fontWeight: 700,
-                                color: item.g ? 'var(--accent-green)' : 'var(--text-primary)',
-                              }}
-                            >
+                            <div style={{ fontSize: '0.6rem', color: 'var(--text-muted)' }}>{item.k}</div>
+                            <div className="font-mono" style={{ fontSize: '0.78rem', fontWeight: 700 }}>
                               {item.v}
                             </div>
                           </div>
@@ -373,21 +325,13 @@ export default function ProductMotionSection() {
                           backgroundColor: 'var(--bg-surface)',
                           border: '1px solid var(--border-subtle)',
                           borderRadius: '8px',
-                          padding: '0.65rem 0.75rem',
+                          padding: '0.65rem 0.7rem',
                         }}
                       >
-                        <div
-                          style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            fontSize: '0.68rem',
-                            marginBottom: '0.45rem',
-                          }}
-                        >
-                          <span style={{ fontWeight: 600 }}>Volume diário (14 dias)</span>
-                          <span style={{ color: 'var(--text-muted)' }}>Concluídos e confirmados</span>
+                        <div style={{ fontSize: '0.66rem', color: 'var(--text-muted)', marginBottom: '0.45rem' }}>
+                          Últimos 14 dias
                         </div>
-                        <div style={{ height: '56px', display: 'flex', alignItems: 'flex-end', gap: '5px' }}>
+                        <div style={{ height: '64px', display: 'flex', alignItems: 'flex-end', gap: '5px' }}>
                           {bars.map((h, i) => (
                             <div
                               key={i}
@@ -412,18 +356,17 @@ export default function ProductMotionSection() {
                           display: 'flex',
                           justifyContent: 'space-between',
                           alignItems: 'center',
-                          marginBottom: '0.65rem',
-                          gap: '0.5rem',
+                          marginBottom: '0.6rem',
                         }}
                       >
-                        <div style={{ fontSize: '0.92rem', fontWeight: 700 }}>Agendamentos do dia</div>
+                        <strong style={{ fontSize: '0.84rem' }}>Hoje · 18 nov</strong>
                         <span
                           style={{
                             backgroundColor: '#fafafa',
                             color: '#0a0a0b',
-                            fontSize: '0.68rem',
+                            fontSize: '0.66rem',
                             fontWeight: 600,
-                            padding: '0.28rem 0.6rem',
+                            padding: '0.24rem 0.55rem',
                             borderRadius: '5px',
                             display: 'inline-flex',
                             alignItems: 'center',
@@ -434,108 +377,44 @@ export default function ProductMotionSection() {
                         </span>
                       </div>
 
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.4rem',
-                          marginBottom: '0.65rem',
-                          flexWrap: 'wrap',
-                        }}
-                      >
-                        <div
-                          style={{
-                            flex: 1,
-                            minWidth: '140px',
-                            backgroundColor: 'var(--bg-surface)',
-                            border: '1px solid var(--border-subtle)',
-                            borderRadius: '6px',
-                            padding: '0.3rem 0.55rem',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.35rem',
-                            fontSize: '0.68rem',
-                            color: 'var(--text-muted)',
-                          }}
-                        >
-                          <Search size={11} />
-                          <span>Buscar cliente ou protocolo...</span>
-                        </div>
-                        <span className="ui-status ui-status-neutral">Confirmados 11</span>
-                        <span className="ui-status ui-status-neutral">Concluídos 3</span>
-                      </div>
-
                       {[
-                        {
-                          t: '15:00',
-                          c: 'Gabriel Ferreira',
-                          s: 'Corte + Barba · Rafael Costa',
-                          p: 'R$ 85,00',
-                          meta: '(11) 99824-3190 · Protocolo CLK-94B7M2 · Página pública',
-                        },
-                        {
-                          t: '16:00',
-                          c: 'Bruno Cavalcanti',
-                          s: 'Corte Degradê · Lucas Martins',
-                          p: 'R$ 55,00',
-                        },
-                        {
-                          t: '17:00',
-                          c: 'Pedro Henrique',
-                          s: 'Barba Toalha Quente · Rafael Costa',
-                          p: 'R$ 45,00',
-                        },
+                        { t: '15:00', c: 'Gabriel Ferreira', s: 'Corte + Barba', p: 'R$ 85' },
+                        { t: '16:00', c: 'Bruno Cavalcanti', s: 'Corte Degradê', p: 'R$ 55' },
+                        { t: '17:00', c: 'Pedro Henrique', s: 'Barba', p: 'R$ 45' },
+                        { t: '18:00', c: 'Thiago Ribeiro', s: 'Corte Social', p: 'R$ 55' },
                       ].map((row, idx) => (
                         <div
                           key={idx}
                           style={{
                             backgroundColor: 'var(--bg-surface)',
                             border: '1px solid var(--border-subtle)',
-                            borderRadius: '8px',
-                            padding: '0.6rem 0.75rem',
-                            marginBottom: '0.45rem',
+                            borderRadius: '7px',
+                            padding: '0.52rem 0.7rem',
+                            marginBottom: '0.4rem',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            gap: '0.5rem',
                           }}
                         >
-                          <div
-                            style={{
-                              display: 'flex',
-                              justifyContent: 'space-between',
-                              alignItems: 'center',
-                              gap: '0.5rem',
-                            }}
-                          >
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.7rem', minWidth: 0 }}>
-                              <span className="font-mono" style={{ fontSize: '0.76rem', fontWeight: 700 }}>
-                                {row.t}
-                              </span>
-                              <div style={{ minWidth: 0 }}>
-                                <div style={{ fontSize: '0.78rem', fontWeight: 600 }}>{row.c}</div>
-                                <div style={{ fontSize: '0.66rem', color: 'var(--text-muted)' }}>
-                                  {row.s}
-                                </div>
-                              </div>
-                            </div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexShrink: 0 }}>
-                              <span className="font-mono" style={{ fontSize: '0.74rem', fontWeight: 600 }}>
-                                {row.p}
-                              </span>
-                              <span className="ui-status ui-status-green">● Confirmado</span>
-                            </div>
-                          </div>
-                          {row.meta && (
-                            <div
-                              className="font-mono"
-                              style={{
-                                marginTop: '0.45rem',
-                                paddingTop: '0.45rem',
-                                borderTop: '1px solid var(--border-subtle)',
-                                fontSize: '0.64rem',
-                                color: 'var(--text-muted)',
-                              }}
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', minWidth: 0 }}>
+                            <span className="font-mono" style={{ fontSize: '0.74rem', fontWeight: 700 }}>
+                              {row.t}
+                            </span>
+                            <span style={{ fontSize: '0.76rem', fontWeight: 600 }}>{row.c}</span>
+                            <span
+                              className="desktop-nav"
+                              style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}
                             >
-                              {row.meta}
-                            </div>
-                          )}
+                              · {row.s}
+                            </span>
+                          </div>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexShrink: 0 }}>
+                            <span className="font-mono" style={{ fontSize: '0.72rem' }}>
+                              {row.p}
+                            </span>
+                            <span className="ui-status ui-status-green">●</span>
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -543,38 +422,30 @@ export default function ProductMotionSection() {
 
                   {scene === 2 && (
                     <div key="s2" className="scene-enter">
-                      <div style={{ fontSize: '0.92rem', fontWeight: 700, marginBottom: '0.55rem' }}>
-                        Equipe & expediente semanal
-                      </div>
-
-                      <div style={{ display: 'flex', gap: '0.45rem', marginBottom: '0.65rem', flexWrap: 'wrap' }}>
-                        {[
-                          { n: 'Rafael Costa', r: 'Titular', a: true },
-                          { n: 'Lucas Martins', r: 'Barbeiro', a: false },
-                          { n: 'Diego Alves', r: 'Barbeiro', a: false },
-                        ].map((p, i) => (
-                          <div
+                      <div style={{ display: 'flex', gap: '0.4rem', marginBottom: '0.6rem', flexWrap: 'wrap' }}>
+                        {['Rafael Costa', 'Lucas Martins', 'Diego Alves'].map((n, i) => (
+                          <span
                             key={i}
                             style={{
-                              padding: '0.38rem 0.65rem',
-                              borderRadius: '7px',
+                              padding: '0.3rem 0.6rem',
+                              borderRadius: '6px',
                               backgroundColor: 'var(--bg-surface)',
-                              border: `1px solid ${p.a ? 'var(--border-strong)' : 'var(--border-subtle)'}`,
+                              border: `1px solid ${i === 0 ? 'var(--border-strong)' : 'var(--border-subtle)'}`,
                               fontSize: '0.72rem',
+                              fontWeight: i === 0 ? 600 : 400,
                             }}
                           >
-                            <strong>{p.n}</strong>{' '}
-                            <span style={{ color: 'var(--text-muted)', fontSize: '0.65rem' }}>· {p.r}</span>
-                          </div>
+                            {n}
+                          </span>
                         ))}
                       </div>
 
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.38rem' }}>
                         {[
                           { d: 'Domingo', on: false },
-                          { d: 'Segunda-feira', on: true, h: '09:00 às 19:00' },
-                          { d: 'Terça a Sexta', on: true, h: '09:00 às 20:00' },
-                          { d: 'Sábado', on: true, h: '08:30 às 18:00' },
+                          { d: 'Segunda', on: true, h: '09:00 – 19:00' },
+                          { d: 'Terça a Sexta', on: true, h: '09:00 – 20:00' },
+                          { d: 'Sábado', on: true, h: '08:30 – 18:00' },
                         ].map((row, i) => (
                           <div
                             key={i}
@@ -582,18 +453,18 @@ export default function ProductMotionSection() {
                               backgroundColor: 'var(--bg-surface)',
                               border: '1px solid var(--border-subtle)',
                               borderRadius: '7px',
-                              padding: '0.48rem 0.7rem',
+                              padding: '0.48rem 0.65rem',
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'space-between',
-                              fontSize: '0.75rem',
+                              fontSize: '0.74rem',
                             }}
                           >
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                               <span
                                 style={{
-                                  width: '28px',
-                                  height: '16px',
+                                  width: '26px',
+                                  height: '15px',
                                   borderRadius: '99px',
                                   backgroundColor: row.on ? 'var(--accent-green)' : '#27272e',
                                   padding: '2px',
@@ -603,8 +474,8 @@ export default function ProductMotionSection() {
                               >
                                 <span
                                   style={{
-                                    width: '12px',
-                                    height: '12px',
+                                    width: '11px',
+                                    height: '11px',
                                     borderRadius: '50%',
                                     backgroundColor: row.on ? '#fff' : '#71717a',
                                   }}
@@ -614,8 +485,8 @@ export default function ProductMotionSection() {
                                 {row.d}
                               </span>
                             </div>
-                            <span className="font-mono" style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>
-                              {row.on ? `${row.h} · +Pausa` : 'Fechado'}
+                            <span className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>
+                              {row.on ? row.h : 'Fechado'}
                             </span>
                           </div>
                         ))}
@@ -625,14 +496,10 @@ export default function ProductMotionSection() {
 
                   {scene === 3 && (
                     <div key="s3" className="scene-enter">
-                      <div style={{ fontSize: '0.92rem', fontWeight: 700, marginBottom: '0.55rem' }}>
-                        Serviços ativos & histórico de clientes
-                      </div>
-
-                      <div className="form-2-grid" style={{ marginBottom: '0.65rem' }}>
+                      <div className="form-2-grid" style={{ marginBottom: '0.55rem' }}>
                         {[
-                          { n: 'Corte + Barba', d: '1h · R$ 85,00' },
-                          { n: 'Corte Degradê', d: '45min · R$ 55,00' },
+                          { n: 'Corte + Barba', p: 'R$ 85' },
+                          { n: 'Corte Degradê', p: 'R$ 55' },
                         ].map((s, i) => (
                           <div
                             key={i}
@@ -640,28 +507,25 @@ export default function ProductMotionSection() {
                               backgroundColor: 'var(--bg-surface)',
                               border: '1px solid var(--border-subtle)',
                               borderRadius: '7px',
-                              padding: '0.55rem 0.65rem',
+                              padding: '0.5rem 0.65rem',
                               display: 'flex',
                               justifyContent: 'space-between',
-                              alignItems: 'center',
+                              fontSize: '0.74rem',
                             }}
                           >
-                            <div>
-                              <div style={{ fontSize: '0.75rem', fontWeight: 600 }}>{s.n}</div>
-                              <div className="font-mono" style={{ fontSize: '0.66rem', color: 'var(--text-muted)' }}>
-                                {s.d}
-                              </div>
-                            </div>
-                            <span className="ui-status ui-status-green">Ativo</span>
+                            <strong>{s.n}</strong>
+                            <span className="font-mono" style={{ color: 'var(--accent-green)' }}>
+                              {s.p}
+                            </span>
                           </div>
                         ))}
                       </div>
 
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.38rem' }}>
                         {[
-                          { n: 'Bruno Cavalcanti', v: '12 visitas', ltv: 'R$ 1.020', st: 'Recorrente' },
-                          { n: 'Matheus Oliveira', v: '8 visitas', ltv: 'R$ 680', st: '64d sem voltar' },
-                          { n: 'Pedro Henrique', v: '5 visitas', ltv: 'R$ 425', st: 'Última há 18d' },
+                          { n: 'Bruno Cavalcanti', v: '12x', ltv: 'R$ 1.020' },
+                          { n: 'Matheus Oliveira', v: '64d ausente', ltv: 'R$ 680' },
+                          { n: 'Pedro Henrique', v: '5x', ltv: 'R$ 425' },
                         ].map((c, i) => (
                           <div
                             key={i}
@@ -669,23 +533,20 @@ export default function ProductMotionSection() {
                               backgroundColor: 'var(--bg-surface)',
                               border: '1px solid var(--border-subtle)',
                               borderRadius: '7px',
-                              padding: '0.5rem 0.7rem',
+                              padding: '0.48rem 0.65rem',
                               display: 'flex',
                               justifyContent: 'space-between',
                               alignItems: 'center',
-                              fontSize: '0.75rem',
+                              fontSize: '0.74rem',
                             }}
                           >
-                            <div>
+                            <span>
                               <strong>{c.n}</strong>{' '}
                               <span style={{ color: 'var(--text-muted)', fontSize: '0.68rem' }}>· {c.v}</span>
-                            </div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                              <span className="font-mono" style={{ fontSize: '0.72rem', fontWeight: 600 }}>
-                                {c.ltv}
-                              </span>
-                              <span className="ui-status ui-status-neutral">{c.st}</span>
-                            </div>
+                            </span>
+                            <span className="font-mono" style={{ fontSize: '0.72rem', fontWeight: 600 }}>
+                              {c.ltv}
+                            </span>
                           </div>
                         ))}
                       </div>
@@ -696,7 +557,7 @@ export default function ProductMotionSection() {
             </div>
           </div>
 
-          {/* RIGHT: CLIENT BOOKING FLOW MOTION */}
+          {/* RIGHT: CLIENT BOOKING MOTION */}
           <div
             onMouseEnter={() => setPauseClient(true)}
             onMouseLeave={() => setPauseClient(false)}
@@ -709,10 +570,9 @@ export default function ProductMotionSection() {
               flexDirection: 'column',
             }}
           >
-            {/* Step Bar */}
             <div
               style={{
-                padding: '0.55rem 0.75rem',
+                padding: '0.5rem 0.7rem',
                 backgroundColor: 'var(--bg-surface)',
                 borderBottom: '1px solid var(--border-subtle)',
                 display: 'flex',
@@ -730,7 +590,7 @@ export default function ProductMotionSection() {
                       type="button"
                       onClick={() => setBStep(s.step)}
                       style={{
-                        padding: '0.32rem 0.55rem',
+                        padding: '0.3rem 0.55rem',
                         borderRadius: 'var(--radius-xs)',
                         border: `1px solid ${active ? 'var(--border-default)' : 'transparent'}`,
                         backgroundColor: active ? 'var(--bg-elevated)' : 'transparent',
@@ -747,15 +607,14 @@ export default function ProductMotionSection() {
                   );
                 })}
               </div>
-              <span className="font-mono" style={{ fontSize: '0.66rem', color: 'var(--text-muted)', flexShrink: 0 }}>
+              <span className="font-mono" style={{ fontSize: '0.65rem', color: 'var(--text-muted)', flexShrink: 0 }}>
                 cliente
               </span>
             </div>
 
-            {/* Public Booking Page */}
             <div
               style={{
-                padding: '0.95rem',
+                padding: '0.85rem',
                 flex: 1,
                 display: 'flex',
                 flexDirection: 'column',
@@ -763,52 +622,49 @@ export default function ProductMotionSection() {
               }}
             >
               <div>
-                {/* Store Header */}
                 <div
                   style={{
                     backgroundColor: 'var(--bg-surface)',
                     border: '1px solid var(--border-subtle)',
-                    borderRadius: '9px',
-                    padding: '0.65rem 0.8rem',
+                    borderRadius: '8px',
+                    padding: '0.55rem 0.75rem',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    gap: '0.5rem',
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
                     <div
                       style={{
-                        width: '32px',
-                        height: '32px',
+                        width: '28px',
+                        height: '28px',
                         borderRadius: '50%',
                         backgroundColor: '#19191f',
                         border: '1px solid var(--border-default)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        fontSize: '0.72rem',
+                        fontSize: '0.68rem',
                         fontWeight: 700,
                       }}
                     >
                       NC
                     </div>
                     <div>
-                      <div style={{ fontSize: '0.82rem', fontWeight: 700 }}>Barbearia Navalha Club</div>
-                      <div className="font-mono" style={{ fontSize: '0.66rem', color: 'var(--text-muted)' }}>
+                      <div style={{ fontSize: '0.78rem', fontWeight: 700 }}>Navalha Club</div>
+                      <div className="font-mono" style={{ fontSize: '0.64rem', color: 'var(--text-muted)' }}>
                         @navalhaclub
                       </div>
                     </div>
                   </div>
-                  <span className="ui-status ui-status-green">● Agenda online</span>
+                  <span className="ui-status ui-status-green">● Online</span>
                 </div>
 
-                {/* Progress Bar */}
                 <div
                   style={{
                     height: '2px',
                     backgroundColor: 'var(--border-subtle)',
-                    margin: '0.65rem 0',
+                    margin: '0.6rem 0',
                     borderRadius: '99px',
                     overflow: 'hidden',
                   }}
@@ -818,61 +674,44 @@ export default function ProductMotionSection() {
                       height: '100%',
                       width: clientSteps[bStep].pct,
                       backgroundColor: 'var(--accent-green)',
-                      transition: 'width 320ms ease',
+                      transition: 'width 300ms ease',
                     }}
                   />
                 </div>
 
-                {/* STEP 0 */}
                 {bStep === 0 && (
-                  <div key="c0" className="scene-enter">
-                    <div
-                      style={{
-                        backgroundColor: 'var(--bg-surface)',
-                        border: '1px solid var(--border-subtle)',
-                        borderRadius: '9px',
-                        padding: '0.8rem',
-                      }}
-                    >
-                      <div style={{ fontSize: '0.78rem', fontWeight: 600, marginBottom: '0.6rem' }}>
-                        1. Escolha o serviço
+                  <div key="c0" className="scene-enter" style={{ display: 'flex', flexDirection: 'column', gap: '0.38rem' }}>
+                    {[
+                      { n: 'Corte + Barba', d: '1h', p: 'R$ 85', sel: true },
+                      { n: 'Corte Degradê', d: '45m', p: 'R$ 55', sel: false },
+                      { n: 'Barba', d: '30m', p: 'R$ 45', sel: false },
+                    ].map((srv, i) => (
+                      <div
+                        key={i}
+                        onClick={() => setBStep(1)}
+                        style={{
+                          padding: '0.55rem 0.7rem',
+                          borderRadius: '7px',
+                          backgroundColor: 'var(--bg-surface)',
+                          border: `1px solid ${srv.sel ? 'var(--text-primary)' : 'var(--border-subtle)'}`,
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          cursor: 'pointer',
+                          fontSize: '0.75rem',
+                        }}
+                      >
+                        <span>
+                          <strong>{srv.n}</strong>{' '}
+                          <span style={{ color: 'var(--text-muted)' }}>· {srv.d}</span>
+                        </span>
+                        <span className="font-mono" style={{ fontWeight: 600 }}>
+                          {srv.p}
+                        </span>
                       </div>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                        {[
-                          { n: 'Corte + Barba', d: '1h', p: 'R$ 85,00', sel: true },
-                          { n: 'Corte Degradê', d: '45min', p: 'R$ 55,00', sel: false },
-                          { n: 'Barba Toalha Quente', d: '30min', p: 'R$ 45,00', sel: false },
-                        ].map((srv, i) => (
-                          <div
-                            key={i}
-                            onClick={() => setBStep(1)}
-                            style={{
-                              padding: '0.55rem 0.7rem',
-                              borderRadius: '7px',
-                              backgroundColor: 'var(--bg-void)',
-                              border: `1px solid ${srv.sel ? 'var(--text-primary)' : 'var(--border-subtle)'}`,
-                              display: 'flex',
-                              justifyContent: 'space-between',
-                              alignItems: 'center',
-                              cursor: 'pointer',
-                              fontSize: '0.76rem',
-                            }}
-                          >
-                            <span>
-                              <strong>{srv.n}</strong>{' '}
-                              <span style={{ color: 'var(--text-muted)', fontSize: '0.68rem' }}>· {srv.d}</span>
-                            </span>
-                            <span className="font-mono" style={{ fontWeight: 600 }}>
-                              {srv.p}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 )}
 
-                {/* STEP 1 */}
                 {bStep === 1 && (
                   <div key="c1" className="scene-enter">
                     <div
@@ -880,23 +719,7 @@ export default function ProductMotionSection() {
                         backgroundColor: 'var(--bg-surface)',
                         border: '1px solid var(--border-subtle)',
                         borderRadius: '8px',
-                        padding: '0.45rem 0.7rem',
-                        marginBottom: '0.45rem',
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        fontSize: '0.72rem',
-                      }}
-                    >
-                      <span>✓ Corte + Barba · R$ 85,00</span>
-                      <span style={{ color: 'var(--text-muted)' }}>Alterar</span>
-                    </div>
-
-                    <div
-                      style={{
-                        backgroundColor: 'var(--bg-surface)',
-                        border: '1px solid var(--border-subtle)',
-                        borderRadius: '9px',
-                        padding: '0.75rem',
+                        padding: '0.7rem',
                       }}
                     >
                       <div
@@ -904,13 +727,13 @@ export default function ProductMotionSection() {
                           display: 'flex',
                           justifyContent: 'space-between',
                           alignItems: 'center',
-                          marginBottom: '0.55rem',
-                          fontSize: '0.76rem',
+                          marginBottom: '0.5rem',
+                          fontSize: '0.72rem',
                         }}
                       >
-                        <strong>2. Data e horário</strong>
-                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '0.7rem' }}>
-                          <ChevronLeft size={12} /> Novembro <ChevronRight size={12} />
+                        <strong>Quarta, 18 nov</strong>
+                        <span style={{ display: 'inline-flex', gap: '4px' }}>
+                          <ChevronLeft size={12} /> <ChevronRight size={12} />
                         </span>
                       </div>
 
@@ -919,36 +742,29 @@ export default function ProductMotionSection() {
                           display: 'grid',
                           gridTemplateColumns: 'repeat(7, 1fr)',
                           gap: '4px',
-                          marginBottom: '0.6rem',
+                          marginBottom: '0.55rem',
                         }}
                       >
-                        {[
-                          { d: '15', w: 'D', off: true },
-                          { d: '16', w: 'S' },
-                          { d: '17', w: 'T' },
-                          { d: '18', w: 'Q', on: true },
-                          { d: '19', w: 'Q' },
-                          { d: '20', w: 'S' },
-                          { d: '21', w: 'S' },
-                        ].map((x, i) => (
-                          <div
-                            key={i}
-                            style={{
-                              padding: '0.3rem 0',
-                              borderRadius: '6px',
-                              textAlign: 'center',
-                              backgroundColor: x.on ? '#fafafa' : 'var(--bg-void)',
-                              color: x.on ? '#0a0a0b' : 'var(--text-primary)',
-                              opacity: x.off ? 0.35 : 1,
-                              border: '1px solid var(--border-subtle)',
-                              fontSize: '0.68rem',
-                            }}
-                            className="font-mono"
-                          >
-                            <div style={{ fontSize: '0.55rem' }}>{x.w}</div>
-                            <strong>{x.d}</strong>
-                          </div>
-                        ))}
+                        {['15', '16', '17', '18', '19', '20', '21'].map((d) => {
+                          const on = d === '18';
+                          return (
+                            <div
+                              key={d}
+                              className="font-mono"
+                              style={{
+                                padding: '0.28rem 0',
+                                borderRadius: '5px',
+                                textAlign: 'center',
+                                backgroundColor: on ? '#fafafa' : 'var(--bg-void)',
+                                color: on ? '#0a0a0b' : 'var(--text-secondary)',
+                                fontSize: '0.68rem',
+                                fontWeight: on ? 700 : 400,
+                              }}
+                            >
+                              {d}
+                            </div>
+                          );
+                        })}
                       </div>
 
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.35rem' }}>
@@ -960,10 +776,10 @@ export default function ProductMotionSection() {
                               onClick={() => setBStep(2)}
                               className="font-mono"
                               style={{
-                                padding: '0.38rem',
+                                padding: '0.36rem',
                                 borderRadius: '6px',
                                 textAlign: 'center',
-                                fontSize: '0.72rem',
+                                fontSize: '0.7rem',
                                 fontWeight: on ? 700 : 400,
                                 backgroundColor: on ? '#fafafa' : 'var(--bg-void)',
                                 color: on ? '#0a0a0b' : 'var(--text-primary)',
@@ -980,159 +796,104 @@ export default function ProductMotionSection() {
                   </div>
                 )}
 
-                {/* STEP 2 */}
                 {bStep === 2 && (
                   <div key="c2" className="scene-enter">
                     <div
                       style={{
                         backgroundColor: 'var(--bg-surface)',
                         border: '1px solid var(--border-subtle)',
-                        borderRadius: '9px',
-                        padding: '0.8rem',
+                        borderRadius: '8px',
+                        padding: '0.75rem',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '0.4rem',
+                        fontSize: '0.73rem',
                       }}
                     >
-                      <div style={{ fontSize: '0.78rem', fontWeight: 600, marginBottom: '0.55rem' }}>
-                        3. Seus dados para confirmação
+                      <div
+                        style={{
+                          backgroundColor: 'var(--bg-void)',
+                          border: '1px solid var(--border-subtle)',
+                          borderRadius: '6px',
+                          padding: '0.4rem 0.55rem',
+                        }}
+                      >
+                        Gabriel Ferreira
                       </div>
-
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', fontSize: '0.74rem' }}>
-                        <div
-                          style={{
-                            backgroundColor: 'var(--bg-void)',
-                            border: '1px solid var(--border-subtle)',
-                            borderRadius: '6px',
-                            padding: '0.42rem 0.6rem',
-                          }}
-                        >
-                          Gabriel Ferreira
-                        </div>
-                        <div className="form-2-grid">
-                          <div
-                            className="font-mono"
-                            style={{
-                              backgroundColor: 'var(--bg-void)',
-                              border: '1px solid var(--border-subtle)',
-                              borderRadius: '6px',
-                              padding: '0.42rem 0.55rem',
-                              fontSize: '0.68rem',
-                            }}
-                          >
-                            (11) 99824-3190
-                          </div>
-                          <div
-                            style={{
-                              backgroundColor: 'var(--bg-void)',
-                              border: '1px solid var(--border-subtle)',
-                              borderRadius: '6px',
-                              padding: '0.42rem 0.55rem',
-                              fontSize: '0.68rem',
-                              overflow: 'hidden',
-                              textOverflow: 'ellipsis',
-                              whiteSpace: 'nowrap',
-                            }}
-                          >
-                            gabriel.ferreira@email.com
-                          </div>
-                        </div>
-
-                        <div
-                          style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            padding: '0.4rem 0.1rem',
-                            fontSize: '0.72rem',
-                            color: 'var(--text-secondary)',
-                          }}
-                        >
-                          <span>18 de nov · 15:00 (1h)</span>
-                          <strong className="font-mono" style={{ color: 'var(--text-primary)' }}>
-                            R$ 85,00
-                          </strong>
-                        </div>
-
-                        <button
-                          type="button"
-                          onClick={() => setBStep(3)}
-                          style={{
-                            width: '100%',
-                            padding: '0.55rem',
-                            borderRadius: '6px',
-                            border: 'none',
-                            backgroundColor: '#fafafa',
-                            color: '#0a0a0b',
-                            fontWeight: 600,
-                            fontSize: '0.76rem',
-                            cursor: 'pointer',
-                          }}
-                        >
-                          Confirmar agendamento
-                        </button>
+                      <div
+                        className="font-mono"
+                        style={{
+                          backgroundColor: 'var(--bg-void)',
+                          border: '1px solid var(--border-subtle)',
+                          borderRadius: '6px',
+                          padding: '0.4rem 0.55rem',
+                          fontSize: '0.68rem',
+                        }}
+                      >
+                        (11) 99824-3190
                       </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.2rem 0' }}>
+                        <span style={{ color: 'var(--text-muted)' }}>Corte + Barba · 15:00</span>
+                        <strong className="font-mono">R$ 85</strong>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setBStep(3)}
+                        style={{
+                          width: '100%',
+                          padding: '0.5rem',
+                          borderRadius: '6px',
+                          border: 'none',
+                          backgroundColor: '#fafafa',
+                          color: '#0a0a0b',
+                          fontWeight: 600,
+                          fontSize: '0.75rem',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        Confirmar horário
+                      </button>
                     </div>
                   </div>
                 )}
 
-                {/* STEP 3 */}
                 {bStep === 3 && (
                   <div key="c3" className="scene-enter">
                     <div
                       style={{
                         backgroundColor: 'var(--bg-surface)',
                         border: '1px solid var(--border-default)',
-                        borderRadius: '9px',
-                        padding: '1.1rem 0.9rem',
+                        borderRadius: '8px',
+                        padding: '1rem 0.85rem',
+                        textAlign: 'center',
                       }}
                     >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.45rem' }}>
-                        <span
-                          style={{
-                            width: '22px',
-                            height: '22px',
-                            borderRadius: '50%',
-                            backgroundColor: 'var(--accent-green)',
-                            color: '#051b11',
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                          }}
-                        >
-                          <Check size={13} strokeWidth={3} />
-                        </span>
-                        <strong style={{ fontSize: '0.86rem' }}>Agendamento confirmado</strong>
-                      </div>
-                      <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>
-                        Reservado sem login e sem esperar resposta manual.
-                      </p>
                       <div
-                        className="font-mono"
                         style={{
-                          borderTop: '1px solid var(--border-subtle)',
-                          paddingTop: '0.6rem',
-                          fontSize: '0.7rem',
-                          color: 'var(--text-secondary)',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          gap: '0.25rem',
+                          width: '28px',
+                          height: '28px',
+                          borderRadius: '50%',
+                          backgroundColor: 'var(--accent-green)',
+                          color: '#051b11',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          marginBottom: '0.45rem',
                         }}
                       >
-                        <div>Protocolo: CLK-94B7M2</div>
-                        <div>Data: Qua, 18 de nov às 15:00</div>
-                        <div>Comprovante enviado por e-mail</div>
+                        <Check size={15} strokeWidth={3} />
+                      </div>
+                      <div style={{ fontSize: '0.84rem', fontWeight: 700 }}>Horário confirmado</div>
+                      <div className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--text-muted)', marginTop: '4px' }}>
+                        Qua, 18 nov · 15:00 · CLK-94B7M2
                       </div>
                     </div>
                   </div>
                 )}
               </div>
 
-              <div
-                style={{
-                  textAlign: 'center',
-                  paddingTop: '0.7rem',
-                  fontSize: '0.68rem',
-                  color: 'var(--text-muted)',
-                }}
-              >
-                Agendamento via <Logo size="small" />
+              <div style={{ textAlign: 'center', paddingTop: '0.6rem', fontSize: '0.65rem', color: 'var(--text-muted)' }}>
+                via <Logo size="small" />
               </div>
             </div>
           </div>
